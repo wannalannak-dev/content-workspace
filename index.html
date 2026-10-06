@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Content Workspace</title>
+  <style id="statusStyles"></style>
   <style>
     :root{
       --bg:#f6f7fb; --panel:#ffffff; --panel-2:#f9fafb; --border:#e6e8ef; --text:#1f2430; --muted:#737b8c;
@@ -55,7 +56,7 @@
     .today-head .panel-meta{margin-right:auto}
     .today.collapsed .today-body{display:none}
     .today.collapsed .today-head{border-bottom:0}
-    .today-body{display:grid;grid-template-columns:1.3fr 1fr 1fr 1.2fr;gap:0}
+    .today-body{display:grid;grid-template-columns:1.25fr 1.1fr 1fr 1.2fr;gap:0}
     .today-col{padding:14px 16px;border-right:1px solid var(--border);min-width:0}
     .today-col:last-child{border-right:0}
     .today-col h3{margin:0 0 10px;font-size:12px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);display:flex;gap:6px;align-items:center}
@@ -65,11 +66,34 @@
     .t-item{display:flex;align-items:center;gap:8px;width:100%;border:1px solid var(--border);background:#fff;border-radius:8px;padding:7px 9px;margin-bottom:5px;text-align:left;font-size:13px}
     .t-item:hover{border-color:#c9ccd6;background:#fcfcff}
     .t-item .d{width:8px;height:8px;border-radius:50%;flex:0 0 auto}
-    .t-item .tt{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-weight:650}
+    .t-item .tb{flex:1;min-width:0;display:flex;flex-direction:column;gap:3px}
+    .t-item .tt{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-weight:650}
+    .t-item .ts{display:flex;gap:6px;align-items:center;font-size:11px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
     .t-item .hh{font-size:11px;color:var(--muted);white-space:nowrap}
     .t-item.red{border-color:#f3c4c4;background:var(--danger-soft)}
     .t-item.orange{border-color:#f3d6bf;background:var(--warn-soft)}
     .t-empty{font-size:12.5px;color:var(--muted)}
+    .t-row{display:flex;gap:5px;align-items:stretch}
+    .t-row .t-item{flex:1;min-width:0}
+    .t-ok{border:1px solid #bfe3cc;background:var(--ok-soft);color:var(--ok);border-radius:8px;font-weight:800;padding:0 10px;margin-bottom:5px;font-size:14px;white-space:nowrap}
+    .t-ok:hover{background:#d8f2e2}
+    .t-st{font-size:10.5px;font-weight:800;border-radius:999px;padding:1px 7px;white-space:nowrap}
+    .t-sub{font-size:11px;font-weight:800;color:var(--muted);margin:10px 0 4px;text-transform:uppercase;letter-spacing:.04em}
+    .app-name-btn{all:unset;cursor:pointer;display:flex;gap:10px;align-items:center;border-radius:8px;padding:2px 4px;margin:-2px -4px}
+    .app-name-btn:hover{background:#232631}
+    .app-name-btn .pen{opacity:0;font-size:12px;color:#8f95a5;margin-left:2px}
+    .app-name-btn:hover .pen{opacity:1}
+    .settings-btn{border:0;background:transparent;color:#8f95a5;font-size:12.5px;text-align:left;padding:8px 10px;border-radius:8px}
+    .settings-btn:hover{background:#232631;color:#fff}
+    .st-row{display:flex;align-items:center;gap:10px;padding:6px 0;border-bottom:1px solid var(--border)}
+    .st-row:last-child{border-bottom:0}
+    .st-row input[type=color]{width:38px;height:30px;border:1px solid var(--border);border-radius:8px;padding:2px;background:#fff;cursor:pointer}
+    .st-row .preview{margin-left:auto}
+    .img-field{display:flex;gap:12px;align-items:center}
+    .img-drop{width:96px;height:96px;border:1.5px dashed #cfd3df;border-radius:12px;background:#fafbfc;display:grid;place-items:center;overflow:hidden;cursor:pointer;flex:0 0 auto;text-align:center;font-size:11px;color:var(--muted);line-height:1.3;padding:4px}
+    .img-drop:hover,.img-drop.drop-active{border-color:var(--primary);background:#f4f4ff}
+    .img-drop img{width:100%;height:100%;object-fit:cover;border-radius:9px}
+    .st-dot{width:7px;height:7px;border-radius:50%;flex:0 0 auto;align-self:center}
 
     .stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-bottom:16px}
     .stat{background:var(--panel);border:1px solid var(--border);border-radius:var(--radius);padding:14px 16px}
@@ -111,8 +135,7 @@
     .asset{font-size:11px;font-weight:700;text-decoration:none;background:var(--primary-soft);color:#3d3db0;border-radius:6px;padding:2px 7px;white-space:nowrap}
     .asset:hover{background:#e0e0ff}
     .badge,.status,.platform{display:inline-flex;align-items:center;gap:5px;padding:5px 8px;border-radius:999px;font-size:12px;font-weight:750;white-space:nowrap}
-    .status{background:#eef0f4;color:#5f6674}.s-Approved{background:#eaf8ef;color:#2c7a4b}.s-Scheduled{background:#edf2ff;color:#475fb5}
-    .s-Published{background:#e8f8fa;color:#227181}.s-Revision{background:#fff1e7;color:#b75d1d}.s-Designing{background:#f5edff;color:#7650ae}.s-Briefing{background:#f2f3f7;color:#6a7180}
+    .status{background:#eef0f4;color:#5f6674;border:1px solid transparent}
     .platform{background:#f2f3f7;color:#515867}
     .flag{display:inline-flex;align-items:center;gap:4px;font-size:11px;font-weight:750;border-radius:6px;padding:2px 6px;margin-top:4px;white-space:nowrap}
     .flag.red{background:var(--danger-soft);color:#b23434}
@@ -124,7 +147,7 @@
     .bulkbar.show{display:flex}
     .bulkbar .count{font-weight:800;color:#4f4fb2;margin-right:auto}
     .row-check,.head-check{width:17px;height:17px;accent-color:var(--primary);cursor:pointer}
-    .inline-select{border:1px solid var(--border);border-radius:999px;padding:6px 24px 6px 10px;font-size:12px;font-weight:750;background:#fff;min-width:104px}
+    .inline-select{border:1px solid var(--border);border-radius:999px;padding:6px 24px 6px 10px;font-size:12px;font-weight:750;background-color:#fff;min-width:104px}
     tr.selected{background:#f5f5ff!important}
     .conditional-box{grid-column:1/-1;border:1px solid #dedfff;background:#f7f7ff;border-radius:12px;padding:14px;display:none}
     .conditional-box.show{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
@@ -271,12 +294,13 @@
 <body>
 <div class="app">
   <aside class="sidebar">
-    <div class="brandmark"><span class="dot"></span><span>Content OS</span></div>
+    <div class="brandmark"><button class="app-name-btn" id="appNameBtn" title="Rename / workspace settings"><span class="dot"></span><span class="app-name">Content OS</span><span class="pen">✎</span></button></div>
     <div class="nav">
       <button class="active" data-view="list" title="Content List">☷ <span class="label">Content List</span></button>
       <button data-view="calendar" title="Calendar">▦ <span class="label">Calendar</span></button>
     </div>
     <div class="sidebar-foot">
+      <button class="settings-btn" id="settingsBtn" title="Workspace settings">⚙ <span class="label">Settings</span></button>
       <div class="sidebar-note" id="sidebarNote">Master content database + synced calendar + drag &amp; drop rescheduling.</div>
       <div class="user-box" id="userBox">
         <div class="avatar" id="userAvatar">?</div>
@@ -418,6 +442,17 @@
       </div>
 
       <div class="field full">
+        <label>Preview image</label>
+        <div class="img-field">
+          <div class="img-drop" id="editorImgBox" tabindex="0" title="Click, drop or paste an image">Click, drop<br>or paste<br>image</div>
+          <div style="display:flex;flex-direction:column;gap:6px">
+            <button class="btn small" type="button" id="editorImgUpload">Upload image</button>
+            <button class="link-btn" type="button" id="editorImgRemove" style="color:var(--danger);display:none;align-self:flex-start">Remove image</button>
+            <span class="help">PNG / JPG / WebP / GIF. Tip: copy an image and press Ctrl+V here.</span>
+          </div>
+        </div>
+      </div>
+      <div class="field full">
         <label for="assetsInput">Asset links (VDO / AW download)</label>
         <textarea id="assetsInput" rows="2" placeholder="One link per line — Google Drive, Dropbox, WeTransfer..."></textarea>
       </div>
@@ -436,6 +471,28 @@
         <button class="btn" type="button" id="cancelBtn">Cancel</button>
         <button class="btn primary" type="submit">Save Content</button>
       </div>
+    </div>
+  </form>
+</dialog>
+
+<dialog id="settingsDialog" style="width:min(520px,calc(100vw - 32px))">
+  <form id="settingsForm">
+    <div class="modal-head"><strong>Workspace settings</strong><button class="icon-btn" type="button" id="closeSettings" aria-label="Close">×</button></div>
+    <div class="modal-body" style="display:block">
+      <div class="field" style="margin-bottom:18px">
+        <label for="appNameInput">Workspace name</label>
+        <input type="text" id="appNameInput" maxlength="40" required placeholder="e.g. Scotch Content Hub">
+        <span class="help">Shown top-left, on the sign-in page and in the browser tab. Changes for the whole team.</span>
+      </div>
+      <div class="field">
+        <label>Status colours</label>
+        <div id="statusColorList"></div>
+        <button class="link-btn" type="button" id="resetColors" style="align-self:flex-start;margin-top:6px">Reset to default colours</button>
+      </div>
+    </div>
+    <div class="modal-foot" style="justify-content:flex-end">
+      <button class="btn" type="button" id="cancelSettings">Cancel</button>
+      <button class="btn primary" type="submit">Save settings</button>
     </div>
   </form>
 </dialog>
@@ -481,12 +538,13 @@
     </div>
   </div>
 </dialog>
+<input type="file" id="editorImageInput" accept="image/png,image/jpeg,image/webp,image/gif" style="display:none">
 <input type="file" id="imageFileInput" accept="image/png,image/jpeg,image/webp,image/gif" style="display:none">
 <div class="paste-hint" id="pasteHint">Paste image with Ctrl+V</div>
 
 <div class="gate" id="gate">
   <form class="gate-box" id="loginForm">
-    <div class="brandmark"><span class="dot"></span><span>Content OS</span></div>
+    <div class="brandmark"><span class="dot"></span><span class="app-name">Content OS</span></div>
     <h2 id="gateTitle">Sign in</h2>
     <p id="gateText">Use your team email and password.</p>
     <input id="loginEmail" type="email" required placeholder="name@company.com" autocomplete="email" aria-label="Email">
@@ -524,6 +582,20 @@ const ONLINE = !!(CFG.supabaseUrl && CFG.supabaseAnonKey && window.supabase);
 const sb = ONLINE ? window.supabase.createClient(CFG.supabaseUrl, CFG.supabaseAnonKey) : null;
 const $ = id => document.getElementById(id);
 const brandColor = b => BRAND_COLORS[b] || "#7b8190";
+const DEFAULT_STATUS_COLORS = Object.assign({Briefing:"#64748b",Designing:"#8b5cf6",Revision:"#f97316",Approved:"#16a34a",Scheduled:"#2563eb",Published:"#0d9488"}, CFG.statusColors||{});
+const FALLBACK_COLORS=["#e11d48","#0891b2","#ca8a04","#7c3aed","#059669","#db2777"];
+const SETTINGS = {appName:(CFG.appName||"Content OS").trim(), statusColors:{}};
+function statusColor(st){ return SETTINGS.statusColors[st] || DEFAULT_STATUS_COLORS[st] || FALLBACK_COLORS[Math.abs([...String(st)].reduce((a,ch)=>a*31+ch.charCodeAt(0)|0,7))%FALLBACK_COLORS.length]; }
+function shade(hex,amt){ const n=parseInt(hex.slice(1),16); let r=n>>16,g=n>>8&255,b=n&255; const f=v=>Math.max(0,Math.min(255,Math.round(amt<0?v*(1+amt):v+(255-v)*amt))); return "#"+[f(r),f(g),f(b)].map(v=>v.toString(16).padStart(2,"0")).join(""); }
+function stStyle(st){ const c=statusColor(st); return `background:${c}22;color:${shade(c,-.3)};border-color:${c}55`; }
+function cssStr(v){ return '"'+String(v).replace(/\\/g,"\\\\").replace(/"/g,'\\"')+'"'; }
+function applySettings(){
+  document.querySelectorAll(".app-name").forEach(el=>el.textContent=SETTINGS.appName);
+  document.title = SETTINGS.appName;
+  const all=[...new Set([...Object.keys(DEFAULT_STATUS_COLORS),...(CFG.statuses||[]),...Object.keys(SETTINGS.statusColors)])];
+  $("statusStyles").textContent = all.map(st=>{ const c=statusColor(st); return `[data-st=${cssStr(st)}]{background-color:${c}22!important;color:${shade(c,-.3)}!important;border-color:${c}66!important}`; }).join("\n");
+}
+function loadLocalSettings(){ try{ const v=JSON.parse(localStorage.getItem("cw_settings")||"{}"); if(v.appName) SETTINGS.appName=v.appName; if(v.statusColors) SETTINGS.statusColors=v.statusColors; }catch(e){} }
 
 /* ============ dates / helpers ============ */
 function iso(d){return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,"0")}-${String(d.getDate()).padStart(2,"0")}`}
@@ -557,7 +629,7 @@ function alertsFor(c){
   }
   if(isBoost(c) && c.flow==="self" && !c.linkSent && (c.status===DONE || c.publishDate<TODAY)) out.push({level:"orange",text:"Send post link to agency"});
   if(isBoost(c) && !c.flow && daysBetween(TODAY,c.publishDate)<=WARN_DAYS && c.status!==DONE) out.push({level:"orange",text:"Boost workflow not set"});
-  if(c.status==="Scheduled" && timePassed(c)) out.push({level:"orange",text:"Time passed – confirm Published"});
+  if(timePassed(c) && daysBetween(c.publishDate,TODAY)<=14) out.push({level:c.status==="Scheduled"?"orange":"red",text:c.status==="Scheduled"?"Time passed – confirm Published":`Time passed – still ${c.status}`});
   else if(c.publishDate<TODAY && c.status!==DONE && daysBetween(c.publishDate,TODAY)<=14) out.push({level:"orange",text:"Past due"});
   return out;
 }
@@ -661,6 +733,7 @@ async function loadRemote(){
   if(error) throw error;
   contents = (data||[]).map(fromRow);
   synced = {}; contents.forEach(c=>synced[c.id]=sig(c));
+  try{ const st=await sb.from("settings").select("*").in("key",["app_name","status_colors"]); (st.data||[]).forEach(applyRemoteSetting); applySettings(); }catch(e){}
   setSync("ok","All changes saved");
 }
 function listenRemote(){
@@ -680,6 +753,7 @@ function listenRemote(){
       synced[c.id]=sig(c);
       renderAll(); refreshDrawer();
     })
+    .on("postgres_changes",{event:"*",schema:"public",table:"settings"},p=>{ if(p.new){ applyRemoteSetting(p.new); applySettings(); renderAll(); } })
     .subscribe();
 }
 
@@ -798,31 +872,45 @@ function renderPlatformTabs(){
 /* ============ today panel ============ */
 let todayCollapsed=false;
 try{ todayCollapsed = localStorage.getItem("cw_today_collapsed")==="1"; }catch(e){}
-function tItem(c, extra, level){
-  return `<button class="t-item ${level||""}" data-open="${esc(c.id)}" title="${esc(c.title)}"><span class="d" style="background:${brandColor(c.brand)}"></span><span class="tt">${esc(c.title)}</span><span class="hh">${esc(extra||"")}</span></button>`;
+function stChip(st){ return `<span class="t-st" data-st="${esc(st)}">${esc(st)}</span>`; }
+function tItem(c, extra, level, opts={}){
+  const btn=`<button class="t-item ${level||""}" data-open="${esc(c.id)}" title="${esc(c.title)} · ${esc(c.status)}"><span class="d" style="background:${brandColor(c.brand)}"></span><span class="tb"><span class="tt">${opts.prefix||""}${esc(c.title)}</span><span class="ts">${opts.chip?stChip(c.status):""}${extra?`<span>${esc(extra)}</span>`:""}</span></span></button>`;
+  if(opts.ok) return `<div class="t-row">${btn}<button class="t-ok" data-mark-pub="${esc(c.id)}" title="Mark as ${esc(DONE)}" aria-label="Mark “${esc(c.title)}” as ${esc(DONE)}">✓</button></div>`;
+  return btn;
+}
+function groupByPlatform(list, render){
+  const groups={}; list.forEach(c=>(groups[c.platform]=groups[c.platform]||[]).push(c));
+  const order=PLATFORMS.concat(Object.keys(groups).filter(k=>!PLATFORMS.includes(k)));
+  return order.filter(p=>groups[p]).map(p=>`<div class="t-group">${filters.platform?"":`<div class="t-plat">${esc(p)} · ${groups[p].length}</div>`}${groups[p].map(render).join("")}</div>`).join("");
 }
 function renderToday(){
   const data=filtered();
+  const TOMORROW=addDays(TODAY,1);
   $("todayTitle").textContent = filters.platform ? `Today on ${filters.platform}` : "Today";
   $("todayMeta").textContent = new Intl.DateTimeFormat("en-GB",{weekday:"long",day:"numeric",month:"long",year:"numeric"}).format(new Date());
   $("today").classList.toggle("collapsed",todayCollapsed);
   $("todayToggle").textContent=todayCollapsed?"Show":"Hide";
   $("todayToggle").setAttribute("aria-expanded",String(!todayCollapsed));
-  const live=data.filter(c=>c.publishDate===TODAY).sort((a,b)=>(a.postTime||"99").localeCompare(b.postTime||"99"));
+  const byTime=(a,b)=>(a.postTime||"99").localeCompare(b.postTime||"99");
+  const live=data.filter(c=>c.publishDate===TODAY).sort(byTime);
+  const tmr=data.filter(c=>c.publishDate===TOMORROW).sort(byTime);
   const boost=data.filter(c=>isBoost(c) && boostStartOf(c)===TODAY);
   const send=data.filter(c=>isBoost(c) && c.flow==="agency" && c.sendDate===TODAY && !c.agencySent);
+  const tmrBoost=data.filter(c=>isBoost(c) && c.boostStart===TOMORROW && c.boostStart!==c.publishDate);
+  const tmrSend=data.filter(c=>isBoost(c) && c.flow==="agency" && c.sendDate===TOMORROW && !c.agencySent);
   const attn=data.map(c=>({c,a:alertsFor(c)})).filter(x=>x.a.length).sort((x,y)=>(worstLevel(y.a)==="red")-(worstLevel(x.a)==="red")||x.c.publishDate.localeCompare(y.c.publishDate));
-  const groups={}; live.forEach(c=>(groups[c.platform]=groups[c.platform]||[]).push(c));
-  const order=PLATFORMS.concat(Object.keys(groups).filter(k=>!PLATFORMS.includes(k)));
-  const liveHtml = live.length ? order.filter(p=>groups[p]).map(p=>
-      `<div class="t-group">${filters.platform?"":`<div class="t-plat">${esc(p)} · ${groups[p].length}</div>`}${groups[p].map(c=>tItem(c,(c.media==="Ads Setup"?"Ads · ":"")+(c.postTime||c.status),worstLevel(alertsFor(c)))).join("")}</div>`).join("")
+  const liveHtml = live.length ? groupByPlatform(live, c=>{ const passed=c.status!==DONE&&timePassed(c); return tItem(c,(c.media==="Ads Setup"?"Ads · ":"")+(c.postTime||""),passed?"orange":"",{chip:true,ok:passed}); })
     : `<div class="t-empty">Nothing goes live today.</div>`;
-  const col=(icon,title,n,body)=>`<div class="today-col"><h3>${icon} ${title} <span class="n">${n}</span></h3>${body}</div>`;
+  let tmrHtml = tmr.length ? groupByPlatform(tmr, c=>{ const al=alertsFor(c); return tItem(c,c.postTime||"",worstLevel(al),{chip:true}); }) : `<div class="t-empty">Nothing scheduled for tomorrow.</div>`;
+  if(tmrBoost.length||tmrSend.length) tmrHtml += `<div class="t-sub">Also tomorrow</div>`+tmrBoost.map(c=>tItem(c,c.postRef||c.linkSent?"ready":"no Post ID",c.postRef||c.linkSent?"":"orange",{prefix:"⚡ "})).join("")+tmrSend.map(c=>tItem(c,"live "+shortDate(c.publishDate),"",{prefix:"📤 "})).join("");
+  const baHtml = (boost.length||send.length) ? boost.map(c=>tItem(c, c.postRef?"Post ID ✓":(c.flow==="agency"?"No Post ID":"Need link"), c.postRef||c.linkSent?"":"orange",{prefix:"⚡ "})).join("")+send.map(c=>tItem(c,"live "+shortDate(c.publishDate),"",{prefix:"📤 "})).join("")
+    : `<div class="t-empty">No boost or agency hand-off today.</div>`;
+  const col=(icon,title,n,body,tip)=>`<div class="today-col"><h3 title="${esc(tip||"")}">${icon} ${title} <span class="n">${n}</span></h3>${body}</div>`;
   $("todayBody").innerHTML =
-    col("📣","Going live",live.length,liveHtml) +
-    col("⚡","Boost starts",boost.length, boost.length?boost.map(c=>tItem(c, c.postRef?"Post ID ✓":(c.flow==="agency"?"No Post ID":"Need link"), c.postRef||c.linkSent?"":"orange")).join(""):`<div class="t-empty">No boost starting today.</div>`) +
-    col("📤","Send to agency",send.length, send.length?send.map(c=>tItem(c,"live "+shortDate(c.publishDate))).join(""):`<div class="t-empty">Nothing to send today.</div>`) +
-    col("⚠️","Needs attention",attn.length, attn.length?attn.slice(0,8).map(x=>tItem(x.c,x.a[0].text,worstLevel(x.a))+(x.a[0].text.startsWith("Time passed")?`<button class="btn small" style="margin:-1px 0 7px" data-mark-pub="${esc(x.c.id)}">✓ Mark “${esc(x.c.title.slice(0,24))}” Published</button>`:"")).join("")+(attn.length>8?`<div class="t-empty">+${attn.length-8} more</div>`:""):`<div class="t-empty">All good 👍</div>`);
+    col("📣","Going live today",live.length,liveHtml,"Content with today's publish date") +
+    col("🗓️","Tomorrow",tmr.length,tmrHtml,"Content going live tomorrow — check it today") +
+    col("⚡","Boost & agency",boost.length+send.length,baHtml,"⚡ boosts starting today · 📤 work to send to the agency today (workflow ①)") +
+    col("⚠️","Needs attention",attn.length, attn.length?attn.slice(0,8).map(x=>tItem(x.c,x.a[0].text,worstLevel(x.a),{ok:x.a[0].text.startsWith("Time passed")})).join("")+(attn.length>8?`<div class="t-empty">+${attn.length-8} more</div>`:""):`<div class="t-empty">All good 👍</div>`,"Things the system thinks need action");
   $("todayBody").querySelectorAll("[data-open]").forEach(b=>b.onclick=()=>openEditor(b.dataset.open));
   $("todayBody").querySelectorAll("[data-mark-pub]").forEach(b=>b.onclick=()=>{ const c=byId(b.dataset.markPub); if(!c) return; c.status=DONE; save(); renderAll(); toast(`“${c.title}” marked ${DONE}`); });
 }
@@ -910,9 +998,9 @@ function renderList(){
         <td>
           <input type="date" value="${esc(c.publishDate)}" data-date-id="${id}" aria-label="Publish date" ${late?'style="border-color:#f0c9a8"':""}>
           ${(c.media==="Organic"||isBoost(c))&&c.postTime?`<div class="media-detail">Post ${esc(c.postTime)}</div>`:""}
-          ${c.status==="Scheduled"&&timePassed(c)?`<div class="media-detail" style="color:var(--warn);font-weight:700">Time passed – confirm Published</div>`:late?`<div class="media-detail" style="color:var(--warn);font-weight:700">Past due</div>`:""}
+          ${c.status!==DONE&&timePassed(c)&&daysBetween(c.publishDate,TODAY)<=14?`<div class="media-detail" style="color:var(--warn);font-weight:700">Time passed – not ${esc(DONE)} yet</div>`:late?`<div class="media-detail" style="color:var(--warn);font-weight:700">Past due</div>`:""}
         </td>
-        <td><select class="inline-select" data-status-id="${id}" aria-label="Status">${STATUSES.map(s=>`<option ${s===c.status?"selected":""}>${esc(s)}</option>`).join("")}</select></td>
+        <td><select class="inline-select" data-status-id="${id}" data-st="${esc(c.status)}" aria-label="Status">${STATUSES.map(s=>`<option ${s===c.status?"selected":""}>${esc(s)}</option>`).join("")}</select></td>
         <td>${mediaCell(c)}</td>
         <td><div class="actions"><button class="icon-btn" data-copy-one="${id}" title="Copy" aria-label="Copy">⧉</button><button class="icon-btn" data-edit="${id}" title="Edit" aria-label="Edit">✎</button></div></td>
       </tr>`;}).join("")}
@@ -940,7 +1028,7 @@ function renderList(){
     const c=byId(i.dataset.dateId); if(!c||!i.value) return;
     const old=c.publishDate; c.publishDate=i.value; save(); renderAll(); toast(`Moved from ${niceDate(old)} to ${niceDate(i.value)}`);
   });
-  root.querySelectorAll("[data-status-id]").forEach(s=>s.onchange=()=>{ const c=byId(s.dataset.statusId); if(!c)return; c.status=s.value; save(); renderAll(); toast(`Status updated to ${s.value}`); });
+  root.querySelectorAll("[data-status-id]").forEach(s=>s.onchange=()=>{ const c=byId(s.dataset.statusId); if(!c)return; c.status=s.value; s.dataset.st=s.value; save(); renderAll(); toast(`Status updated to ${s.value}`); });
 }
 
 async function hydratePreviewImages(data){
@@ -1018,7 +1106,7 @@ function evCard(e){
   const icon=e.kind==="boost"?"⚡ ":e.kind==="send"?"📤 ":"";
   const meta=e.kind==="boost"?`<span>Boost</span>${c.budget?`<span>•</span><span>${baht(c.budget)}</span>`:""}`
     : e.kind==="send"?`<span>Send to agency</span><span>•</span><span>live ${shortDate(c.publishDate)}</span>`
-    : `<span>${esc(c.brand)}</span><span>•</span><span>${esc(c.platform)}</span>${c.postTime?`<span>•</span><span>${esc(c.postTime)}</span>`:""}`;
+    : `<span class="st-dot" style="background:${statusColor(c.status)}" title="${esc(c.status)}"></span><span>${esc(c.brand)}</span><span>•</span><span>${esc(c.platform)}</span>${c.postTime?`<span>•</span><span>${esc(c.postTime)}</span>`:""}`;
   return `<div class="cal-card k-${e.kind} ${e.kind==="post"&&c.status===DONE?"published":""} ${lv}" draggable="true" data-id="${esc(c.id)}" data-kind="${e.kind}" style="border-left-color:${brandColor(c.brand)}" title="${esc(icon+c.title)} · ${esc(c.status)}${al.length?" · "+esc(al[0].text):""}">
     <div class="cal-card-title">${icon}${esc(c.title)}</div><div class="cal-card-meta">${meta}</div></div>`;
 }
@@ -1072,7 +1160,7 @@ function openDrawer(date){
       <div class="kind">${kindLabel[e.kind]}</div>
       <div style="display:flex;justify-content:space-between;gap:10px;align-items:flex-start">
         <div><strong>${esc(c.title)}</strong><div class="content-sub">${esc(c.brand)} · ${esc(c.platform)} · ${esc(c.type)}${c.postTime?` · ${esc(c.postTime)}`:""}</div></div>
-        <span class="status s-${esc(c.status)}">${esc(c.status)}</span>
+        <span class="status" data-st="${esc(c.status)}">${esc(c.status)}</span>
       </div>
       ${c.postRef?`<div class="content-sub" style="margin-top:6px">Post ID: <b style="color:var(--text)">${esc(c.postRef)}</b></div>`:""}
       ${al.map(a=>`<span class="flag ${a.level}">${esc(a.text)}</span> `).join("")}
@@ -1115,7 +1203,7 @@ function openEditor(id=null, presetDate=null){
   ensureOption($("platformInput"),c?.platform); $("platformInput").value=c?.platform||filters.platform||PLATFORMS[0];
   $("dateInput").value=c?.publishDate||presetDate||TODAY;
   $("postTimeInput").value=c?.postTime||"";
-  ensureOption($("statusInput"),c?.status); $("statusInput").value=c?.status||STATUSES[0];
+  ensureOption($("statusInput"),c?.status); $("statusInput").value=c?.status||STATUSES[0]; $("statusInput").dataset.st=$("statusInput").value;
   ensureOption($("typeInput"),c?.type); $("typeInput").value=c?.type||TYPES[0];
   $("mediaInput").value=c?.media||"Organic";
   $("refInput").value=c?.refId||"";
@@ -1130,6 +1218,7 @@ function openEditor(id=null, presetDate=null){
   $("assetsInput").value=c?.assets||"";
   $("remarkInput").value=c?.remark||"";
   ck={agencySent:!!c?.agencySent,linkSent:!!c?.linkSent,boostLive:!!c?.boostLive};
+  setEditorImage({file:null,remove:false,id:c?.id||null});
   toggleMediaFields();
   $("deleteBtn").style.display=c?"inline-flex":"none";
   $("editedBy").textContent=c&&c.by?`Last edited by ${c.by.split("@")[0]}`:"";
@@ -1150,7 +1239,7 @@ $("flowInput").onchange=()=>{
   renderChecklist();
 };
 $("postRefInput").oninput=renderChecklist;
-$("statusInput").onchange=renderChecklist;
+$("statusInput").onchange=()=>{ $("statusInput").dataset.st=$("statusInput").value; renderChecklist(); };
 $("newContentBtn").onclick=()=>openEditor();
 $("closeDialog").onclick=closeEditor;
 $("cancelBtn").onclick=closeEditor;
@@ -1179,7 +1268,10 @@ $("contentForm").addEventListener("submit",e=>{
   if(existing){ const idx=contents.findIndex(x=>x.id===id); contents[idx]=payload; }
   else if(id){ toast("This content was deleted by a teammate"); closeEditor(); return; }
   else contents.push(payload);
+  const img=editorImg;
   save(); closeEditor(); renderAll(); refreshDrawer(); toast(id?"Content updated":"Content created");
+  if(img.file) saveImageToContent(payload.id,img.file);
+  else if(img.remove) removeImage(payload.id).then(()=>renderList());
 });
 $("deleteBtn").onclick=()=>{
   const id=$("contentId").value; if(!id)return;
@@ -1190,6 +1282,66 @@ $("deleteBtn").onclick=()=>{
   }
 };
 $("itemHistoryBtn").onclick=()=>{ const id=$("contentId").value; closeEditor(); openHistory(id); };
+
+/* editor preview image (pending until Save) */
+let editorImg={file:null,remove:false,id:null}, editorImgUrl=null;
+async function setEditorImage(st){
+  editorImg=st; const box=$("editorImgBox");
+  if(editorImgUrl){ URL.revokeObjectURL(editorImgUrl); editorImgUrl=null; }
+  let url=null;
+  if(st.file){ editorImgUrl=URL.createObjectURL(st.file); url=editorImgUrl; }
+  else if(!st.remove && st.id){ url=await imageUrlFor(byId(st.id)); }
+  box.innerHTML = url ? `<img src="${esc(url)}" alt="Preview">` : "Click, drop<br>or paste<br>image";
+  $("editorImgRemove").style.display = url ? "inline" : "none";
+  $("editorImgUpload").textContent = url ? "Replace image" : "Upload image";
+}
+function pickEditorFile(file){ if(!file) return; if(!/^image\//.test(file.type)){ toast("Please choose an image file"); return; } setEditorImage({file,remove:false,id:editorImg.id}); }
+$("editorImgUpload").onclick=()=>{ $("editorImageInput").value=""; $("editorImageInput").click(); };
+$("editorImgBox").onclick=()=>{ $("editorImageInput").value=""; $("editorImageInput").click(); };
+$("editorImgBox").addEventListener("keydown",e=>{ if(e.key==="Enter"||e.key===" "){ e.preventDefault(); $("editorImageInput").click(); } });
+$("editorImageInput").onchange=e=>pickEditorFile(e.target.files?.[0]);
+$("editorImgRemove").onclick=()=>setEditorImage({file:null,remove:true,id:editorImg.id});
+$("editorImgBox").addEventListener("dragover",e=>{e.preventDefault();$("editorImgBox").classList.add("drop-active")});
+$("editorImgBox").addEventListener("dragleave",()=>$("editorImgBox").classList.remove("drop-active"));
+$("editorImgBox").addEventListener("drop",e=>{ e.preventDefault(); $("editorImgBox").classList.remove("drop-active"); pickEditorFile([...e.dataTransfer.files].find(f=>f.type.startsWith("image/"))); });
+$("contentDialog").addEventListener("paste",e=>{
+  const item=[...(e.clipboardData?.items||[])].find(i=>i.type.startsWith("image/"));
+  if(item){ e.preventDefault(); pickEditorFile(item.getAsFile()); toast("Image added — click Save Content to keep it"); }
+});
+
+/* ============ workspace settings (name + status colours) ============ */
+function openSettings(){
+  $("appNameInput").value=SETTINGS.appName;
+  const list=[...new Set([...STATUSES,...Object.keys(SETTINGS.statusColors).filter(k=>STATUSES.includes(k))])];
+  $("statusColorList").innerHTML=list.map(st=>`<div class="st-row"><input type="color" data-color-for="${esc(st)}" value="${statusColor(st)}" aria-label="${esc(st)} colour"><span style="font-size:13px;font-weight:650">${esc(st)}</span><span class="status preview" data-preview-st="${esc(st)}" style="${stStyle(st)}">${esc(st)}</span></div>`).join("");
+  $("statusColorList").querySelectorAll("[data-color-for]").forEach(inp=>inp.oninput=()=>{
+    const st=inp.dataset.colorFor, c=inp.value; const pv=$("statusColorList").querySelector(`[data-preview-st="${CSS.escape(st)}"]`);
+    pv.style.cssText=`background:${c}22;color:${shade(c,-.3)};border-color:${c}55`;
+  });
+  $("settingsDialog").showModal();
+}
+$("resetColors").onclick=()=>{ $("statusColorList").querySelectorAll("[data-color-for]").forEach(inp=>{ inp.value=DEFAULT_STATUS_COLORS[inp.dataset.colorFor]||statusColor(inp.dataset.colorFor); inp.oninput(); }); };
+$("settingsBtn").onclick=openSettings; $("appNameBtn").onclick=openSettings;
+$("closeSettings").onclick=()=>$("settingsDialog").close(); $("cancelSettings").onclick=()=>$("settingsDialog").close();
+$("settingsForm").onsubmit=async e=>{
+  e.preventDefault();
+  const name=$("appNameInput").value.trim()||"Content OS";
+  const colors={}; $("statusColorList").querySelectorAll("[data-color-for]").forEach(inp=>{ if(inp.value.toLowerCase()!==(DEFAULT_STATUS_COLORS[inp.dataset.colorFor]||"").toLowerCase()) colors[inp.dataset.colorFor]=inp.value; });
+  SETTINGS.appName=name; SETTINGS.statusColors=colors;
+  applySettings(); renderAll(); $("settingsDialog").close();
+  if(ONLINE){
+    setSync("saving","Saving…");
+    const {error}=await sb.from("settings").upsert([{key:"app_name",value:name},{key:"status_colors",value:colors}]);
+    if(error){ console.error(error); setSync("err","Settings not saved"); toast("Couldn't save settings for the team: "+error.message); return; }
+    setSync("ok","All changes saved");
+  }else{ try{ localStorage.setItem("cw_settings",JSON.stringify(SETTINGS)); }catch(err){} }
+  toast("Settings saved");
+};
+function applyRemoteSetting(row){
+  if(!row) return;
+  if(row.key==="app_name" && typeof row.value==="string" && row.value.trim()) SETTINGS.appName=row.value.trim();
+  if(row.key==="status_colors" && row.value && typeof row.value==="object") SETTINGS.statusColors=row.value;
+}
 
 /* ============ history (online) ============ */
 const FIELD_LABEL={title:"Title",brand:"Brand",platform:"Platform",publish_date:"Publish date",post_time:"Post time",status:"Status",content_type:"Type",
@@ -1443,6 +1595,8 @@ setInterval(()=>{ if(!document.querySelector("dialog[open]")){ renderToday(); re
 
 /* ============ boot ============ */
 populateSelects();
+if(!ONLINE) loadLocalSettings();
+applySettings();
 readUrl();
 if(!ONLINE){
   contents=loadLocal();
