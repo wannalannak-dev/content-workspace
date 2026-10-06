@@ -1,29 +1,29 @@
 /* =========================================================
-   ตั้งค่า Content Workspace
-   - ถ้าเว้น supabaseUrl / supabaseAnonKey ว่างไว้ = "โหมดทดลอง"
-     (ข้อมูลเก็บในเบราว์เซอร์เครื่องเดียว ไม่แชร์กับทีม)
-   - ใส่ค่าจาก Supabase > Project Settings > API เพื่อเปิด "โหมดออนไลน์"
-     (anon key ใส่ในหน้าเว็บได้ ปลอดภัยเพราะสิทธิ์ถูกคุมด้วย RLS ในฐานข้อมูล)
-   ห้ามใส่ service_role key ในไฟล์นี้เด็ดขาด
+   Content Workspace settings
+   - Leave supabaseUrl / supabaseAnonKey empty = demo mode
+     (data stays in one browser, not shared with the team)
+   - The publishable/anon key is safe to put on a web page:
+     access is controlled by RLS rules in the database.
+   NEVER put a secret / service_role key in this file.
    ========================================================= */
 window.WORKSPACE_CONFIG = {
   supabaseUrl: "https://bdrfaeyztoszimqrdcuj.supabase.co",
   supabaseAnonKey: "sb_publishable_A5aXGj_b2w57rNa7d0byWw_g5Cmqhm_",
 
-  // รายชื่อทีม (คีย์สั้น ๆ : ชื่อที่แสดง + สีวงกลม)
-  team: {
-    nn: { name: "หนึ่ง", color: "#2F4BD6" },
-    pk: { name: "ปุ๊ก",  color: "#0E9F9A" },
-    tm: { name: "ต้อม",  color: "#B07A1E" },
-    jj: { name: "เจ",    color: "#D6336C" }
+  // Brands and their colours (add / remove freely)
+  brandColors: {
+    BN:     "#d59b2a",
+    EOC:    "#4d8ad5",
+    PTL:    "#9b6bd6",
+    PUREE:  "#d96587",
+    GIVING: "#4b9b70",
+    SKIN:   "#6c79cf"
   },
 
-  // ช่องทางที่ใช้ลงคอนเทนต์
-  channels: {
-    instagram: { label: "Instagram", color: "#D6336C" },
-    tiktok:    { label: "TikTok",    color: "#0E9F9A" },
-    youtube:   { label: "YouTube",   color: "#E03131" },
-    facebook:  { label: "Facebook",  color: "#2B6CD4" },
-    blog:      { label: "บทความ",    color: "#B07A1E" }
-  }
+  platforms: ["Facebook", "Instagram", "TikTok", "YouTube", "LINE", "X"],
+
+  // Workflow order. Briefing / Designing / Revision count as "In progress".
+  statuses: ["Briefing", "Designing", "Revision", "Approved", "Scheduled", "Published"],
+
+  contentTypes: ["Static", "Carousel", "Reels", "TikTok", "Story", "Video"]
 };
