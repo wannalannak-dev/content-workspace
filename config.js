@@ -25,5 +25,9 @@ window.WORKSPACE_CONFIG = {
   // Workflow order. Briefing / Designing / Revision count as "In progress".
   statuses: ["Briefing", "Designing", "Revision", "Approved", "Scheduled", "Published"],
 
-  contentTypes: ["Static", "Carousel", "Reels", "TikTok", "Story", "Video"]
+  contentTypes: ["Static", "Carousel", "Reels", "TikTok", "Story", "Video"],
+
+  // Boost workflow ① (agency sets ads first):
+  agencyLeadDays: 3,   // default "send to agency" date = this many days before publish date
+  postIdWarnDays: 2    // warn (red) when there is still no Post ID this many days before publish
 };
