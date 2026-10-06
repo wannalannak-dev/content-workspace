@@ -397,8 +397,9 @@ body.dragging{cursor:grabbing}
 <div class="gate" id="gate">
   <form class="box" id="loginForm">
     <h2>เข้าสู่ Content Workspace</h2>
-    <p id="gateText">ใส่อีเมลของทีม ระบบจะส่งลิงก์เข้าสู่ระบบไปให้ ไม่ต้องตั้งรหัสผ่าน</p>
+    <p id="gateText">ใส่อีเมลของทีม ถ้ามีรหัสผ่านให้ใส่ด้วย ถ้าไม่มี เว้นว่างไว้ ระบบจะส่งลิงก์เข้าสู่ระบบไปทางอีเมล</p>
     <input id="loginEmail" type="email" required placeholder="name@company.com" autocomplete="email">
+    <input id="loginPass" type="password" placeholder="รหัสผ่าน (ถ้ามี)" autocomplete="current-password">
     <button class="btn btn-primary" id="loginBtn" type="submit">ส่งลิงก์เข้าสู่ระบบ</button>
     <div class="msg" id="loginMsg"></div>
   </form>
@@ -1003,12 +1004,20 @@ if(!ONLINE){
   $("#loginForm").onsubmit = async e => {
     e.preventDefault();
     const email = $("#loginEmail").value.trim().toLowerCase();
+    const pass = $("#loginPass").value;
     $("#loginBtn").disabled = true;
+    if(pass){
+      const r = await sb.auth.signInWithPassword({email, password:pass});
+      $("#loginBtn").disabled = false;
+      if(r.error) showGate(null, "เข้าสู่ระบบไม่สำเร็จ: อีเมลหรือรหัสผ่านไม่ถูกต้อง", true);
+      return;
+    }
     const {error} = await sb.auth.signInWithOtp({email, options:{emailRedirectTo: location.origin + location.pathname, shouldCreateUser:true}});
     $("#loginBtn").disabled = false;
     if(error) showGate(null, "ส่งลิงก์ไม่สำเร็จ: "+error.message, true);
     else showGate(null, "ส่งลิงก์ไปที่ "+email+" แล้ว เปิดอีเมลแล้วกดลิงก์เพื่อเข้าใช้งาน");
   };
+  $("#loginPass").oninput = e => { $("#loginBtn").textContent = e.target.value ? "เข้าสู่ระบบ" : "ส่งลิงก์เข้าสู่ระบบ"; };
   $("#logoutBtn").onclick = () => { if(confirm("ออกจากระบบ?")) sb.auth.signOut().then(()=>location.reload()); };
   sb.auth.onAuthStateChange((ev, session) => { if(session) setTimeout(()=>startSession(session), 0); });
   sb.auth.getSession().then(({data}) => {
