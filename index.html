@@ -96,7 +96,12 @@
     .st-dot{width:7px;height:7px;border-radius:50%;flex:0 0 auto;align-self:center}
 
     .stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-bottom:16px}
-    .stat{background:var(--panel);border:1px solid var(--border);border-radius:var(--radius);padding:14px 16px}
+    .stat{background:var(--panel);border:1px solid var(--border);border-radius:var(--radius);padding:14px 16px;text-align:left;color:inherit;font:inherit;cursor:pointer;transition:.15s ease}
+    .stat:hover{border-color:#c9ccd6;box-shadow:0 4px 14px rgba(31,36,48,.06)}
+    .stat-go{float:right;font-size:11px;color:var(--primary);opacity:0;transition:.15s}
+    .stat:hover .stat-go,.stat:focus-visible .stat-go{opacity:1}
+    .s-item{display:block;width:100%;text-align:left;background:#fff;border:1px solid var(--border);border-left:4px solid #8b8bf6;border-radius:10px;padding:10px 12px;margin-bottom:8px;font:inherit;color:inherit;cursor:pointer}
+    .s-item:hover{border-color:#c9ccd6;background:#fcfcff}
     .stat-label{font-size:12px;color:var(--muted);font-weight:700}
     .stat-value{font-size:24px;font-weight:800;margin-top:4px;font-variant-numeric:tabular-nums}
     .stat-sub{font-size:12px;color:var(--muted);margin-top:2px}
@@ -249,6 +254,39 @@
     .imp-table{max-height:52vh;overflow:auto;border:1px solid var(--border);border-radius:10px}
     .imp-table table th,.imp-table table td{font-size:12px;padding:8px 10px}
     .imp-table tr.err{background:var(--danger-soft)} .imp-table tr.skip{background:#f6f6f8;color:var(--muted)}
+    .cal-card.k-task{background:#fafbff;border-style:dashed}
+    .cal-card.k-task.red{background:var(--danger-soft);border-color:#f3c4c4;border-left-style:solid}
+    .cal-card.k-task.orange{background:var(--warn-soft);border-color:#f3d6bf;border-left-style:solid}
+    .cal-card.k-run{border:0;border-radius:6px;background:color-mix(in srgb,var(--bc) 18%,#fff);border-left:4px solid var(--bc);padding:5px 8px}
+    .cal-card.k-run.run-mid,.cal-card.k-run.run-end{border-left-color:transparent;border-top-left-radius:0;border-bottom-left-radius:0;margin-left:-10px;padding-left:12px}
+    .cal-card.k-run.run-mid,.cal-card.k-run.run-start{border-top-right-radius:0;border-bottom-right-radius:0;margin-right:-10px}
+    .run-fill{font-size:11px;color:transparent;height:14px;overflow:hidden;white-space:nowrap}
+    .board{grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;padding:14px}
+    .b-col{background:var(--panel-2);border:1px solid var(--border);border-radius:12px;padding:10px;min-width:0}
+    .b-head{display:flex;justify-content:space-between;font-weight:800;font-size:13px}
+    .b-head .n{background:#fff;border:1px solid var(--border);border-radius:999px;padding:0 8px;font-size:12px}
+    .b-sub{font-size:11px;color:var(--muted);margin:2px 0 10px}
+    .b-card{display:block;width:100%;text-align:left;background:#fff;border:1px solid var(--border);border-left:4px solid #8b8bf6;border-radius:10px;padding:10px;margin-bottom:8px}
+    .b-card:hover{border-color:#c9ccd6}
+    .b-card.red{background:var(--danger-soft)} .b-card.orange{background:var(--warn-soft)}
+    .b-title{font-weight:750;font-size:13px}
+    .b-meta{font-size:11px;color:var(--muted);margin-top:3px}
+    .b-next{font-size:12px;font-weight:700;color:#3d3db0;margin-top:6px}
+    code.code{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:11.5px;background:#f3f4f8;border:1px solid var(--border);border-radius:6px;padding:2px 6px;max-width:170px;display:inline-block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;vertical-align:middle}
+    .code-cell{display:flex;gap:6px;align-items:center}
+    .txt-red{color:#b23434!important;font-weight:700}
+    .ck-inline{display:flex;align-items:center;gap:9px;font-size:13px;font-weight:650}
+    .ck-inline input{width:16px;height:16px;accent-color:var(--primary)}
+    #tiktokFields{border-color:#f9c8e0;background:#fff5fa}
+    .tt-table td{vertical-align:top}
+    .exp-presets{display:flex;gap:6px;flex-wrap:wrap}
+    .exp-presets button.active{background:#171923;color:#fff;border-color:#171923}
+    .imp-update{display:none;align-items:center;gap:9px;background:#edf2ff;border:1px solid #cdd8ff;border-radius:10px;padding:9px 12px;margin-bottom:12px;font-size:13px}
+    .imp-update.show{display:flex}
+    .imp-update input{width:16px;height:16px;accent-color:var(--primary)}
+    .imp-table tr.upd{background:#f3f6ff} .imp-table tr.same{color:var(--muted)}
+    @media(max-width:1100px){.board{grid-template-columns:repeat(2,minmax(0,1fr))}}
+    @media(max-width:760px){.board{grid-template-columns:1fr}}
     @media (prefers-reduced-motion:reduce){.drawer{transition:none}.preview-box.loading::after{animation:none}}
 
     .gate{position:fixed;inset:0;z-index:90;background:var(--bg);display:none;place-items:center;padding:16px}
@@ -298,6 +336,8 @@
     <div class="nav">
       <button class="active" data-view="list" title="Content List">☷ <span class="label">Content List</span></button>
       <button data-view="calendar" title="Calendar">▦ <span class="label">Calendar</span></button>
+      <button data-view="agency" title="Agency">⇄ <span class="label">Agency</span></button>
+      <button data-view="tiktok" title="TikTok Hub">♪ <span class="label">TikTok Hub</span></button>
     </div>
     <div class="sidebar-foot">
       <button class="settings-btn" id="settingsBtn" title="Workspace settings">⚙ <span class="label">Settings</span></button>
@@ -321,6 +361,7 @@
         <span class="sync" id="sync" aria-live="polite"><i></i><span id="syncText"></span></span>
         <button class="btn ghost" id="historyBtn" style="display:none">🕘 History</button>
         <button class="btn" id="importBtn">⇪ Import Excel</button>
+        <button class="btn" id="exportBtn">⇩ Export Excel</button>
         <button class="btn primary" id="newContentBtn">＋ New Content</button>
       </div>
     </div>
@@ -373,11 +414,38 @@
             <div class="calendar-month" id="calendarTitle"></div>
             <button class="icon-btn" id="nextMonth" aria-label="Next month">›</button>
           </div>
-          <div class="cal-legend"><span>▍Post</span><span>⚡ Boost starts</span><span>📤 Send to agency</span></div>
+          <div class="cal-legend"><span>What goes live on our pages · <span class="st-dot" style="display:inline-block;background:#8b5cf6"></span> = status colour</span></div>
           <button class="btn" id="todayBtn">Today</button>
         </div>
         <div class="calendar-grid" id="calendarGrid"></div>
       </div>
+    </section>
+    <section id="agencyView" class="panel" style="display:none">
+      <div class="panel-head">
+        <div><div class="panel-title">Agency</div><div class="panel-meta">Hand-offs, Post IDs, Spark codes and ad run dates — everything coordinated with the agency.</div></div>
+        <div class="view-switch" id="agencySwitch" style="margin-left:0"><button data-agency-mode="calendar" class="active">Calendar</button><button data-agency-mode="board">Board</button></div>
+      </div>
+      <div id="agencyCal" class="calendar-wrap">
+        <div class="calendar-top">
+          <div class="calendar-nav">
+            <button class="icon-btn" id="agPrev" aria-label="Previous month">‹</button>
+            <div class="calendar-month" id="agencyCalTitle"></div>
+            <button class="icon-btn" id="agNext" aria-label="Next month">›</button>
+          </div>
+          <div class="cal-legend"><span>📤 Send work</span><span>🆔 Post ID needed</span><span>🔗 Send post link</span><span>🔑 Spark code</span><span>⚡ Ad running</span></div>
+          <button class="btn" id="agToday">Today</button>
+        </div>
+        <div class="calendar-grid" id="agencyGrid"></div>
+      </div>
+      <div id="agencyBoard" class="board" style="display:none"></div>
+    </section>
+
+    <section id="tiktokView" class="panel" style="display:none">
+      <div class="panel-head">
+        <div><div class="panel-title">♪ TikTok Hub</div><div class="panel-meta" id="ttMeta"></div></div>
+        <button class="btn primary small" id="ttNewBtn">＋ New TikTok content</button>
+      </div>
+      <div id="tiktokContainer" class="table-scroll"></div>
     </section>
   </main>
 </div>
@@ -389,7 +457,7 @@
     <button class="icon-btn" id="closeDrawer" aria-label="Close">×</button>
   </div>
   <div class="drawer-body" id="drawerBody"></div>
-  <div class="drawer-foot"><button class="btn primary block" id="drawerAddBtn">＋ Add content on this day</button></div>
+  <div class="drawer-foot" id="drawerFoot"><button class="btn primary block" id="drawerAddBtn">＋ Add content on this day</button></div>
 </aside>
 <aside class="drawer" id="historyDrawer" aria-label="History">
   <div class="drawer-head">
@@ -420,8 +488,18 @@
       <div class="field"><label for="mediaInput">Media</label><select id="mediaInput"><option>Organic</option><option>Boost Post</option><option>Ads Setup</option></select></div>
       <div class="field"><label for="refInput">Ref ID <span style="font-weight:600">(optional)</span></label><input type="text" id="refInput" placeholder="e.g. TT-0012" /></div>
 
+      <div class="conditional-box" id="tiktokFields">
+        <div class="field full"><label for="ttClipInput">♪ TikTok clip link</label><input type="text" id="ttClipInput" placeholder="https://www.tiktok.com/@account/video/… (after posting)"></div>
+        <div class="field"><label for="ttAccTypeInput">Posting account</label><select id="ttAccTypeInput"><option value="brand">Brand account</option><option value="kol">KOL / Creator</option></select></div>
+        <div class="field" style="grid-column:span 2"><label for="ttAccNameInput">Account name</label><input type="text" id="ttAccNameInput" placeholder="@brand or KOL name"></div>
+        <div class="field" style="grid-column:span 2"><label for="ttCodeInput">Spark Ads code</label><input type="text" id="ttCodeInput" placeholder="Paste the authorization code" autocomplete="off" spellcheck="false" style="font-family:ui-monospace,Menlo,monospace"></div>
+        <div class="field"><label for="ttExpiryInput">Code expiry <span style="font-weight:600">(optional)</span></label><input type="date" id="ttExpiryInput"></div>
+        <label class="ck-inline full"><input type="checkbox" id="ttCodeSentInput"> Spark code sent to agency</label>
+      </div>
+
       <div class="conditional-box" id="boostFields">
-        <div class="field full">
+        <div class="media-detail full" id="adsNote" style="font-size:12px;color:#4f4fb2"></div>
+        <div class="field full" id="flowField">
           <label for="flowInput">Boost workflow</label>
           <select id="flowInput">
             <option value="">Not decided yet</option>
@@ -430,15 +508,15 @@
           </select>
         </div>
         <div class="field" id="sendDateField"><label for="sendDateInput">Send to agency</label><input type="date" id="sendDateInput"></div>
-        <div class="field"><label for="boostStartInput">Boost start</label><input type="date" id="boostStartInput"><span class="help">Blank = same as publish date</span></div>
-        <div class="field"><label for="boostEndInput">Boost end</label><input type="date" id="boostEndInput"></div>
+        <div class="field"><label for="boostStartInput">Ad run start</label><input type="date" id="boostStartInput"><span class="help">Blank = publish date</span></div>
+        <div class="field"><label for="boostEndInput">Ad run end</label><input type="date" id="boostEndInput"></div>
         <div class="field"><label for="budgetInput">Budget (THB)</label><div class="money-wrap"><span>฿</span><input type="number" min="0" step="100" id="budgetInput" placeholder="e.g. 5000"></div></div>
         <div class="field"><label for="objectiveInput">Media Objective</label>
           <select id="objectiveInput"><option value="">Select objective</option><option>Awareness</option><option>Reach</option><option>Engagement</option><option>Traffic</option><option>Video Views</option><option>Sales / Conversion</option></select></div>
         <div class="field"><label for="kpiInput">Primary KPI</label>
           <select id="kpiInput"><option value="">Select KPI</option><option>CPM</option><option>Reach</option><option>Frequency</option><option>CPE</option><option>ER%</option><option>CPC</option><option>CTR%</option><option>CPV</option><option>VTR%</option><option>ROAS</option></select></div>
-        <div class="field full"><label for="postRefInput" id="postRefLabel">Post ID / post link</label><input type="text" id="postRefInput" placeholder="e.g. 123456789012345_987654321 or https://facebook.com/..."></div>
-        <div class="field full"><label>Checklist</label><div class="checklist" id="checklist"></div></div>
+        <div class="field full" id="postRefField"><label for="postRefInput" id="postRefLabel">Post ID / post link</label><input type="text" id="postRefInput" placeholder="e.g. 123456789012345_987654321 or https://facebook.com/..."></div>
+        <div class="field full" id="checklistField"><label>Checklist</label><div class="checklist" id="checklist"></div></div>
       </div>
 
       <div class="field full">
@@ -453,7 +531,7 @@
         </div>
       </div>
       <div class="field full">
-        <label for="assetsInput">Asset links (VDO / AW download)</label>
+        <label for="assetsInput">Download links (VDO / AW)</label>
         <textarea id="assetsInput" rows="2" placeholder="One link per line — Google Drive, Dropbox, WeTransfer..."></textarea>
       </div>
       <div class="field full">
@@ -510,8 +588,9 @@
   <div class="modal-head"><strong id="importTitle">Import from Excel</strong><button class="icon-btn" type="button" id="closeImport" aria-label="Close">×</button></div>
   <div style="padding:18px 20px">
     <div class="imp-summary" id="importSummary"></div>
+    <label class="imp-update" id="importUpdateWrap"><input type="checkbox" id="importApplyUpdates"> <span>Also update <b id="importUpdCount"></b> with the values in this file (rows marked ↻). Every change is saved in 🕘 History and can be undone.</span></label>
     <div class="imp-table" id="importTable"></div>
-    <div class="media-detail" style="margin-top:10px">Rows with errors are not imported — fix them in Excel and import again. Rows whose Ref ID already exists are skipped, so existing content is never overwritten.</div>
+    <div class="media-detail" style="margin-top:10px">Rows with errors are not imported — fix them in Excel and import again. Existing content is only changed if you tick the update box above.</div>
   </div>
   <div class="modal-foot" style="justify-content:flex-end">
     <button class="btn" type="button" id="cancelImport">Cancel</button>
@@ -519,6 +598,34 @@
   </div>
 </dialog>
 <input type="file" id="importFile" accept=".xlsx,.xls,.csv" style="display:none">
+
+<dialog id="exportDialog" style="width:min(560px,calc(100vw - 32px))">
+  <div class="modal-head"><strong>Export to Excel</strong><button class="icon-btn" type="button" id="closeExport" aria-label="Close">×</button></div>
+  <div class="modal-body" style="display:block">
+    <div class="field" style="margin-bottom:14px">
+      <label>Period (by publish date)</label>
+      <div class="exp-presets">
+        <button class="btn small" type="button" data-exp-preset="thisweek">This week</button>
+        <button class="btn small" type="button" data-exp-preset="nextweek">Next week</button>
+        <button class="btn small" type="button" data-exp-preset="lastmonth">Last month</button>
+        <button class="btn small" type="button" data-exp-preset="thismonth">This month</button>
+        <button class="btn small" type="button" data-exp-preset="nextmonth">Next month</button>
+        <button class="btn small" type="button" data-exp-preset="all">All</button>
+      </div>
+      <div style="display:flex;gap:10px;align-items:center;margin-top:8px;flex-wrap:wrap">
+        <input type="date" id="expFrom" aria-label="From"> <span class="media-detail" style="margin:0">to</span> <input type="date" id="expTo" aria-label="To">
+      </div>
+    </div>
+    <label class="ck-inline" style="margin-bottom:8px"><input type="checkbox" id="expFilters"> Only content matching current filters <span class="media-detail" id="expFiltersNote" style="margin:0;font-weight:500"></span></label>
+    <label class="ck-inline"><input type="checkbox" id="expSummary" checked> Add a Summary sheet (counts and ad budget)</label>
+    <div class="flag gray" id="expCount" style="margin-top:14px;font-size:12.5px"></div>
+    <div class="media-detail" style="margin-top:10px">Same layout as the import template — you can edit the file and import it back.</div>
+  </div>
+  <div class="modal-foot">
+    <button class="link-btn" type="button" id="templateLink">⇩ Download blank template</button>
+    <div style="display:flex;gap:8px"><button class="btn" type="button" id="cancelExport">Cancel</button><button class="btn primary" type="button" id="confirmExport">Export</button></div>
+  </div>
+</dialog>
 
 <dialog id="imagePreviewDialog" class="image-preview-modal">
   <div class="modal-head"><strong>Content Preview</strong><button class="icon-btn" type="button" id="closeImagePreview" aria-label="Close">×</button></div>
@@ -615,22 +722,46 @@ function assetList(c){ return String(c.assets||"").split(/\s*\n\s*|\s+(?=https?:
 function assetLabel(u){ try{ const h=new URL(u).hostname.replace(/^www\./,""); if(/drive\.google|docs\.google/.test(h)) return "Drive"; if(/dropbox/.test(h)) return "Dropbox"; if(/wetransfer|we\.tl/.test(h)) return "WeTransfer"; if(/onedrive|sharepoint|1drv/.test(h)) return "OneDrive"; if(/canva/.test(h)) return "Canva"; if(/figma/.test(h)) return "Figma"; return h.split(".")[0]; }catch(e){ return "Link"; } }
 function assetChips(c, max=4){ const l=assetList(c); if(!l.length) return ""; return `<div class="assets">${l.slice(0,max).map((u,i)=>`<a class="asset" href="${esc(u)}" target="_blank" rel="noopener noreferrer" title="${esc(u)}">🔗 ${esc(assetLabel(u))}${l.length>1?" "+(i+1):""}</a>`).join("")}${l.length>max?`<span class="asset">+${l.length-max}</span>`:""}</div>`; }
 const isBoost = c => c.media==="Boost Post";
-const boostStartOf = c => c.boostStart || c.publishDate;
+const isAd = c => c.media==="Boost Post" || c.media==="Ads Setup";
+const isTT = c => c.platform==="TikTok";
+/* effective workflow: "agency" (① or Ads Setup dark post) · "self" (②) · "tiktok" (Spark code) · "" (not set) */
+const flowOf = c => !isAd(c) ? "" : isTT(c) ? "tiktok" : c.media==="Ads Setup" ? "agency" : (c.flow||"");
+const runStartOf = c => c.boostStart || c.publishDate;
+const runEndOf = c => (c.boostEnd && c.boostEnd>=runStartOf(c)) ? c.boostEnd : runStartOf(c);
+const boostStartOf = runStartOf;
+const FLOW_LABELS = ["① Agency sets ads → we publish","② We post first → agency boosts"];
+const PREFIX = {Facebook:"FB",Instagram:"IG",TikTok:"TT",YouTube:"YT",LINE:"LN",X:"X"};
+function autoRef(platform){
+  const pf=PREFIX[platform]||String(platform||"CT").replace(/[^A-Za-z]/g,"").slice(0,2).toUpperCase()||"CT";
+  const re=new RegExp("^"+pf+"-(\\d+)$","i"); let max=0;
+  contents.forEach(c=>{ const m=(c.refId||"").match(re); if(m) max=Math.max(max,+m[1]); });
+  return `${pf}-${String(max+1).padStart(4,"0")}`;
+}
 
-/* ============ alerts (agency workflow) ============ */
+/* ============ alerts ============ */
 function alertsFor(c){
-  const out=[];
-  if(c.status===DONE && !(isBoost(c) && c.flow==="self" && !c.linkSent)) return out;
-  if(isBoost(c) && c.flow==="agency" && !c.postRef){
-    const d=daysBetween(TODAY,c.publishDate);
-    if(d<0) out.push({level:"red",text:"Past publish date – no Post ID"});
-    else if(d<=WARN_DAYS) out.push({level:"red",text:d===0?"No Post ID yet – publishing today":`No Post ID yet – publish in ${d}d`});
-    if(!c.agencySent && c.sendDate && c.sendDate<=TODAY) out.push({level:"orange",text:"Not sent to agency yet"});
+  const out=[]; const f=flowOf(c);
+  if(isAd(c) && runEndOf(c)>=TODAY){
+    if(f==="agency" && !c.postRef && c.status!==DONE){
+      const d=daysBetween(TODAY,c.publishDate);
+      if(d<0) out.push({level:"red",text:"Past publish date – no Post ID"});
+      else if(d<=WARN_DAYS) out.push({level:"red",text:d===0?"No Post ID yet – publishing today":`No Post ID yet – publish in ${d}d`});
+      if(!c.agencySent && c.sendDate && c.sendDate<=TODAY) out.push({level:"orange",text:"Not sent to agency yet"});
+    }
+    if(f==="self" && !c.linkSent && (c.status===DONE || c.publishDate<TODAY)) out.push({level:"orange",text:"Send post link to agency"});
+    if(f==="" && daysBetween(TODAY,c.publishDate)<=WARN_DAYS && c.status!==DONE) out.push({level:"orange",text:"Boost workflow not set"});
+    if(f==="tiktok"){
+      const ds=daysBetween(TODAY,runStartOf(c));
+      if(!c.sparkCode && ds<=WARN_DAYS) out.push({level:"red",text:ds<0?"Ad started – no Spark code":ds===0?"No Spark code – ad starts today":`No Spark code yet – ad in ${ds}d`});
+      if(c.sparkCode && c.codeExpiry){
+        if(c.codeExpiry<TODAY) out.push({level:"red",text:"Spark code expired"});
+        else if(c.codeExpiry<runEndOf(c)) out.push({level:"red",text:"Code expires before ad ends"});
+        else if(daysBetween(TODAY,c.codeExpiry)<=3) out.push({level:"orange",text:`Code expires in ${daysBetween(TODAY,c.codeExpiry)}d`});
+      }
+      if(c.sparkCode && !c.codeSent) out.push({level:"orange",text:"Send Spark code to agency"});
+    }
   }
-  if(isBoost(c) && c.flow==="self" && !c.linkSent && (c.status===DONE || c.publishDate<TODAY)) out.push({level:"orange",text:"Send post link to agency"});
-  if(isBoost(c) && !c.flow && daysBetween(TODAY,c.publishDate)<=WARN_DAYS && c.status!==DONE) out.push({level:"orange",text:"Boost workflow not set"});
-  if(timePassed(c) && daysBetween(c.publishDate,TODAY)<=14) out.push({level:c.status==="Scheduled"?"orange":"red",text:c.status==="Scheduled"?"Time passed – confirm Published":`Time passed – still ${c.status}`});
-  else if(c.publishDate<TODAY && c.status!==DONE && daysBetween(c.publishDate,TODAY)<=14) out.push({level:"orange",text:"Past due"});
+  if(c.status!==DONE && timePassed(c) && daysBetween(c.publishDate,TODAY)<=14) out.push({level:c.status==="Scheduled"?"orange":"red",text:c.status==="Scheduled"?"Time passed – confirm Published":`Time passed – still ${c.status}`});
   return out;
 }
 function nowHM(){ const n=new Date(); return String(n.getHours()).padStart(2,"0")+":"+String(n.getMinutes()).padStart(2,"0"); }
@@ -645,9 +776,9 @@ function demoData(){
     {id:"C-1002",refId:"TT-001",postTime:"19:00",title:"Nonkul – Busy Day",brand:"EOC",platform:"TikTok",publishDate:d(0),status:"Scheduled",type:"TikTok",media:"Organic",remark:"Short-form video",assets:"https://drive.google.com/file/d/demo1/view\nhttps://www.dropbox.com/s/demo2"},
     {id:"C-1003",postTime:"18:00",title:"Beauty Shot – Glow Routine",brand:"PTL",platform:"Instagram",publishDate:d(1),status:"Designing",type:"Reels",media:"Organic",remark:"Lifestyle creator format"},
     {id:"C-1004",postTime:"12:00",title:"Prune – Daily Comfort",brand:"PUREE",platform:"Facebook",publishDate:d(2),status:"Approved",type:"Carousel",media:"Boost Post",flow:"agency",sendDate:d(-1),agencySent:true,budget:5000,objective:"Engagement",kpi:"ER%",remark:"Benefit-focused"},
-    {id:"C-1005",title:"Giving – Family Moment",brand:"GIVING",platform:"YouTube",publishDate:d(2),status:"Approved",type:"Video",media:"Ads Setup",remark:"Brand story"},
+    {id:"C-1005",title:"Giving – Family Moment",brand:"GIVING",platform:"Facebook",publishDate:d(6),status:"Approved",type:"Video",media:"Ads Setup",sendDate:d(1),boostStart:d(3),boostEnd:d(12),budget:12000,objective:"Video Views",kpi:"CPV",remark:"Dark post first, publish on page later"},
     {id:"C-1006",postTime:"11:00",title:"BN Promotion – Gift Set",brand:"BN",platform:"Facebook",publishDate:d(5),status:"Revision",type:"Static",media:"Boost Post",flow:"agency",sendDate:d(2),budget:8000,objective:"Traffic",kpi:"CPC",remark:"Promotion CTA"},
-    {id:"C-1007",postTime:"19:00",title:"PTL – Before Bed Routine",brand:"PTL",platform:"TikTok",publishDate:d(3),status:"Briefing",type:"TikTok",media:"Organic",remark:"UGC angle"},
+    {id:"C-1007",refId:"TT-0002",postTime:"19:00",title:"PTL – Before Bed Routine",brand:"PTL",platform:"TikTok",publishDate:d(3),status:"Approved",type:"TikTok",media:"Boost Post",boostStart:d(4),boostEnd:d(10),budget:6000,objective:"Video Views",kpi:"CPV",ttAccType:"kol",ttAccName:"@nongmay",sparkCode:"#Xk2Lm9QpA1sZ",codeExpiry:d(8),remark:"UGC angle",assets:"https://drive.google.com/file/d/demo-tt/view"},
     {id:"C-1008",postTime:"18:30",title:"Eye Berry – Screen Time",brand:"PUREE",platform:"Instagram",publishDate:d(4),status:"Approved",type:"Carousel",media:"Boost Post",flow:"agency",sendDate:d(1),postRef:"112233445566_778899",agencySent:true,budget:5000,objective:"Traffic",kpi:"CPC",remark:"Always-on"},
     {id:"C-1009",title:"Skincare – Mask Night",brand:"SKIN",platform:"X",publishDate:d(0),status:"Scheduled",type:"Static",media:"Organic",remark:"Product demo"},
     {id:"C-1010",postTime:"08:00",title:"EOC – Morning Checklist",brand:"EOC",platform:"Facebook",publishDate:d(-2),status:"Published",type:"Static",media:"Boost Post",flow:"self",postRef:"https://facebook.com/demo/posts/1",budget:3000,objective:"Reach",kpi:"CPM",remark:"Routine content"},
@@ -657,7 +788,8 @@ function demoData(){
 }
 function normalize(c){
   return Object.assign({refId:"",postTime:"",type:"Static",media:"Organic",budget:null,objective:"",kpi:"",remark:"",image:null,assets:"",
-    flow:"",sendDate:"",boostStart:"",boostEnd:"",postRef:"",agencySent:false,linkSent:false,boostLive:false,by:""},c);
+    flow:"",sendDate:"",boostStart:"",boostEnd:"",postRef:"",agencySent:false,linkSent:false,boostLive:false,
+    clipUrl:"",ttAccType:"brand",ttAccName:"",sparkCode:"",codeExpiry:"",codeSent:false,by:"",at:""},c);
 }
 
 /* ============ state ============ */
@@ -672,25 +804,30 @@ let activePreviewContentId = null, pendingImageTargetId = null, drawerDate = nul
 let synced = {}, saveTimer = null, retryTimer = null;
 const sig = c => JSON.stringify([c.refId||"",c.title,c.brand,c.platform,c.publishDate,c.postTime||"",c.status,c.type,c.media,
   c.budget==null?null:Number(c.budget),c.objective||"",c.kpi||"",c.remark||"",c.image||null,c.assets||"",c.flow||"",
-  c.sendDate||"",c.boostStart||"",c.boostEnd||"",c.postRef||"",!!c.agencySent,!!c.linkSent,!!c.boostLive]);
+  c.sendDate||"",c.boostStart||"",c.boostEnd||"",c.postRef||"",!!c.agencySent,!!c.linkSent,!!c.boostLive,
+  c.clipUrl||"",c.ttAccType||"brand",c.ttAccName||"",c.sparkCode||"",c.codeExpiry||"",!!c.codeSent]);
 const nn = v => v===""||v==null ? null : v;
 function toRow(c){
   return {id:c.id,ref_id:nn((c.refId||"").trim()),title:c.title,brand:c.brand,platform:c.platform,publish_date:c.publishDate,post_time:nn(c.postTime),
     status:c.status,content_type:c.type,media:c.media,budget:c.budget==null?null:Number(c.budget),objective:nn(c.objective),kpi:nn(c.kpi),
     remark:c.remark||"",image_path:c.image||null,asset_links:nn(c.assets),boost_flow:nn(c.flow),agency_send_date:nn(c.sendDate),
     boost_start:nn(c.boostStart),boost_end:nn(c.boostEnd),post_ref:nn(c.postRef),agency_sent:!!c.agencySent,link_sent:!!c.linkSent,
-    boost_live:!!c.boostLive,updated_by:me?me.email:null};
+    boost_live:!!c.boostLive,tt_clip_url:nn(c.clipUrl),tt_account_type:isTT(c)?(c.ttAccType||"brand"):null,tt_account_name:nn(c.ttAccName),
+    tt_spark_code:nn(c.sparkCode),tt_code_expiry:nn(c.codeExpiry),tt_code_sent:!!c.codeSent,updated_by:me?me.email:null};
 }
 function fromRow(r){
   return normalize({id:r.id,refId:r.ref_id||"",title:r.title||"",brand:r.brand,platform:r.platform,publishDate:r.publish_date,
     postTime:r.post_time?String(r.post_time).slice(0,5):"",status:r.status,type:r.content_type||"Static",media:r.media||"Organic",
     budget:r.budget==null?null:Number(r.budget),objective:r.objective||"",kpi:r.kpi||"",remark:r.remark||"",image:r.image_path||null,
     assets:r.asset_links||"",flow:r.boost_flow||"",sendDate:r.agency_send_date||"",boostStart:r.boost_start||"",boostEnd:r.boost_end||"",
-    postRef:r.post_ref||"",agencySent:!!r.agency_sent,linkSent:!!r.link_sent,boostLive:!!r.boost_live,by:r.updated_by||""});
+    postRef:r.post_ref||"",agencySent:!!r.agency_sent,linkSent:!!r.link_sent,boostLive:!!r.boost_live,
+    clipUrl:r.tt_clip_url||"",ttAccType:r.tt_account_type||"brand",ttAccName:r.tt_account_name||"",sparkCode:r.tt_spark_code||"",
+    codeExpiry:r.tt_code_expiry||"",codeSent:!!r.tt_code_sent,by:r.updated_by||"",at:r.updated_at||""});
 }
 function loadLocal(){
-  try{const v=localStorage.getItem(STORAGE_KEY);return v?JSON.parse(v).map(normalize):demoData()}
-  catch(e){return demoData()}
+  let list; try{const v=localStorage.getItem(STORAGE_KEY);list=v?JSON.parse(v).map(normalize):demoData()}catch(e){list=demoData()}
+  contents=list; list.forEach(c=>{ if(!c.refId) c.refId=autoRef(c.platform); });
+  return list;
 }
 function save(){
   if(!ONLINE){ try{localStorage.setItem(STORAGE_KEY,JSON.stringify(contents))}catch(e){} return; }
@@ -721,6 +858,7 @@ async function flush(){
     setSync("ok","All changes saved");
   }catch(err){
     console.error(err);
+    if(/tt_|column .* does not exist|schema cache/i.test(err.message||"")){ setSync("err","Database needs update v4"); toast("Please run supabase-update-v4.sql in Supabase, then reload."); flushing=false; return; }
     const dup = /duplicate key|ref_id/i.test(err.message||"");
     setSync("err", dup ? "Ref ID already used" : "Couldn't save · retrying");
     if(dup){ toast("That Ref ID is already used by another content. Please change it."); }
@@ -838,7 +976,7 @@ async function copyImage(from,to){
 /* ============ filters ============ */
 function matches(c, ignorePlatform){
   const q=filters.q.trim().toLowerCase();
-  return (!q || [c.title,c.brand,c.platform,c.remark,c.type,c.objective,c.refId,c.postRef].join(" ").toLowerCase().includes(q)) &&
+  return (!q || [c.title,c.brand,c.platform,c.remark,c.type,c.objective,c.refId,c.postRef,c.sparkCode,c.ttAccName].join(" ").toLowerCase().includes(q)) &&
     (!filters.brand||c.brand===filters.brand) &&
     (ignorePlatform || !filters.platform||c.platform===filters.platform) &&
     (!filters.status||c.status===filters.status) &&
@@ -850,12 +988,12 @@ const filtered = () => contents.filter(c=>matches(c,false));
 function readUrl(){
   const p=new URLSearchParams(location.search);
   const pl=p.get("platform"); if(pl){ const m=PLATFORMS.find(x=>x.toLowerCase()===pl.toLowerCase()); if(m) filters.platform=m; }
-  const v=p.get("view"); if(v==="calendar") currentView="calendar";
+  const v=p.get("view"); if(["calendar","agency","tiktok"].includes(v)) currentView=v;
 }
 function writeUrl(){
   const p=new URLSearchParams();
   if(filters.platform) p.set("platform",filters.platform);
-  if(currentView==="calendar") p.set("view","calendar");
+  if(currentView!=="list") p.set("view",currentView);
   const qs=p.toString();
   try{ history.replaceState(null,"",location.pathname+(qs?"?"+qs:"")); }catch(e){}
 }
@@ -894,22 +1032,19 @@ function renderToday(){
   const byTime=(a,b)=>(a.postTime||"99").localeCompare(b.postTime||"99");
   const live=data.filter(c=>c.publishDate===TODAY).sort(byTime);
   const tmr=data.filter(c=>c.publishDate===TOMORROW).sort(byTime);
-  const boost=data.filter(c=>isBoost(c) && boostStartOf(c)===TODAY);
-  const send=data.filter(c=>isBoost(c) && c.flow==="agency" && c.sendDate===TODAY && !c.agencySent);
-  const tmrBoost=data.filter(c=>isBoost(c) && c.boostStart===TOMORROW && c.boostStart!==c.publishDate);
-  const tmrSend=data.filter(c=>isBoost(c) && c.flow==="agency" && c.sendDate===TOMORROW && !c.agencySent);
+  const agToday=agencyTasksOn(data,TODAY), agTmr=agencyTasksOn(data,TOMORROW);
   const attn=data.map(c=>({c,a:alertsFor(c)})).filter(x=>x.a.length).sort((x,y)=>(worstLevel(y.a)==="red")-(worstLevel(x.a)==="red")||x.c.publishDate.localeCompare(y.c.publishDate));
   const liveHtml = live.length ? groupByPlatform(live, c=>{ const passed=c.status!==DONE&&timePassed(c); return tItem(c,(c.media==="Ads Setup"?"Ads · ":"")+(c.postTime||""),passed?"orange":"",{chip:true,ok:passed}); })
     : `<div class="t-empty">Nothing goes live today.</div>`;
   let tmrHtml = tmr.length ? groupByPlatform(tmr, c=>{ const al=alertsFor(c); return tItem(c,c.postTime||"",worstLevel(al),{chip:true}); }) : `<div class="t-empty">Nothing scheduled for tomorrow.</div>`;
-  if(tmrBoost.length||tmrSend.length) tmrHtml += `<div class="t-sub">Also tomorrow</div>`+tmrBoost.map(c=>tItem(c,c.postRef||c.linkSent?"ready":"no Post ID",c.postRef||c.linkSent?"":"orange",{prefix:"⚡ "})).join("")+tmrSend.map(c=>tItem(c,"live "+shortDate(c.publishDate),"",{prefix:"📤 "})).join("");
-  const baHtml = (boost.length||send.length) ? boost.map(c=>tItem(c, c.postRef?"Post ID ✓":(c.flow==="agency"?"No Post ID":"Need link"), c.postRef||c.linkSent?"":"orange",{prefix:"⚡ "})).join("")+send.map(c=>tItem(c,"live "+shortDate(c.publishDate),"",{prefix:"📤 "})).join("")
-    : `<div class="t-empty">No boost or agency hand-off today.</div>`;
+  if(agTmr.length) tmrHtml += `<div class="t-sub">Agency tomorrow</div>`+agTmr.map(e=>tItem(e.c,EV[e.kind].short,e.level,{prefix:EV[e.kind].icon+" "})).join("");
+  const baHtml = agToday.length ? agToday.map(e=>tItem(e.c,EV[e.kind].short,e.level,{prefix:EV[e.kind].icon+" "})).join("")
+    : `<div class="t-empty">No agency hand-off today.</div>`;
   const col=(icon,title,n,body,tip)=>`<div class="today-col"><h3 title="${esc(tip||"")}">${icon} ${title} <span class="n">${n}</span></h3>${body}</div>`;
   $("todayBody").innerHTML =
     col("📣","Going live today",live.length,liveHtml,"Content with today's publish date") +
     col("🗓️","Tomorrow",tmr.length,tmrHtml,"Content going live tomorrow — check it today") +
-    col("⚡","Boost & agency",boost.length+send.length,baHtml,"⚡ boosts starting today · 📤 work to send to the agency today (workflow ①)") +
+    col("🤝","Agency today",agToday.length,baHtml,"Hand-offs and ads starting today — full view on the Agency page") +
     col("⚠️","Needs attention",attn.length, attn.length?attn.slice(0,8).map(x=>tItem(x.c,x.a[0].text,worstLevel(x.a),{ok:x.a[0].text.startsWith("Time passed")})).join("")+(attn.length>8?`<div class="t-empty">+${attn.length-8} more</div>`:""):`<div class="t-empty">All good 👍</div>`,"Things the system thinks need action");
   $("todayBody").querySelectorAll("[data-open]").forEach(b=>b.onclick=()=>openEditor(b.dataset.open));
   $("todayBody").querySelectorAll("[data-mark-pub]").forEach(b=>b.onclick=()=>{ const c=byId(b.dataset.markPub); if(!c) return; c.status=DONE; save(); renderAll(); toast(`“${c.title}” marked ${DONE}`); });
@@ -917,22 +1052,54 @@ function renderToday(){
 
 /* ============ stats ============ */
 function weekRange(){ const t=new Date(); const s=new Date(t.getFullYear(),t.getMonth(),t.getDate()-t.getDay()); return [iso(s),addDays(iso(s),6)]; }
-function renderStats(){
+function statSets(){
   const data=filtered();
   const [ws,we]=weekRange();
-  const week=data.filter(c=>c.publishDate>=ws&&c.publishDate<=we);
-  const weekLeft=week.filter(c=>c.status!==DONE).length;
-  const wip=data.filter(c=>IN_PROGRESS.includes(c.status));
   const ym=TODAY.slice(0,7);
-  const boostMonth=data.filter(c=>isBoost(c)&&boostStartOf(c).startsWith(ym));
-  const budget=boostMonth.reduce((s,c)=>s+(Number(c.budget)||0),0);
-  const waitingId=data.filter(c=>isBoost(c)&&c.flow==="agency"&&!c.postRef&&c.status!==DONE&&c.publishDate>=TODAY).length;
-  const tile=(label,value,sub)=>`<div class="stat"><div class="stat-label">${label}</div><div class="stat-value">${value}</div><div class="stat-sub">${sub}</div></div>`;
+  const byDate=(a,b)=>a.publishDate.localeCompare(b.publishDate)||(a.postTime||"99").localeCompare(b.postTime||"99");
+  return {
+    total:{title:"All content",items:data.slice().sort(byDate)},
+    week:{title:`This week · ${shortDate(ws)}–${shortDate(we)}`,items:data.filter(c=>c.publishDate>=ws&&c.publishDate<=we).sort(byDate)},
+    wip:{title:"In progress · "+IN_PROGRESS.join(" · "),items:data.filter(c=>IN_PROGRESS.includes(c.status)).sort(byDate)},
+    ads:{title:"Ads this month (by ad run start)",items:data.filter(c=>isAd(c)&&runStartOf(c).startsWith(ym)).sort((a,b)=>runStartOf(a).localeCompare(runStartOf(b)))}
+  };
+}
+function renderStats(){
+  const S=statSets();
+  const weekLeft=S.week.items.filter(c=>c.status!==DONE).length;
+  const budget=S.ads.items.reduce((s,c)=>s+(Number(c.budget)||0),0);
+  const waitingId=filtered().filter(c=>flowOf(c)==="agency"&&!c.postRef&&c.status!==DONE&&c.publishDate>=TODAY).length;
+  const tile=(key,label,value,sub)=>`<button class="stat" data-stat="${key}" title="Click to see the list"><div class="stat-label">${label} <span class="stat-go">View ›</span></div><div class="stat-value">${value}</div><div class="stat-sub">${sub}</div></button>`;
   $("stats").innerHTML =
-    tile("Total content", data.length, filters.brand||filters.platform||filters.status||filters.media||filters.q ? "matching filters" : "in workspace") +
-    tile("This week", week.length, weekLeft ? `${weekLeft} not yet published` : "all published") +
-    tile("In progress", wip.length, "Briefing · Designing · Revision") +
-    tile("Boost budget this month", baht(budget), `${boostMonth.length} boost${boostMonth.length===1?"":"s"}${waitingId?` · <span style="color:#b23434;font-weight:700">${waitingId} waiting Post ID</span>`:""}`);
+    tile("total","Total content", S.total.items.length, filters.brand||filters.platform||filters.status||filters.media||filters.q ? "matching filters" : "in workspace") +
+    tile("week","This week", S.week.items.length, weekLeft ? `${weekLeft} not yet published` : "all published") +
+    tile("wip","In progress", S.wip.items.length, "Briefing · Designing · Revision") +
+    tile("ads","Ad budget this month", baht(budget), `${S.ads.items.length} ad${S.ads.items.length===1?"":"s"}${waitingId?` · <span style="color:#b23434;font-weight:700">${waitingId} waiting Post ID</span>`:""}`);
+  $("stats").querySelectorAll("[data-stat]").forEach(b=>b.onclick=()=>openStatList(b.dataset.stat));
+}
+let statKey=null;
+function openStatList(key){
+  closeHistory();
+  const set=statSets()[key]; if(!set) return;
+  statKey=key; drawerDate=null;
+  const items=set.items;
+  $("drawerTitle").textContent=set.title+(filters.platform?` · ${filters.platform}`:"");
+  const budget=key==="ads"?items.reduce((s,c)=>s+(Number(c.budget)||0),0):0;
+  $("drawerMeta").textContent=`${items.length} content${items.length===1?"":"s"}`+(key==="ads"?` · total ${baht(budget)}`:"");
+  $("drawerBody").innerHTML=items.length?items.map(c=>{ const al=alertsFor(c); return `
+    <button class="s-item" data-stat-open="${esc(c.id)}" style="border-left-color:${brandColor(c.brand)}">
+      <div style="display:flex;justify-content:space-between;gap:10px;align-items:flex-start">
+        <div style="min-width:0"><div class="ref">${esc(c.refId||"")}</div><div class="content-title">${esc(c.title)}</div>
+          <div class="content-sub">${esc(c.brand)} · ${esc(c.platform)} · ${esc(c.media)} · ${shortDate(c.publishDate)}${c.postTime?" "+esc(c.postTime):""}</div>
+          ${key==="ads"?`<div class="content-sub">⚡ ${shortDate(runStartOf(c))}–${shortDate(runEndOf(c))}${c.budget?" · <b style=\"color:var(--text)\">"+baht(c.budget)+"</b>":""}${flowLabel(c)?" · "+esc(flowLabel(c)):""}</div>`:""}
+        </div>
+        <span class="status" data-st="${esc(c.status)}">${esc(c.status)}</span>
+      </div>
+      ${al.slice(0,2).map(a=>`<span class="flag ${a.level}">${esc(a.text)}</span> `).join("")}
+    </button>`;}).join(""):`<div class="empty">Nothing here.</div>`;
+  $("drawerBody").querySelectorAll("[data-stat-open]").forEach(b=>b.onclick=()=>openEditor(b.dataset.statOpen));
+  $("drawerFoot").style.display="none";
+  $("drawer").classList.add("open"); $("overlay").classList.add("show");
 }
 
 /* ============ selects ============ */
@@ -948,23 +1115,30 @@ function ensureOption(sel,val){ if(val && ![...sel.options].some(o=>o.value===va
 /* ============ views ============ */
 function setView(view){
   currentView=view;
-  $("listView").style.display=view==="list"?"block":"none";
-  $("calendarView").style.display=view==="calendar"?"block":"none";
+  ["list","calendar","agency","tiktok"].forEach(v=>$(v+"View").style.display=v===view?"block":"none");
+  const main = view==="list"||view==="calendar";
+  $("today").style.display=main?"block":"none";
+  $("stats").style.display=main?"grid":"none";
+  $("platformTabs").style.display=view==="tiktok"?"none":"flex";
+  document.querySelector(".toolbar .view-switch").style.display=main?"flex":"none";
+  if(view!=="list") $("bulkbar").classList.remove("show");
   document.querySelectorAll("[data-view]").forEach(b=>b.classList.toggle("active",b.dataset.view===view));
   writeUrl();
-  if(view==="list")renderList(); else renderCalendar();
+  renderAll();
 }
 function brandBadge(b){ const col=brandColor(b); return `<span class="badge" style="background:${col}1f;color:${col}">${esc(b)}</span>`; }
+function flowLabel(c){ const f=flowOf(c); return f==="agency"?(c.media==="Ads Setup"?"Dark post → Post ID → publish":"① Agency sets ads"):f==="self"?"② We post first":f==="tiktok"?"TikTok Spark Ads":""; }
 function mediaCell(c){
   let h=`<strong>${esc(c.media)}</strong>`;
-  if(isBoost(c)){
-    h+=`<div class="media-detail">${c.budget?`${baht(c.budget)} · `:""}${esc(c.objective||"No objective")} · ${esc(c.kpi||"No KPI")}</div>`;
-    if(c.boostStart&&c.boostStart!==c.publishDate) h+=`<div class="media-detail">⚡ Boost ${shortDate(c.boostStart)}${c.boostEnd?"–"+shortDate(c.boostEnd):""}</div>`;
-    else if(c.boostEnd) h+=`<div class="media-detail">⚡ until ${shortDate(c.boostEnd)}</div>`;
-    if(c.flow) h+=`<div class="media-detail">${c.flow==="agency"?"① Agency sets ads":"② We post first"}</div>`;
-    if(c.postRef) h+=`<span class="flag green" title="${esc(c.postRef)}">Post ID ✓</span>`;
+  if(isAd(c)){
+    const bits=[c.budget?baht(c.budget):"",c.objective,c.kpi].filter(Boolean).join(" · ");
+    if(bits) h+=`<div class="media-detail">${esc(bits)}</div>`;
+    h+=`<div class="media-detail">⚡ Ad ${shortDate(runStartOf(c))}${runEndOf(c)!==runStartOf(c)?"–"+shortDate(runEndOf(c)):""}</div>`;
+    if(flowLabel(c)) h+=`<div class="media-detail">${esc(flowLabel(c))}</div>`;
+    if(flowOf(c)==="tiktok"){ if(c.sparkCode) h+=`<span class="flag green">Spark code ✓</span>`; }
+    else if(c.postRef) h+=`<span class="flag green" title="${esc(c.postRef)}">Post ID ✓</span>`;
   }
-  alertsFor(c).filter(a=>a.text!=="Past due"&&!a.text.startsWith("Time passed")).forEach(a=>{ h+=`<div><span class="flag ${a.level}">${esc(a.text)}</span></div>`; });
+  alertsFor(c).filter(a=>!a.text.startsWith("Time passed")).forEach(a=>{ h+=`<div><span class="flag ${a.level}">${esc(a.text)}</span></div>`; });
   return h;
 }
 
@@ -1068,7 +1242,7 @@ function updateBulkBar(){
 async function copyContents(ids){
   const originals=contents.filter(c=>ids.includes(c.id));
   if(!originals.length)return;
-  const copies=originals.map(c=>normalize({...c,id:newId(),refId:"",title:`${c.title} (Copy)`,status:STATUSES[0],image:null,postRef:"",agencySent:false,linkSent:false,boostLive:false,by:""}));
+  const copies=originals.map(c=>normalize({...c,id:newId(),refId:ONLINE?"":autoRef(c.platform),title:`${c.title} (Copy)`,status:STATUSES[0],image:null,postRef:"",agencySent:false,linkSent:false,boostLive:false,clipUrl:"",sparkCode:"",codeExpiry:"",codeSent:false,by:"",at:""}));
   for(let i=0;i<originals.length;i++) await copyImage(originals[i],copies[i]);
   contents.push(...copies);
   save(); selectedIds.clear(); renderAll();
@@ -1089,47 +1263,74 @@ function confirmDeleteSelected(){
   toast(`${count} content${count>1?"s":""} deleted`);
 }
 
-/* ============ calendar ============ */
-function eventsFor(data){
+/* ============ calendars (main = what goes on our page · agency = hand-offs + ad runs) ============ */
+const EV={
+  post:  {icon:"",   label:"Goes live on page",       short:"live"},
+  send:  {icon:"📤", label:"Send work to agency",     short:"send AW / VDO"},
+  postid:{icon:"🆔", label:"Post ID needed (publish)", short:"Post ID needed"},
+  link:  {icon:"🔗", label:"Send post link to agency", short:"send post link"},
+  code:  {icon:"🔑", label:"Spark code to agency",     short:"Spark code"},
+  run:   {icon:"⚡", label:"Ad running",               short:"ad starts"}
+};
+const KIND_ORDER={send:0,postid:1,link:2,code:3,run:4,post:5};
+function mainEvents(data){ return data.map(c=>({kind:"post",date:c.publishDate,c})); }
+function agencyEvents(data){
   const ev=[];
-  data.forEach(c=>{
-    ev.push({kind:"post",date:c.publishDate,c});
-    if(isBoost(c) && c.boostStart && c.boostStart!==c.publishDate) ev.push({kind:"boost",date:c.boostStart,c});
-    if(isBoost(c) && c.flow==="agency" && c.sendDate && !c.agencySent && c.sendDate!==c.publishDate) ev.push({kind:"send",date:c.sendDate,c});
+  data.filter(isAd).forEach(c=>{
+    const f=flowOf(c);
+    if(f==="agency" && c.sendDate && !c.agencySent) ev.push({kind:"send",date:c.sendDate,c,level:c.sendDate<TODAY?"red":""});
+    if(f==="agency" && !c.postRef && c.status!==DONE) ev.push({kind:"postid",date:c.publishDate,c,level:daysBetween(TODAY,c.publishDate)<=WARN_DAYS?"red":"orange"});
+    if(f==="self" && !c.linkSent) ev.push({kind:"link",date:c.publishDate,c,level:c.publishDate<TODAY?"orange":""});
+    if(f==="tiktok" && !c.codeSent) ev.push({kind:"code",date:runStartOf(c)<TODAY?TODAY:runStartOf(c),c,level:!c.sparkCode?"red":"orange"});
+    const s0=runStartOf(c), n=Math.min(Math.max(daysBetween(s0,runEndOf(c)),0),120);
+    for(let i=0;i<=n;i++) ev.push({kind:"run",date:addDays(s0,i),c,pos:n===0?"single":i===0?"start":i===n?"end":"mid",day:i+1,days:n+1,level:""});
   });
   return ev;
 }
-const KIND_ORDER={send:0,boost:1,post:2};
-function sortEvents(a,b){ return KIND_ORDER[a.kind]-KIND_ORDER[b.kind] || (a.c.postTime||"99").localeCompare(b.c.postTime||"99"); }
-function evCard(e){
-  const c=e.c; const al=alertsFor(c); const lv=e.kind==="post"?worstLevel(al):(e.kind==="boost"&&!c.postRef&&!c.linkSent?"orange":"");
-  const icon=e.kind==="boost"?"⚡ ":e.kind==="send"?"📤 ":"";
-  const meta=e.kind==="boost"?`<span>Boost</span>${c.budget?`<span>•</span><span>${baht(c.budget)}</span>`:""}`
-    : e.kind==="send"?`<span>Send to agency</span><span>•</span><span>live ${shortDate(c.publishDate)}</span>`
-    : `<span class="st-dot" style="background:${statusColor(c.status)}" title="${esc(c.status)}"></span><span>${esc(c.brand)}</span><span>•</span><span>${esc(c.platform)}</span>${c.postTime?`<span>•</span><span>${esc(c.postTime)}</span>`:""}`;
-  return `<div class="cal-card k-${e.kind} ${e.kind==="post"&&c.status===DONE?"published":""} ${lv}" draggable="true" data-id="${esc(c.id)}" data-kind="${e.kind}" style="border-left-color:${brandColor(c.brand)}" title="${esc(icon+c.title)} · ${esc(c.status)}${al.length?" · "+esc(al[0].text):""}">
-    <div class="cal-card-title">${icon}${esc(c.title)}</div><div class="cal-card-meta">${meta}</div></div>`;
+function agencyTasksOn(data,date){
+  return agencyEvents(data).filter(e=>e.date===date && (e.kind!=="run" || e.pos==="start" || e.pos==="single")).sort(sortEvents);
+}
+function sortEvents(a,b){ return KIND_ORDER[a.kind]-KIND_ORDER[b.kind] || (a.kind==="run"?runStartOf(a.c).localeCompare(runStartOf(b.c))||a.c.id.localeCompare(b.c.id):0) || (a.c.postTime||"99").localeCompare(b.c.postTime||"99"); }
+function evCard(e, dow){
+  const c=e.c; const al=alertsFor(c);
+  if(e.kind==="post"){
+    const lv=worstLevel(al.filter(a=>a.text.startsWith("Time passed")||a.text.includes("Post ID")||a.text.includes("Spark")));
+    return `<div class="cal-card k-post ${c.status===DONE?"published":""} ${lv}" draggable="true" data-id="${esc(c.id)}" data-kind="post" data-date="${e.date}" style="border-left-color:${brandColor(c.brand)}" title="${esc(c.title)} · ${esc(c.status)}${al.length?" · "+esc(al[0].text):""}">
+      <div class="cal-card-title">${esc(c.title)}</div><div class="cal-card-meta"><span class="st-dot" style="background:${statusColor(c.status)}" title="${esc(c.status)}"></span><span>${esc(c.brand)}</span><span>•</span><span>${esc(c.platform)}</span>${c.media!=="Organic"?`<span>•</span><span>${c.media==="Ads Setup"?"Ads":"Boost"}</span>`:""}${c.postTime?`<span>•</span><span>${esc(c.postTime)}</span>`:""}</div></div>`;
+  }
+  if(e.kind==="run"){
+    const showText = e.pos==="start"||e.pos==="single"||dow===0;
+    return `<div class="cal-card k-run run-${e.pos}" draggable="true" data-id="${esc(c.id)}" data-kind="run" data-date="${e.date}" style="--bc:${brandColor(c.brand)}" title="⚡ ${esc(c.title)} · ad day ${e.day}/${e.days}${c.budget?" · "+baht(c.budget):""}">
+      ${showText?`<div class="cal-card-title">⚡ ${esc(c.title)}</div><div class="cal-card-meta"><span>${esc(c.platform)}</span>${c.budget?`<span>•</span><span>${baht(c.budget)}</span>`:""}<span>•</span><span>${shortDate(runStartOf(c))}–${shortDate(runEndOf(c))}</span></div>`:`<div class="run-fill">${esc(c.title)}</div>`}</div>`;
+  }
+  const drag = e.kind==="send";
+  const meta = e.kind==="send"?`live ${shortDate(c.publishDate)}`: e.kind==="postid"?`publish ${c.postTime||""}`.trim(): e.kind==="link"?"after posting": c.sparkCode?(c.codeExpiry?`exp ${shortDate(c.codeExpiry)}`:"code ready"):"get code first";
+  return `<div class="cal-card k-task ${e.level||""}" ${drag?'draggable="true"':""} data-id="${esc(c.id)}" data-kind="${e.kind}" data-date="${e.date}" style="border-left-color:${brandColor(c.brand)}" title="${esc(EV[e.kind].label)} · ${esc(c.title)}">
+    <div class="cal-card-title">${EV[e.kind].icon} ${esc(c.title)}</div><div class="cal-card-meta"><span>${esc(EV[e.kind].short)}</span><span>•</span><span>${esc(c.platform)}</span><span>•</span><span>${esc(meta)}</span></div></div>`;
 }
 function startOfCalendar(y,m){ const first=new Date(y,m,1); return new Date(y,m,1-first.getDay()); }
-function renderCalendar(){
-  const grid=$("calendarGrid"); const y=calendarCursor.getFullYear(),m=calendarCursor.getMonth();
-  $("calendarTitle").textContent=(filters.platform?filters.platform+" · ":"")+new Intl.DateTimeFormat("en",{month:"long",year:"numeric"}).format(calendarCursor);
+function renderCalendar(mode="main"){
+  const A=mode==="agency";
+  const grid=$(A?"agencyGrid":"calendarGrid"); const y=calendarCursor.getFullYear(),m=calendarCursor.getMonth();
+  $(A?"agencyCalTitle":"calendarTitle").textContent=(filters.platform?filters.platform+" · ":"")+new Intl.DateTimeFormat("en",{month:"long",year:"numeric"}).format(calendarCursor);
   const headers=["Sun","Mon","Tue","Wed","Thu","Fri","Sat"].map(x=>`<div class="dow">${x}</div>`).join("");
   const start=startOfCalendar(y,m); let cells="";
-  const byDate={}; eventsFor(filtered()).forEach(e=>(byDate[e.date]=byDate[e.date]||[]).push(e));
+  const byDate={}; (A?agencyEvents(filtered()):mainEvents(filtered())).forEach(e=>(byDate[e.date]=byDate[e.date]||[]).push(e));
+  const LIMIT=A?5:3;
   for(let i=0;i<42;i++){
     const d=new Date(start); d.setDate(start.getDate()+i); const date=iso(d);
     const items=(byDate[date]||[]).sort(sortEvents);
     const other=d.getMonth()!==m;
+    const tasks=items.filter(e=>e.kind!=="run").length, runs=items.filter(e=>e.kind==="run").length;
     cells+=`<div class="day ${other?"other":""} ${date===TODAY?"today":""}" data-day="${date}" tabindex="0" aria-label="${niceDate(date)}, ${items.length} items">
-      <div class="day-head"><span class="day-num">${d.getDate()}</span>${items.length?`<span class="day-count">${items.length}</span>`:""}</div>
-      ${items.slice(0,3).map(evCard).join("")}
-      ${items.length>3?`<div class="more">+${items.length-3} more</div>`:""}
+      <div class="day-head"><span class="day-num">${d.getDate()}</span>${A?(runs?`<span class="day-count" title="ads running">⚡${runs}</span>`:""):(items.length?`<span class="day-count">${items.length}</span>`:"")}</div>
+      ${items.slice(0,LIMIT).map(e=>evCard(e,i%7)).join("")}
+      ${items.length>LIMIT?`<div class="more">+${items.length-LIMIT} more</div>`:""}
     </div>`;
   }
   grid.innerHTML=headers+cells;
   grid.querySelectorAll(".cal-card").forEach(card=>{
-    card.addEventListener("dragstart",e=>{e.dataTransfer.setData("text/plain",card.dataset.id+"|"+card.dataset.kind);e.dataTransfer.effectAllowed="move"});
+    if(card.draggable) card.addEventListener("dragstart",e=>{e.dataTransfer.setData("text/plain",[card.dataset.id,card.dataset.kind,card.dataset.date].join("|"));e.dataTransfer.effectAllowed="move"});
     card.addEventListener("click",e=>{e.stopPropagation();openEditor(card.dataset.id)});
   });
   grid.querySelectorAll(".day").forEach(day=>{
@@ -1137,47 +1338,140 @@ function renderCalendar(){
     day.addEventListener("dragleave",()=>day.classList.remove("drag-over"));
     day.addEventListener("drop",e=>{
       e.preventDefault();day.classList.remove("drag-over");
-      const [id,kind]=e.dataTransfer.getData("text/plain").split("|"); const c=byId(id); if(!c)return;
-      const next=day.dataset.day;
-      if(kind==="boost"){ if(c.boostStart===next) return; const delta=daysBetween(c.boostStart,next); c.boostStart=next; if(c.boostEnd) c.boostEnd=addDays(c.boostEnd,delta); toast(`Boost moved to ${niceDate(next)}`); }
-      else if(kind==="send"){ if(c.sendDate===next) return; c.sendDate=next; toast(`Send-to-agency moved to ${niceDate(next)}`); }
-      else { if(c.publishDate===next) return; c.publishDate=next; toast(`Rescheduled to ${niceDate(next)}`); }
+      const [id,kind,from]=e.dataTransfer.getData("text/plain").split("|"); const c=byId(id); if(!c)return;
+      const next=day.dataset.day; if(from===next) return;
+      if(kind==="run"){ const delta=daysBetween(from,next); const s0=runStartOf(c), e0=runEndOf(c); c.boostStart=addDays(s0,delta); c.boostEnd=addDays(e0,delta); toast(`Ad run moved to ${shortDate(c.boostStart)}–${shortDate(c.boostEnd)}`); }
+      else if(kind==="send"){ c.sendDate=next; toast(`Send-to-agency moved to ${niceDate(next)}`); }
+      else if(kind==="post"){ c.publishDate=next; toast(`Rescheduled to ${niceDate(next)}`); }
+      else return;
       save(); renderAll();
     });
-    day.addEventListener("click",()=>openDrawer(day.dataset.day));
-    day.addEventListener("keydown",e=>{ if(e.key==="Enter"||e.key===" "){ e.preventDefault(); openDrawer(day.dataset.day); } });
+    day.addEventListener("click",()=>openDrawer(day.dataset.day, mode));
+    day.addEventListener("keydown",e=>{ if(e.key==="Enter"||e.key===" "){ e.preventDefault(); openDrawer(day.dataset.day, mode); } });
   });
 }
-function openDrawer(date){
+let drawerMode="main";
+function openDrawer(date, mode="main"){
   closeHistory();
-  drawerDate=date;
-  const items=eventsFor(filtered()).filter(e=>e.date===date).sort(sortEvents);
-  $("drawerTitle").textContent=niceDate(date)+(filters.platform?` · ${filters.platform}`:"");
+  drawerDate=date; drawerMode=mode; statKey=null; $("drawerFoot").style.display="block";
+  const A=mode==="agency";
+  const items=(A?agencyEvents(filtered()):mainEvents(filtered())).filter(e=>e.date===date).sort(sortEvents);
+  $("drawerTitle").textContent=(A?"Agency · ":"")+niceDate(date)+(filters.platform?` · ${filters.platform}`:"");
   $("drawerMeta").textContent=`${items.length} item${items.length===1?"":"s"}`;
-  const kindLabel={post:"Goes live",boost:"⚡ Boost starts",send:"📤 Send to agency"};
   $("drawerBody").innerHTML=items.length?items.map(e=>{ const c=e.c; const al=alertsFor(c); return `
     <div class="drawer-item">
-      <div class="kind">${kindLabel[e.kind]}</div>
+      <div class="kind">${e.kind==="run"?`⚡ Ad running · day ${e.day} of ${e.days}`:(EV[e.kind].icon+" "+EV[e.kind].label)}</div>
       <div style="display:flex;justify-content:space-between;gap:10px;align-items:flex-start">
-        <div><strong>${esc(c.title)}</strong><div class="content-sub">${esc(c.brand)} · ${esc(c.platform)} · ${esc(c.type)}${c.postTime?` · ${esc(c.postTime)}`:""}</div></div>
+        <div><strong>${esc(c.title)}</strong><div class="content-sub">${esc(c.refId?c.refId+" · ":"")}${esc(c.brand)} · ${esc(c.platform)} · ${esc(c.media)}${c.postTime?` · ${esc(c.postTime)}`:""}</div></div>
         <span class="status" data-st="${esc(c.status)}">${esc(c.status)}</span>
       </div>
-      ${c.postRef?`<div class="content-sub" style="margin-top:6px">Post ID: <b style="color:var(--text)">${esc(c.postRef)}</b></div>`:""}
+      ${isAd(c)?`<div class="content-sub" style="margin-top:6px">${esc(flowLabel(c))} · ad ${shortDate(runStartOf(c))}–${shortDate(runEndOf(c))}${c.budget?" · "+baht(c.budget):""}</div>`:""}
+      ${c.postRef&&!isTT(c)?`<div class="content-sub" style="margin-top:4px">Post ID: <b style="color:var(--text)">${esc(c.postRef)}</b></div>`:""}
+      ${c.sparkCode?`<div class="content-sub" style="margin-top:4px">Spark code: <code class="code">${esc(c.sparkCode)}</code> <button class="mini-btn" data-copy-code="${esc(c.id)}">Copy</button></div>`:""}
       ${al.map(a=>`<span class="flag ${a.level}">${esc(a.text)}</span> `).join("")}
       ${c.remark?`<div class="content-sub" style="margin-top:8px">${esc(c.remark)}</div>`:""}
       ${assetChips(c,6)}
       <button class="btn small" style="margin-top:10px" data-drawer-edit="${esc(c.id)}">Edit</button>
     </div>`;}).join(""):`<div class="empty">Nothing scheduled.</div>`;
   $("drawerBody").querySelectorAll("[data-drawer-edit]").forEach(b=>b.onclick=()=>openEditor(b.dataset.drawerEdit));
+  bindCopyCode($("drawerBody"));
+  $("drawerAddBtn").textContent = A ? "＋ Add boost / ads content on this day" : "＋ Add content on this day";
   $("drawer").classList.add("open"); $("overlay").classList.add("show");
 }
-function refreshDrawer(){ if(drawerDate && $("drawer").classList.contains("open")) openDrawer(drawerDate); }
-function closeDrawer(){ drawerDate=null; $("drawer").classList.remove("open"); if(!$("historyDrawer").classList.contains("open")) $("overlay").classList.remove("show"); }
+function refreshDrawer(){ if(!$("drawer").classList.contains("open")) return; if(drawerDate) openDrawer(drawerDate, drawerMode); else if(statKey) openStatList(statKey); }
+function closeDrawer(){ drawerDate=null; statKey=null; $("drawer").classList.remove("open"); if(!$("historyDrawer").classList.contains("open")) $("overlay").classList.remove("show"); }
+function bindCopyCode(root){
+  root.querySelectorAll("[data-copy-code]").forEach(b=>b.onclick=async e=>{
+    e.stopPropagation(); const c=byId(b.dataset.copyCode); if(!c||!c.sparkCode) return;
+    try{ await navigator.clipboard.writeText(c.sparkCode); toast("Spark code copied"); }catch(err){ prompt("Copy the Spark code:",c.sparkCode); }
+  });
+}
+
+/* ============ agency page ============ */
+let agencyMode="calendar";
+function stageOf(c){
+  const f=flowOf(c), s0=runStartOf(c), e0=runEndOf(c);
+  if(e0<TODAY) return "done";
+  const handedOff = f==="agency"?!!c.postRef : f==="self"?!!c.linkSent : f==="tiktok"?(!!c.sparkCode&&!!c.codeSent) : false;
+  if(handedOff && s0<=TODAY) return "running";
+  if(!f) return "todo";
+  if(f==="agency" && !c.agencySent) return "todo";
+  if(f==="self" && (!c.linkSent)) return "todo";
+  if(f==="tiktok" && (!c.sparkCode||!c.codeSent)) return "todo";
+  if(f==="agency" && c.postRef && c.status!==DONE) return "todo";
+  return "waiting";
+}
+function nextStep(c){
+  const f=flowOf(c), st=stageOf(c);
+  if(st==="done") return `Ended ${shortDate(runEndOf(c))}`;
+  if(st==="running") return `Running until ${shortDate(runEndOf(c))}`;
+  if(!f) return "Choose a boost workflow";
+  if(f==="agency"){ if(!c.agencySent) return `Send work to agency${c.sendDate?" by "+shortDate(c.sendDate):""}`; if(!c.postRef) return `Waiting for Post ID (publish ${shortDate(c.publishDate)})`; if(c.status!==DONE) return `Publish on page ${shortDate(c.publishDate)} with Post ID`; return `Ad starts ${shortDate(runStartOf(c))}`; }
+  if(f==="self"){ if(c.status!==DONE) return `Post on page ${shortDate(c.publishDate)}, then send link`; if(!c.linkSent) return "Send post link to agency"; return c.boostLive?`Ad starts ${shortDate(runStartOf(c))}`:"Waiting for agency to start boost"; }
+  if(f==="tiktok"){ if(!c.sparkCode) return `Get Spark code from ${c.ttAccType==="kol"?(c.ttAccName||"KOL"):"brand account"}`; if(!c.codeSent) return "Send Spark code to agency"; return `Ad starts ${shortDate(runStartOf(c))}`; }
+  return "";
+}
+function renderAgency(){
+  $("agencySwitch").querySelectorAll("[data-agency-mode]").forEach(b=>b.classList.toggle("active",b.dataset.agencyMode===agencyMode));
+  $("agencyCal").style.display=agencyMode==="calendar"?"block":"none";
+  $("agencyBoard").style.display=agencyMode==="board"?"grid":"none";
+  if(agencyMode==="calendar"){ renderCalendar("agency"); return; }
+  const ads=filtered().filter(isAd);
+  const cols={todo:[],waiting:[],running:[],done:[]};
+  ads.forEach(c=>{ const st=stageOf(c); if(st==="done" && daysBetween(runEndOf(c),TODAY)>30) return; cols[st].push(c); });
+  cols.todo.sort((a,b)=>(a.sendDate||a.publishDate).localeCompare(b.sendDate||b.publishDate));
+  cols.waiting.sort((a,b)=>a.publishDate.localeCompare(b.publishDate));
+  cols.running.sort((a,b)=>runEndOf(a).localeCompare(runEndOf(b)));
+  cols.done.sort((a,b)=>runEndOf(b).localeCompare(runEndOf(a)));
+  const meta={todo:["🟣","Our to-do","Hand-offs we still need to do"],waiting:["⏳","Waiting for agency","Post ID / boost confirmation"],running:["⚡","Running now","Ads live today"],done:["✓","Done","Ended in the last 30 days"]};
+  $("agencyBoard").innerHTML=Object.keys(cols).map(k=>`<div class="b-col"><div class="b-head"><span>${meta[k][0]} ${meta[k][1]}</span><span class="n">${cols[k].length}</span></div><div class="b-sub">${meta[k][2]}</div>${
+    cols[k].length?cols[k].map(c=>{ const al=alertsFor(c); return `<button class="b-card ${worstLevel(al)}" data-open-card="${esc(c.id)}" style="border-left-color:${brandColor(c.brand)}">
+      <div class="b-title">${esc(c.title)}</div>
+      <div class="b-meta">${esc(c.refId?c.refId+" · ":"")}${esc(c.brand)} · ${esc(c.platform)} · ${esc(flowLabel(c)||c.media)}</div>
+      <div class="b-next">${esc(nextStep(c))}</div>
+      <div class="b-meta">⚡ ${shortDate(runStartOf(c))}–${shortDate(runEndOf(c))}${c.budget?" · "+baht(c.budget):""}</div>
+      ${al.slice(0,2).map(a=>`<span class="flag ${a.level}">${esc(a.text)}</span>`).join(" ")}
+    </button>`;}).join(""):`<div class="t-empty" style="padding:6px 2px">Nothing here.</div>`}</div>`).join("");
+  $("agencyBoard").querySelectorAll("[data-open-card]").forEach(b=>b.onclick=()=>openEditor(b.dataset.openCard));
+}
+
+/* ============ TikTok hub ============ */
+function renderTikTok(){
+  const data=contents.filter(c=>isTT(c)&&matches(c,true)).sort((a,b)=>a.publishDate.localeCompare(b.publishDate)||(a.postTime||"").localeCompare(b.postTime||""));
+  const withCode=data.filter(c=>c.sparkCode).length, needCode=data.filter(c=>isAd(c)&&!c.sparkCode&&runEndOf(c)>=TODAY).length;
+  $("ttMeta").textContent=`${data.length} TikTok contents · ${withCode} with Spark code${needCode?` · ${needCode} ads still need a code`:""}`;
+  const root=$("tiktokContainer");
+  if(!data.length){ root.innerHTML=`<div class="empty"><b>No TikTok content yet</b>Click “＋ New TikTok content”.</div>`; return; }
+  root.innerHTML=`<table class="tt-table"><thead><tr><th class="preview-cell">Preview</th><th>Content</th><th>Publish</th><th>Status</th><th>Clip</th><th>Spark Ads code</th><th>Sent</th><th>Ad run</th><th>Downloads</th><th></th></tr></thead><tbody>${
+    data.map(c=>{ const id=esc(c.id); const al=alertsFor(c); const clip=safeUrl(c.clipUrl); return `<tr>
+      <td class="preview-cell"><div class="preview-box" data-preview-box="${id}" title="Click to add/preview image"><div class="preview-placeholder">Paste<br>image</div></div></td>
+      <td><div style="min-width:180px">${c.refId?`<div class="ref">${esc(c.refId)}</div>`:""}<div class="content-title">${esc(c.title)}</div>
+        <div class="content-sub">${c.ttAccType==="kol"?"KOL":"Brand"}${c.ttAccName?" · "+esc(c.ttAccName):""} · ${esc(c.brand)}</div>
+        ${al.map(a=>`<span class="flag ${a.level}">${esc(a.text)}</span>`).join(" ")}</div></td>
+      <td style="white-space:nowrap">${shortDate(c.publishDate)}${c.postTime?`<div class="media-detail">${esc(c.postTime)}</div>`:""}</td>
+      <td><span class="status" data-st="${esc(c.status)}">${esc(c.status)}</span></td>
+      <td>${clip?`<a class="asset" href="${esc(clip)}" target="_blank" rel="noopener noreferrer">▶ Open</a>`:`<span class="media-detail">—</span>`}</td>
+      <td>${c.sparkCode?`<div class="code-cell"><code class="code" title="${esc(c.sparkCode)}">${esc(c.sparkCode)}</code><button class="mini-btn" data-copy-code="${id}">Copy</button></div>${c.codeExpiry?`<div class="media-detail ${c.codeExpiry<TODAY?"txt-red":""}">exp ${shortDate(c.codeExpiry)}</div>`:""}`:(isAd(c)?`<span class="flag red">No code</span>`:`<span class="media-detail">—</span>`)}</td>
+      <td><input type="checkbox" class="row-check" data-code-sent="${id}" ${c.codeSent?"checked":""} ${c.sparkCode?"":"disabled"} aria-label="Spark code sent to agency" title="Spark code sent to agency"></td>
+      <td style="white-space:nowrap">${isAd(c)?`${shortDate(runStartOf(c))}–${shortDate(runEndOf(c))}${c.budget||c.objective?`<div class="media-detail">${esc([c.budget?baht(c.budget):"",c.objective].filter(Boolean).join(" · "))}</div>`:""}`:`<span class="media-detail">Organic</span>`}</td>
+      <td>${assetChips(c,3)||`<span class="media-detail">—</span>`}</td>
+      <td><button class="icon-btn" data-edit="${id}" title="Edit" aria-label="Edit">✎</button></td>
+    </tr>`;}).join("")}</tbody></table>`;
+  hydratePreviewImages(data);
+  bindCopyCode(root);
+  root.querySelectorAll("[data-edit]").forEach(b=>b.onclick=()=>openEditor(b.dataset.edit));
+  root.querySelectorAll("[data-preview-box]").forEach(box=>box.onclick=async()=>{ const id=box.dataset.previewBox; const url=await imageUrlFor(byId(id)); if(url) openImagePreview(id); else beginImageUpload(id); });
+  root.querySelectorAll("[data-code-sent]").forEach(cb=>cb.onchange=()=>{ const c=byId(cb.dataset.codeSent); if(!c) return; c.codeSent=cb.checked; save(); renderAll(); toast(cb.checked?"Marked: Spark code sent":"Marked: not sent"); });
+}
 
 /* ============ editor ============ */
 let ck={};
+function editorFlow(){
+  const media=$("mediaInput").value, tt=$("platformInput").value==="TikTok";
+  if(media==="Organic") return ""; if(tt) return "tiktok"; if(media==="Ads Setup") return "agency"; return $("flowInput").value;
+}
 function renderChecklist(){
-  const flow=$("flowInput").value, hasId=!!$("postRefInput").value.trim(), published=$("statusInput").value===DONE;
+  const flow=editorFlow(), hasId=!!$("postRefInput").value.trim(), published=$("statusInput").value===DONE;
   const auto=(ok,label,hint)=>`<div class="ck"><span class="auto" style="color:${ok?"var(--ok)":"#b8bcc8"}">${ok?"✓":"○"}</span>${label}<span class="hint">${ok?"":hint}</span></div>`;
   const box=(id,label,checked)=>`<label class="ck"><input type="checkbox" id="${id}" ${checked?"checked":""}>${label}</label>`;
   $("sendDateField").style.display=flow==="agency"?"flex":"none";
@@ -1189,24 +1483,32 @@ function renderChecklist(){
   Object.keys(keyOf).forEach(id=>{ const el=$(id); if(el) el.onchange=()=>{ ck[keyOf[id]]=el.checked; }; });
 }
 function toggleMediaFields(){
-  const media=$("mediaInput").value;
-  $("boostFields").classList.toggle("show",media==="Boost Post");
-  $("postTimeField").style.display=(media==="Organic"||media==="Boost Post")?"flex":"none";
+  const media=$("mediaInput").value, tt=$("platformInput").value==="TikTok", ad=media!=="Organic";
+  $("boostFields").classList.toggle("show",ad);
+  $("tiktokFields").classList.toggle("show",tt);
+  $("flowField").style.display=(ad&&!tt&&media==="Boost Post")?"flex":"none";
+  $("postRefField").style.display=tt?"none":"flex";
+  $("checklistField").style.display=tt?"none":"flex";
+  $("adsNote").textContent = tt ? "TikTok ads use a Spark Ads code — fill it in the TikTok section above. Ad run, budget and objective are optional."
+    : media==="Ads Setup" ? "Ads Setup: the agency runs it as a dark post first → sends the Post ID → we publish it on our page on the publish date." : "";
+  $("adsNote").style.display=$("adsNote").textContent?"block":"none";
+  if(editorFlow()==="agency" && !$("sendDateInput").value && $("dateInput").value) $("sendDateInput").value=addDays($("dateInput").value,-LEAD_DAYS);
   renderChecklist();
 }
-function openEditor(id=null, presetDate=null){
+function openEditor(id=null, presetDate=null, preset={}){
   const c=id?byId(id):null;
   $("dialogTitle").textContent=c?"Edit Content":"New Content";
   $("contentId").value=c?.id||"";
   $("titleInput").value=c?.title||"";
   ensureOption($("brandInput"),c?.brand); $("brandInput").value=c?.brand||filters.brand||BRANDS[0];
-  ensureOption($("platformInput"),c?.platform); $("platformInput").value=c?.platform||filters.platform||PLATFORMS[0];
+  ensureOption($("platformInput"),c?.platform); $("platformInput").value=c?.platform||preset.platform||filters.platform||PLATFORMS[0];
   $("dateInput").value=c?.publishDate||presetDate||TODAY;
   $("postTimeInput").value=c?.postTime||"";
   ensureOption($("statusInput"),c?.status); $("statusInput").value=c?.status||STATUSES[0]; $("statusInput").dataset.st=$("statusInput").value;
-  ensureOption($("typeInput"),c?.type); $("typeInput").value=c?.type||TYPES[0];
-  $("mediaInput").value=c?.media||"Organic";
+  ensureOption($("typeInput"),c?.type); $("typeInput").value=c?.type||(preset.platform==="TikTok"&&TYPES.includes("TikTok")?"TikTok":TYPES[0]);
+  $("mediaInput").value=c?.media||preset.media||"Organic";
   $("refInput").value=c?.refId||"";
+  $("refInput").placeholder=ONLINE?"Auto (e.g. TT-0012)":"Auto";
   $("flowInput").value=c?.flow||"";
   $("sendDateInput").value=c?.sendDate||"";
   $("boostStartInput").value=c?.boostStart||"";
@@ -1215,6 +1517,12 @@ function openEditor(id=null, presetDate=null){
   $("objectiveInput").value=c?.objective||"";
   $("kpiInput").value=c?.kpi||"";
   $("postRefInput").value=c?.postRef||"";
+  $("ttClipInput").value=c?.clipUrl||"";
+  $("ttAccTypeInput").value=c?.ttAccType||"brand";
+  $("ttAccNameInput").value=c?.ttAccName||"";
+  $("ttCodeInput").value=c?.sparkCode||"";
+  $("ttExpiryInput").value=c?.codeExpiry||"";
+  $("ttCodeSentInput").checked=!!c?.codeSent;
   $("assetsInput").value=c?.assets||"";
   $("remarkInput").value=c?.remark||"";
   ck={agencySent:!!c?.agencySent,linkSent:!!c?.linkSent,boostLive:!!c?.boostLive};
@@ -1227,7 +1535,14 @@ function openEditor(id=null, presetDate=null){
   setTimeout(()=>{ if(!c) $("titleInput").focus(); },30);
 }
 function closeEditor(){ $("contentDialog").close(); }
-function renderAll(){ renderPlatformTabs(); renderToday(); renderStats(); renderList(); if(currentView==="calendar") renderCalendar(); }
+function renderAll(){
+  renderPlatformTabs();
+  if(currentView==="list"||currentView==="calendar"){ renderToday(); renderStats(); }
+  if(currentView==="list") renderList();
+  else if(currentView==="calendar") renderCalendar("main");
+  else if(currentView==="agency") renderAgency();
+  else if(currentView==="tiktok") renderTikTok();
+}
 function resetFilters(){
   filters={q:"",brand:"",platform:"",status:"",media:""};
   $("searchInput").value=""; ["brandFilter","statusFilter","mediaFilter"].forEach(id=>$(id).value="");
@@ -1238,32 +1553,39 @@ $("flowInput").onchange=()=>{
   if($("flowInput").value==="agency" && !$("sendDateInput").value && $("dateInput").value) $("sendDateInput").value=addDays($("dateInput").value,-LEAD_DAYS);
   renderChecklist();
 };
+$("platformInput").onchange=toggleMediaFields;
 $("postRefInput").oninput=renderChecklist;
 $("statusInput").onchange=()=>{ $("statusInput").dataset.st=$("statusInput").value; renderChecklist(); };
-$("newContentBtn").onclick=()=>openEditor();
+$("newContentBtn").onclick=()=>openEditor(null,null,currentView==="tiktok"?{platform:"TikTok"}:currentView==="agency"?{media:"Boost Post"}:{});
 $("closeDialog").onclick=closeEditor;
 $("cancelBtn").onclick=closeEditor;
 $("contentForm").addEventListener("submit",e=>{
   e.preventDefault();
   const id=$("contentId").value;
   const existing=id?byId(id):null;
-  const media=$("mediaInput").value, boost=media==="Boost Post";
-  const refId=$("refInput").value.trim();
+  const media=$("mediaInput").value, ad=media!=="Organic", platform=$("platformInput").value, tt=platform==="TikTok";
+  let refId=$("refInput").value.trim();
   if(refId && contents.some(c=>c.id!==id && (c.refId||"").toLowerCase()===refId.toLowerCase())){ toast(`Ref ID “${refId}” is already used by another content`); $("refInput").focus(); return; }
-  const boostStart=boost?$("boostStartInput").value:"", boostEnd=boost?$("boostEndInput").value:"";
-  if(boostEnd && boostEnd<(boostStart||$("dateInput").value)){ toast("Boost end must be after boost start"); return; }
-  const flow=boost?$("flowInput").value:"";
+  if(!refId && !ONLINE) refId=existing&&existing.refId?existing.refId:autoRef(platform);
+  const boostStart=ad?$("boostStartInput").value:"", boostEnd=ad?$("boostEndInput").value:"";
+  if(boostEnd && boostEnd<(boostStart||$("dateInput").value)){ toast("Ad run end must be after the start"); return; }
+  const flow = !ad||tt ? "" : media==="Ads Setup" ? "agency" : $("flowInput").value;
   const assets=$("assetsInput").value.split("\n").map(s=>s.trim()).filter(Boolean);
   const bad=assets.filter(s=>!safeUrl(s));
   if(bad.length){ toast("Asset links must start with https:// — check: "+bad[0].slice(0,40)); return; }
+  const clip=tt?$("ttClipInput").value.trim():"";
+  if(clip && !safeUrl(clip)){ toast("TikTok clip link must start with https://"); return; }
+  const code=tt?$("ttCodeInput").value.trim():"";
   const payload=normalize({
-    id:id||newId(), refId, title:$("titleInput").value.trim(), brand:$("brandInput").value, platform:$("platformInput").value,
-    publishDate:$("dateInput").value, postTime:(media==="Organic"||boost)?$("postTimeInput").value:"",
+    id:id||newId(), refId, title:$("titleInput").value.trim(), brand:$("brandInput").value, platform,
+    publishDate:$("dateInput").value, postTime:$("postTimeInput").value,
     status:$("statusInput").value, type:$("typeInput").value, media,
-    budget:boost?Number($("budgetInput").value||0):null, objective:boost?$("objectiveInput").value:"", kpi:boost?$("kpiInput").value:"",
-    flow, sendDate:flow==="agency"?$("sendDateInput").value:"", boostStart, boostEnd, postRef:boost?$("postRefInput").value.trim():"",
+    budget:ad&&$("budgetInput").value!==""?Number($("budgetInput").value):null, objective:ad?$("objectiveInput").value:"", kpi:ad?$("kpiInput").value:"",
+    flow, sendDate:flow==="agency"?$("sendDateInput").value:"", boostStart, boostEnd, postRef:ad&&!tt?$("postRefInput").value.trim():"",
     agencySent:flow==="agency"&&!!ck.agencySent, linkSent:flow==="self"&&!!ck.linkSent, boostLive:flow==="self"&&!!ck.boostLive,
-    assets:assets.join("\n"), remark:$("remarkInput").value.trim(), image:existing?existing.image||null:null, by:existing?existing.by:""
+    clipUrl:clip, ttAccType:tt?$("ttAccTypeInput").value:"brand", ttAccName:tt?$("ttAccNameInput").value.trim():"",
+    sparkCode:code, codeExpiry:tt&&code?$("ttExpiryInput").value:"", codeSent:tt&&!!code&&$("ttCodeSentInput").checked,
+    assets:assets.join("\n"), remark:$("remarkInput").value.trim(), image:existing?existing.image||null:null, by:existing?existing.by:"", at:existing?existing.at:""
   });
   if(existing){ const idx=contents.findIndex(x=>x.id===id); contents[idx]=payload; }
   else if(id){ toast("This content was deleted by a teammate"); closeEditor(); return; }
@@ -1347,7 +1669,8 @@ function applyRemoteSetting(row){
 const FIELD_LABEL={title:"Title",brand:"Brand",platform:"Platform",publish_date:"Publish date",post_time:"Post time",status:"Status",content_type:"Type",
   media:"Media",budget:"Budget",objective:"Objective",kpi:"KPI",remark:"Remark",image_path:"Image",asset_links:"Asset links",boost_flow:"Boost workflow",
   agency_send_date:"Send to agency",boost_start:"Boost start",boost_end:"Boost end",post_ref:"Post ID",agency_sent:"Sent to agency",
-  link_sent:"Link sent",boost_live:"Boost live",ref_id:"Ref ID"};
+  link_sent:"Link sent",boost_live:"Boost live",ref_id:"Ref ID",tt_clip_url:"TikTok clip",tt_account_type:"TikTok account",
+  tt_account_name:"Account name",tt_spark_code:"Spark code",tt_code_expiry:"Code expiry",tt_code_sent:"Code sent"};
 function fmtVal(k,v){ if(v==null||v==="") return "—"; if(typeof v==="boolean") return v?"yes":"no"; if(k==="image_path") return "image"; if(k==="boost_flow") return v==="agency"?"①":"②"; const s=String(v); return s.length>40?s.slice(0,40)+"…":s; }
 function timeAgo(t){ const s=(Date.now()-new Date(t).getTime())/1000; if(s<60) return "just now"; if(s<3600) return Math.floor(s/60)+" min ago"; if(s<86400) return Math.floor(s/3600)+" h ago"; return new Intl.DateTimeFormat("en-GB",{day:"numeric",month:"short",hour:"2-digit",minute:"2-digit"}).format(new Date(t)); }
 let historyFor=null, historyRows=[];
@@ -1405,23 +1728,52 @@ function closeHistory(){ $("historyDrawer").classList.remove("open"); if(!$("dra
 $("historyBtn").onclick=()=>openHistory(null);
 $("closeHistory").onclick=closeHistory;
 
-/* ============ Excel import ============ */
-const HEADER_MAP={"ref id":"refId","ref":"refId","ref no":"refId","content id":"refId","id":"refId",
-  "title":"title","content title":"title","content":"title","content name":"title","ชื่อคอนเทนต์":"title","ชื่อ":"title",
-  "brand":"brand","แบรนด์":"brand","platform":"platform","channel":"platform","แพลตฟอร์ม":"platform",
-  "publish date":"publishDate","publish":"publishDate","date":"publishDate","post date":"publishDate","วันที่ลง":"publishDate","วันที่":"publishDate",
-  "post time":"postTime","time":"postTime","เวลา":"postTime","status":"status","สถานะ":"status",
-  "content type":"type","type":"type","format":"type","media":"media",
-  "boost flow":"flow","boost workflow":"flow","workflow":"flow",
-  "send to agency date":"sendDate","send to agency":"sendDate","agency date":"sendDate",
-  "boost start date":"boostStart","boost start":"boostStart","boost end date":"boostEnd","boost end":"boostEnd",
-  "budget":"budget","objective":"objective","media objective":"objective","kpi":"kpi","primary kpi":"kpi",
-  "post id post link":"postRef","post id":"postRef","post link":"postRef","post id link":"postRef",
-  "asset link":"assets","asset links":"assets","assets":"assets","link":"assets","download link":"assets",
-  "remark campaign":"remark","remark":"remark","campaign":"remark","note":"remark","หมายเหตุ":"remark"};
+/* ============ Excel: one column spec shared by Import, Export and the template ============ */
+const XCOLS=[
+ {h:"Ref ID",k:"refId",w:12,g:"core",note:"Leave blank for new content — a Ref ID (e.g. TT-0012) is created automatically. If the Ref ID already exists, the row can update that content (you choose when importing)."},
+ {h:"Title",k:"title",req:1,w:34,g:"core",note:"Content title"},
+ {h:"Brand",k:"brand",req:1,w:11,g:"core",list:"Brand"},
+ {h:"Platform",k:"platform",req:1,w:12,g:"core",list:"Platform"},
+ {h:"Publish Date",k:"publishDate",req:1,w:13,g:"core",t:"date",note:"Day it goes live on our page. dd/mm/yyyy"},
+ {h:"Post Time",k:"postTime",w:10,g:"core",t:"time",note:"24-hour, e.g. 18:30"},
+ {h:"Status",k:"status",w:12,g:"core",list:"Status",note:"Blank = first status"},
+ {h:"Content Type",k:"type",w:13,g:"core",list:"Content Type"},
+ {h:"Media",k:"media",w:12,g:"core",list:"Media",note:"Organic / Boost Post / Ads Setup (agency dark post → Post ID → we publish)"},
+ {h:"Boost Workflow",k:"flow",w:30,g:"ad",list:"Boost Workflow",note:"Boost Post on Facebook/Instagram only. ① Agency sets ads → sends Post ID → we publish · ② We post first → send link → agency boosts"},
+ {h:"Send to Agency Date",k:"sendDate",w:15,g:"ad",t:"date",note:"① and Ads Setup. Blank = a few days before Publish Date"},
+ {h:"Ad Run Start",k:"boostStart",w:13,g:"ad",t:"date",note:"Blank = Publish Date"},
+ {h:"Ad Run End",k:"boostEnd",w:13,g:"ad",t:"date"},
+ {h:"Budget (THB)",k:"budget",w:12,g:"ad",t:"money"},
+ {h:"Objective",k:"objective",w:17,g:"ad",list:"Objective"},
+ {h:"KPI",k:"kpi",w:9,g:"ad",list:"KPI"},
+ {h:"Post ID / Post Link",k:"postRef",w:26,g:"ad",note:"① / Ads Setup: Post ID from the agency · ②: link of the post we published"},
+ {h:"Sent to Agency",k:"agencySent",w:10,g:"ad",t:"yn",list:"Y/N"},
+ {h:"Link Sent",k:"linkSent",w:9,g:"ad",t:"yn",list:"Y/N"},
+ {h:"Boost Live",k:"boostLive",w:9,g:"ad",t:"yn",list:"Y/N"},
+ {h:"TikTok Clip Link",k:"clipUrl",w:30,g:"tt",note:"TikTok only"},
+ {h:"TikTok Account",k:"ttAccType",w:14,g:"tt",list:"TikTok Account"},
+ {h:"TikTok Account Name",k:"ttAccName",w:18,g:"tt"},
+ {h:"Spark Ads Code",k:"sparkCode",w:24,g:"tt"},
+ {h:"Code Expiry",k:"codeExpiry",w:12,g:"tt",t:"date",note:"Optional"},
+ {h:"Code Sent to Agency",k:"codeSent",w:12,g:"tt",t:"yn",list:"Y/N"},
+ {h:"Download Links (VDO / AW)",k:"assets",w:36,g:"core",t:"wrap",note:"One link per line (Alt+Enter). Must start with https://"},
+ {h:"Remark / Campaign",k:"remark",w:30,g:"core"},
+ {h:"Has Image",k:"_img",w:9,g:"ro",ro:1,note:"Read-only — ignored on import"},
+ {h:"Last Edited By",k:"_by",w:20,g:"ro",ro:1,note:"Read-only — ignored on import"}
+];
+const LISTS=()=>({"Brand":BRANDS,"Platform":PLATFORMS,"Status":STATUSES,"Content Type":TYPES,"Media":MEDIA,"Boost Workflow":FLOW_LABELS,
+  "Objective":OBJECTIVES,"KPI":KPIS,"TikTok Account":["Brand","KOL / Creator"],"Y/N":["Y","N"]});
+const LEGACY={"ref":"refId","ref no":"refId","content id":"refId","id":"refId","content title":"title","content":"title","content name":"title","ชื่อคอนเทนต์":"title","ชื่อ":"title",
+  "แบรนด์":"brand","channel":"platform","แพลตฟอร์ม":"platform","publish":"publishDate","date":"publishDate","post date":"publishDate","วันที่ลง":"publishDate","วันที่":"publishDate",
+  "time":"postTime","เวลา":"postTime","สถานะ":"status","type":"type","format":"type","boost workflow":"flow","workflow":"flow","send to agency":"sendDate","agency date":"sendDate",
+  "boost start date":"boostStart","boost start":"boostStart","boost end date":"boostEnd","boost end":"boostEnd","budget":"budget","media objective":"objective","primary kpi":"kpi",
+  "post id":"postRef","post link":"postRef","post id link":"postRef","asset link":"assets","asset links":"assets","assets":"assets","link":"assets","download link":"assets","download links":"assets",
+  "remark":"remark","campaign":"remark","note":"remark","หมายเหตุ":"remark","clip link":"clipUrl","tiktok link":"clipUrl","account name":"ttAccName","spark code":"sparkCode","code sent":"codeSent"};
 function normHeader(h){ return String(h??"").toLowerCase().replace(/\*/g,"").replace(/\(.*?\)/g," ").replace(/[^a-z0-9฀-๿]+/g," ").trim(); }
+const HEADER_MAP=(()=>{ const m=Object.assign({},LEGACY); XCOLS.forEach(c=>{ m[normHeader(c.h)]=c.ro?"_ignore":c.k; }); return m; })();
 function cellDate(v){
   if(v==null||v==="") return "";
+  if(v instanceof Date) return `${v.getUTCFullYear()}-${String(v.getUTCMonth()+1).padStart(2,"0")}-${String(v.getUTCDate()).padStart(2,"0")}`;
   if(typeof v==="number" && v>20000 && v<80000){ const d=new Date(Date.UTC(1899,11,30)+Math.round(v)*864e5); return `${d.getUTCFullYear()}-${String(d.getUTCMonth()+1).padStart(2,"0")}-${String(d.getUTCDate()).padStart(2,"0")}`; }
   const s=String(v).trim(); let m;
   const fix=y=>{ y=+y; if(y<100) y+=2000; if(y>2400) y-=543; return y; };
@@ -1438,7 +1790,15 @@ function cellTime(v){
 }
 const pick=(list,v)=>{ if(v==null||v==="") return ""; const s=String(v).trim().toLowerCase(); return list.find(x=>x.toLowerCase()===s) ?? null; };
 function cellFlow(v){ if(v==null||v==="") return ""; const s=String(v).toLowerCase().trim(); if(/agency sets|^①|^1\b|แบบ ?1/.test(s)) return "agency"; if(/we post|^②|^2\b|แบบ ?2|เราโพสต์/.test(s)) return "self"; if(/agency/.test(s)) return "agency"; return null; }
-function loadScript(src){ return new Promise((res,rej)=>{ const s=document.createElement("script"); s.src=src; s.onload=res; s.onerror=()=>rej(new Error("Couldn't load the Excel reader. Check your internet connection.")); document.head.appendChild(s); }); }
+function cellYN(v){ if(v==null||v==="") return false; if(typeof v==="boolean") return v; return /^(y|yes|true|1|✓|x|ใช่)$/i.test(String(v).trim()); }
+function cellAcc(v){ const s=String(v??"").toLowerCase(); return /kol|creator|ครีเอเตอร์/.test(s)?"kol":"brand"; }
+function loadScript(src){ return new Promise((res,rej)=>{ const s=document.createElement("script"); s.src=src; s.onload=res; s.onerror=()=>rej(new Error("Couldn't load the Excel library. Check your internet connection.")); document.head.appendChild(s); }); }
+
+/* ---------- import ---------- */
+const UPDATABLE=XCOLS.filter(c=>!c.ro).map(c=>c.k).filter(k=>k!=="refId");
+const KEEP_IF_BLANK=new Set(["title","brand","platform","publishDate","status","type","media","ttAccType"]);
+const effFlow=x=>(!x.media||x.media==="Organic"||x.platform==="TikTok")?"":x.media==="Ads Setup"?"agency":(x.flow||"");
+const valStr=(k,v)=>k==="budget"?(v==null||v===""?"":String(Number(v))):typeof v==="boolean"?(v?"Y":"N"):String(v??"");
 let importRows=[];
 async function handleImportFile(file){
   try{
@@ -1453,68 +1813,249 @@ async function handleImportFile(file){
       if(m.filter(Boolean).length>=3 && m.includes("title")){ hIdx=i; map=m; break; }
     }
     if(hIdx<0){ toast("Couldn't find the header row (needs at least Title, Brand, Platform, Publish Date)."); return; }
-    const existingRefs=new Set(contents.map(c=>(c.refId||"").toLowerCase()).filter(Boolean));
+    const present=new Set(map.filter(k=>k&&k!=="_ignore"));
+    const byRef=new Map(contents.filter(c=>c.refId).map(c=>[c.refId.toLowerCase(),c]));
     const seen=new Set();
     importRows=[];
     rows.slice(hIdx+1).forEach((r,i)=>{
       if(!r || r.every(v=>v==null||String(v).trim()==="")) return;
-      const raw={}; map.forEach((k,j)=>{ if(k && raw[k]==null) raw[k]=r[j]; });
+      const raw={}; map.forEach((k,j)=>{ if(k && k!=="_ignore" && raw[k]==null) raw[k]=r[j]; });
+      const blank=k=>raw[k]==null||String(raw[k]).trim()==="";
       const errs=[]; const o=normalize({id:newId()});
       const str=v=>v==null?"":String(v).trim();
       o.refId=str(raw.refId); o.title=str(raw.title);
-      if(!o.title) errs.push("Title missing");
-      const b=pick(BRANDS,raw.brand); if(b===null) errs.push(`Unknown brand “${str(raw.brand)}”`); else if(!b) errs.push("Brand missing"); else o.brand=b;
-      const p=pick(PLATFORMS,raw.platform); if(p===null) errs.push(`Unknown platform “${str(raw.platform)}”`); else if(!p) errs.push("Platform missing"); else o.platform=p;
-      const pd=cellDate(raw.publishDate); if(pd===null) errs.push("Publish date unreadable"); else if(!pd) errs.push("Publish date missing"); else o.publishDate=pd;
+      const key=o.refId.toLowerCase(); const existing=key?byRef.get(key):null;
+      if(!o.title && !existing) errs.push("Title missing");
+      const b=pick(BRANDS,raw.brand); if(b===null) errs.push(`Unknown brand “${str(raw.brand)}”`); else if(!b&&!existing) errs.push("Brand missing"); else o.brand=b;
+      const p=pick(PLATFORMS,raw.platform); if(p===null) errs.push(`Unknown platform “${str(raw.platform)}”`); else if(!p&&!existing) errs.push("Platform missing"); else o.platform=p;
+      const pd=cellDate(raw.publishDate); if(pd===null) errs.push("Publish date unreadable"); else if(!pd&&!existing) errs.push("Publish date missing"); else o.publishDate=pd;
       const tm=cellTime(raw.postTime); if(tm===null) errs.push("Post time unreadable"); else o.postTime=tm;
       const st=pick(STATUSES,raw.status); if(st===null) errs.push(`Unknown status “${str(raw.status)}”`); else o.status=st||STATUSES[0];
       const ty=pick(TYPES,raw.type); if(ty===null) errs.push(`Unknown type “${str(raw.type)}”`); else o.type=ty||TYPES[0];
       const md=pick(MEDIA,raw.media); if(md===null) errs.push(`Unknown media “${str(raw.media)}”`); else o.media=md||"Organic";
-      if(o.media==="Boost Post"){
-        const fl=cellFlow(raw.flow); if(fl===null) errs.push("Boost workflow unreadable"); else o.flow=fl;
-        const labels={sendDate:"Send to agency",boostStart:"Boost start",boostEnd:"Boost end"};
-        for(const k of Object.keys(labels)){ const d=cellDate(raw[k]); if(d===null) errs.push(`${labels[k]} date unreadable`); else o[k]=d; }
-        if(o.flow==="agency"&&!o.sendDate&&o.publishDate) o.sendDate=addDays(o.publishDate,-LEAD_DAYS);
-        if(o.flow!=="agency") o.sendDate="";
-        const bud=raw.budget==null||raw.budget===""?null:Number(String(raw.budget).replace(/[^\d.]/g,""));
-        if(bud!=null && !Number.isFinite(bud)) errs.push("Budget not a number"); else o.budget=bud;
-        o.objective=pick(OBJECTIVES,raw.objective)||str(raw.objective); o.kpi=pick(KPIS,raw.kpi)||str(raw.kpi);
-        o.postRef=str(raw.postRef);
-      }
+      const plat=o.platform||(existing&&existing.platform), med=blank("media")&&existing?existing.media:o.media;
+      const fl=cellFlow(raw.flow); if(fl===null) errs.push("Boost workflow unreadable"); else o.flow=fl;
+      const labels={sendDate:"Send to agency",boostStart:"Ad run start",boostEnd:"Ad run end",codeExpiry:"Code expiry"};
+      for(const k of Object.keys(labels)){ const d=cellDate(raw[k]); if(d===null) errs.push(`${labels[k]} date unreadable`); else o[k]=d; }
+      const bud=blank("budget")?null:Number(String(raw.budget).replace(/[^\d.]/g,""));
+      if(bud!=null && !Number.isFinite(bud)) errs.push("Budget not a number"); else o.budget=bud;
+      o.objective=pick(OBJECTIVES,raw.objective)||str(raw.objective); o.kpi=pick(KPIS,raw.kpi)||str(raw.kpi);
+      o.postRef=str(raw.postRef);
+      ["agencySent","linkSent","boostLive","codeSent"].forEach(k=>o[k]=cellYN(raw[k]));
+      o.clipUrl=str(raw.clipUrl); if(o.clipUrl && !safeUrl(o.clipUrl)) errs.push("TikTok clip link must start with https://");
+      o.ttAccType=cellAcc(raw.ttAccType); o.ttAccName=str(raw.ttAccName); o.sparkCode=str(raw.sparkCode);
       const links=str(raw.assets).split(/\s*[\n,;]\s*|\s+(?=https?:\/\/)/).filter(Boolean);
-      if(links.some(l=>!safeUrl(l))) errs.push("Asset link must start with https://");
+      if(links.some(l=>!safeUrl(l))) errs.push("Download link must start with https://");
       o.assets=links.filter(safeUrl).join("\n");
       o.remark=str(raw.remark);
-      let state=errs.length?"err":"ok", note=errs.join(" · ");
-      const key=o.refId.toLowerCase();
-      if(state==="ok" && key && existingRefs.has(key)){ state="skip"; note="Ref ID already in workspace — skipped"; }
-      else if(state==="ok" && key && seen.has(key)){ state="skip"; note="Duplicate Ref ID in this file — skipped"; }
+      // tidy by media / platform (same rules as the editor)
+      const ad=med!=="Organic", tt=plat==="TikTok";
+      if(!ad){ ["flow","sendDate","boostStart","boostEnd","postRef","objective","kpi"].forEach(k=>o[k]=""); o.budget=null; o.agencySent=o.linkSent=o.boostLive=false; }
+      if(tt){ o.flow=""; o.postRef=""; o.sendDate=""; o.agencySent=o.linkSent=o.boostLive=false; }
+      else { o.clipUrl=""; o.ttAccName=""; o.sparkCode=""; o.codeExpiry=""; o.codeSent=false; o.ttAccType="brand"; }
+      if(ad && !tt && med==="Ads Setup") o.flow="agency";
+      if(o.flow==="agency" && !o.sendDate && o.publishDate && !existing) o.sendDate=addDays(o.publishDate,-LEAD_DAYS);
+      if(o.flow!=="agency") o.sendDate="";
+      let state=errs.length?"err":"new", note=errs.join(" · "), changes=[];
+      if(state!=="err" && key && seen.has(key)){ state="skip"; note="Duplicate Ref ID in this file — skipped"; }
+      else if(state!=="err" && !key){
+        const twin=contents.find(c=>c.title.trim().toLowerCase()===o.title.toLowerCase() && c.platform===o.platform && c.publishDate===o.publishDate);
+        if(twin){ state="skip"; note=`Looks like existing content ${twin.refId||""} (same title, platform and date) — skipped. Put its Ref ID in the row to update it instead.`; }
+      }
+      else if(state!=="err" && existing){
+        const cmp=(k,x)=>k==="flow"?effFlow(Object.assign({},existing,x===o?{media:med,platform:plat}:{} ,{flow:x.flow})):x[k];
+        changes=UPDATABLE.filter(k=>present.has(k) && !(KEEP_IF_BLANK.has(k)&&blank(k)) && valStr(k,cmp(k,o))!==valStr(k,cmp(k,existing)))
+          .map(k=>({k,from:existing[k],to:o[k]}));
+        state=changes.length?"update":"same"; note=changes.length?changes.slice(0,4).map(x=>`${XCOLS.find(c=>c.k===x.k).h}: ${valStr(x.k,x.from)||"—"} → ${valStr(x.k,x.to)||"—"}`).join(" · ")+(changes.length>4?` · +${changes.length-4} more`:""):"No changes";
+      }
       if(key) seen.add(key);
-      importRows.push({row:hIdx+2+i,o,state,note});
+      importRows.push({row:hIdx+2+i,o,state,note,existing,changes});
     });
     showImportPreview(file.name,name);
   }catch(err){ console.error(err); toast(err.message||"Couldn't read this file"); }
 }
 function showImportPreview(fileName,sheet){
-  const ok=importRows.filter(r=>r.state==="ok").length, skip=importRows.filter(r=>r.state==="skip").length, err=importRows.filter(r=>r.state==="err").length;
+  const n=st=>importRows.filter(r=>r.state===st).length;
+  const add=n("new"), upd=n("update"), same=n("same")+n("skip"), err=n("err");
   $("importTitle").textContent=`Import · ${fileName}`;
-  $("importSummary").innerHTML=`<span class="flag green">${ok} ready</span><span class="flag gray">${skip} skipped</span><span class="flag red">${err} with errors</span><span class="media-detail">Sheet “${esc(sheet)}”</span>`;
-  $("importTable").innerHTML=importRows.length?`<table><thead><tr><th>Row</th><th>Result</th><th>Title</th><th>Brand</th><th>Platform</th><th>Publish</th><th>Media</th><th>Status</th></tr></thead><tbody>${
-    importRows.map(r=>`<tr class="${r.state==="err"?"err":r.state==="skip"?"skip":""}"><td>${r.row}</td><td>${r.state==="ok"?"✓ Ready":r.state==="skip"?"Skipped":"✕ "+esc(r.note)}${r.state==="skip"?`<div class="media-detail">${esc(r.note)}</div>`:""}</td><td>${esc(r.o.title)}</td><td>${esc(r.o.brand||"")}</td><td>${esc(r.o.platform||"")}</td><td>${esc(r.o.publishDate?shortDate(r.o.publishDate):"")}</td><td>${esc(r.o.media)}</td><td>${esc(r.o.status)}</td></tr>`).join("")
+  $("importSummary").innerHTML=`<span class="flag green">${add} new</span><span class="flag" style="background:#edf2ff;color:#475fb5">${upd} would update</span><span class="flag gray">${same} unchanged / skipped</span><span class="flag red">${err} with errors</span><span class="media-detail">Sheet “${esc(sheet)}”</span>`;
+  $("importUpdateWrap").classList.toggle("show",upd>0);
+  $("importApplyUpdates").checked=false;
+  $("importUpdCount").textContent=`${upd} existing content${upd===1?"":"s"}`;
+  const label={new:"✓ New",update:"↻ Update",same:"No change",skip:"Skipped",err:"✕ Error"};
+  $("importTable").innerHTML=importRows.length?`<table><thead><tr><th>Row</th><th>Result</th><th>Ref ID</th><th>Title</th><th>Brand</th><th>Platform</th><th>Publish</th><th>Media</th><th>Details</th></tr></thead><tbody>${
+    importRows.map(r=>{ const o=r.existing&&r.state!=="err"?Object.assign({},r.existing,...r.changes.map(x=>({[x.k]:x.to}))):r.o; return `<tr class="${({err:"err",skip:"skip",update:"upd",same:"same"})[r.state]||""}"><td>${r.row}</td><td style="white-space:nowrap">${label[r.state]}</td><td>${esc(r.o.refId||"(auto)")}</td><td>${esc(o.title)}</td><td>${esc(o.brand||"")}</td><td>${esc(o.platform||"")}</td><td>${esc(o.publishDate?shortDate(o.publishDate):"")}</td><td>${esc(o.media)}</td><td class="media-detail" style="max-width:340px">${esc(r.state==="new"?"":r.note)}</td></tr>`; }).join("")
   }</tbody></table>`:`<div class="empty">No data rows found.</div>`;
-  $("confirmImport").disabled=!ok;
-  $("confirmImport").textContent=ok?`Import ${ok} content${ok===1?"":"s"}`:"Nothing to import";
+  updateImportButton();
   $("importDialog").showModal();
 }
+function updateImportButton(){
+  const add=importRows.filter(r=>r.state==="new").length, upd=$("importApplyUpdates").checked?importRows.filter(r=>r.state==="update").length:0;
+  $("confirmImport").disabled=!(add+upd);
+  $("confirmImport").textContent=add+upd?[add?`Add ${add} new`:"",upd?`update ${upd}`:""].filter(Boolean).join(" + "):"Nothing to import";
+}
+$("importApplyUpdates").onchange=updateImportButton;
 $("importBtn").onclick=()=>{ $("importFile").value=""; $("importFile").click(); };
 $("importFile").onchange=e=>{ const f=e.target.files?.[0]; if(f) handleImportFile(f); };
 $("closeImport").onclick=()=>$("importDialog").close();
 $("cancelImport").onclick=()=>$("importDialog").close();
 $("confirmImport").onclick=()=>{
-  const add=importRows.filter(r=>r.state==="ok").map(r=>r.o);
-  contents.push(...add); importRows=[];
+  const add=importRows.filter(r=>r.state==="new").map(r=>{ const o=r.o; if(!o.refId && !ONLINE) o.refId=autoRef(o.platform); return o; });
+  let upd=0;
+  if($("importApplyUpdates").checked) importRows.filter(r=>r.state==="update").forEach(r=>{ const c=byId(r.existing.id); if(!c) return; r.changes.forEach(x=>c[x.k]=x.to); upd++; });
+  add.forEach(o=>{ if(!ONLINE && !o.refId) o.refId=autoRef(o.platform); contents.push(o); });
+  importRows=[];
   save(); $("importDialog").close(); renderAll();
-  toast(`${add.length} content${add.length===1?"":"s"} imported`);
+  toast([add.length?`${add.length} added`:"",upd?`${upd} updated`:""].filter(Boolean).join(" · ")||"Nothing imported");
+};
+
+/* ---------- export ---------- */
+function colLetter(n){ let s=""; while(n>0){ const m=(n-1)%26; s=String.fromCharCode(65+m)+s; n=Math.floor((n-1)/26); } return s; }
+function xDate(s){ if(!s) return null; const [y,m,d]=s.split("-").map(Number); return new Date(Date.UTC(y,m-1,d)); }
+function xTime(t){ if(!t) return null; const [h,m]=t.split(":").map(Number); return (h*60+m)/1440; }
+function cellOut(c,col){
+  const k=col.k;
+  if(k==="_img") return c.image?"Y":"N";
+  if(k==="_by") return c.by||"";
+  if(col.t==="date") return xDate(c[k]);
+  if(col.t==="time") return xTime(c[k]);
+  if(col.t==="yn") return c[k]?"Y":"";
+  if(k==="budget") return c.budget==null?null:Number(c.budget);
+  if(k==="flow") return isAd(c)&&!isTT(c)&&c.media==="Boost Post"&&c.flow?(c.flow==="agency"?FLOW_LABELS[0]:FLOW_LABELS[1]):"";
+  if(k==="ttAccType") return isTT(c)?(c.ttAccType==="kol"?"KOL / Creator":"Brand"):"";
+  return c[k]==null?"":c[k];
+}
+const GROUP_FILL={req:"FF5B5BD6",core:"FFE9EAF7",ad:"FFFFF1E7",tt:"FFFDE7F3",ro:"FFEEEEEE"};
+async function buildWorkbook(items,{template=false,from="",to="",summary=true}={}){
+  if(!window.ExcelJS) await loadScript("https://cdnjs.cloudflare.com/ajax/libs/exceljs/4.4.0/exceljs.min.js");
+  const wb=new ExcelJS.Workbook(); wb.creator=SETTINGS.appName; wb.created=new Date();
+  const how=wb.addWorksheet("How to fill");
+  const ws=wb.addWorksheet("Content",{views:[{state:"frozen",xSplit:2,ySplit:1}]});
+  const sum=(!template&&summary)?wb.addWorksheet("Summary"):null;
+  const ex=template?wb.addWorksheet("Example",{views:[{state:"frozen",xSplit:2,ySplit:1}]}):null;
+  const lists=wb.addWorksheet("Lists");
+  const font={name:"Arial",size:10};
+  // lists
+  const L=LISTS(), lref={};
+  Object.keys(L).forEach((name,i)=>{ const col=i+1; const c0=lists.getCell(1,col); c0.value=name; c0.font={...font,bold:true}; L[name].forEach((v,j)=>{ const c=lists.getCell(j+2,col); c.value=v; c.font=font; }); lists.getColumn(col).width=name==="Boost Workflow"?34:16; lref[name]=`Lists!$${colLetter(col)}$2:$${colLetter(col)}$${L[name].length+1}`; });
+  const sheetHead=(sh)=>{
+    sh.columns=XCOLS.map(c=>({key:c.k,width:c.w}));
+    const hr=sh.getRow(1); hr.height=34;
+    XCOLS.forEach((c,i)=>{ const cell=hr.getCell(i+1); cell.value=c.h+(c.req?" *":""); cell.font={...font,bold:true,color:{argb:c.req?"FFFFFFFF":c.ro?"FF777777":"FF2B2F3A"}};
+      cell.fill={type:"pattern",pattern:"solid",fgColor:{argb:c.req?GROUP_FILL.req:GROUP_FILL[c.g]}}; cell.alignment={vertical:"middle",wrapText:true};
+      if(c.note) cell.note=c.note; });
+  };
+  const fillRows=(sh,rows,minRows)=>{
+    rows.forEach(c=>{ const r=sh.addRow(XCOLS.map(col=>cellOut(c,col))); r.eachCell({includeEmpty:true},cell=>{ cell.font=font; }); });
+    const last=Math.max(rows.length+1,minRows);
+    XCOLS.forEach((c,i)=>{ const col=sh.getColumn(i+1);
+      if(c.t==="date") col.numFmt="dd/mm/yyyy"; else if(c.t==="time") col.numFmt="hh:mm"; else if(c.t==="money") col.numFmt="#,##0";
+      else if(c.t==="wrap") col.alignment={wrapText:true,vertical:"top"};
+      if(c.ro) col.font={...font,color:{argb:"FF888888"}};
+      const L_=colLetter(i+1), rng=`${L_}2:${L_}${last}`;
+      let dv=null;
+      if(c.list) dv={type:"list",allowBlank:true,formulae:[lref[c.list]],showErrorMessage:true,errorTitle:"Not in list",error:"Please choose from the dropdown (or add the value to the Lists sheet and the website settings)."};
+      else if(c.t==="date") dv={type:"date",operator:"greaterThan",allowBlank:true,formulae:[new Date(Date.UTC(2020,0,1))],showErrorMessage:true,errorTitle:"Date",error:"Please enter a date, e.g. 15/10/2026"};
+      else if(c.t==="money") dv={type:"decimal",operator:"greaterThanOrEqual",allowBlank:true,formulae:[0],showErrorMessage:true,error:"Budget must be a number"};
+      if(dv){ if(sh.dataValidations&&sh.dataValidations.add) sh.dataValidations.add(rng,dv); else for(let r=2;r<=last;r++) sh.getCell(r,i+1).dataValidation=dv; }
+    });
+    // header row font/fill was set before rows; keep row 1 heights
+  };
+  sheetHead(ws); fillRows(ws,items,template?500:Math.max(items.length+300,500));
+  ws.getRow(1).font={...font,bold:true};
+  XCOLS.forEach((c,i)=>{ ws.getRow(1).getCell(i+1).font={...font,bold:true,color:{argb:c.req?"FFFFFFFF":c.ro?"FF777777":"FF2B2F3A"}}; });
+  if(ex){
+    sheetHead(ex);
+    const d0=from||TODAY;
+    const sample=[
+      normalize({refId:"",title:"Nonkul – Busy Day",brand:BRANDS[0],platform:"TikTok",publishDate:addDays(d0,3),postTime:"19:00",status:STATUSES[0],type:TYPES.includes("TikTok")?"TikTok":TYPES[0],media:"Boost Post",boostStart:addDays(d0,4),boostEnd:addDays(d0,10),budget:6000,objective:"Video Views",ttAccType:"kol",ttAccName:"@creator",sparkCode:"#ExampleSparkCode",codeExpiry:addDays(d0,30),assets:"https://drive.google.com/file/d/xxxx/view",remark:"KOL clip, boosted with Spark code"}),
+      normalize({refId:"",title:"Prune – Daily Comfort",brand:BRANDS[0],platform:"Facebook",publishDate:addDays(d0,5),postTime:"12:00",status:STATUSES[0],type:TYPES[0],media:"Ads Setup",flow:"agency",sendDate:addDays(d0,1),boostStart:addDays(d0,2),boostEnd:addDays(d0,12),budget:5000,objective:"Engagement",kpi:"ER%",remark:"Agency runs dark post first, sends Post ID, we publish on 5th day"}),
+      normalize({refId:"",title:"Bird's Nest – Health Tip",brand:BRANDS[0],platform:"Facebook",publishDate:addDays(d0,6),postTime:"09:00",status:STATUSES[0],type:TYPES[0],media:"Boost Post",flow:"self",boostStart:addDays(d0,7),boostEnd:addDays(d0,13),budget:5000,objective:"Engagement",kpi:"CPE",remark:"We post, then send link to agency"})
+    ];
+    fillRows(ex,sample,4);
+    ex.getCell(7,1).value="Examples: ① TikTok Spark Ads by a KOL · ② Ads Setup (dark post → Post ID → we publish) · ③ Boost workflow ② (we post first). Ref ID is left blank so it is created automatically.";
+    ex.getCell(7,1).font={...font,italic:true,color:{argb:"FF666666"}};
+  }
+  // how to fill
+  const lines=[
+    [`${SETTINGS.appName} — ${template?"Import template":"Export"}`,true,14],
+    [template?"":`Period: ${from?niceDate(from):"all"} – ${to?niceDate(to):"all"} · ${items.length} contents · exported ${new Date().toLocaleString("en-GB")}${me?" by "+me.email:""}`,false,10],
+    ["",false,10],
+    ["This file uses the same layout for Import and Export: you can edit it and import it back.",true,11],
+    ["1. One row per content in the “Content” sheet. Don't rename or move the column headers.",false,10],
+    ["2. Purple columns (*) are required for new content: Title, Brand, Platform, Publish Date.",false,10],
+    ["3. Orange columns = ads (Boost Post / Ads Setup). Pink columns = TikTok only. Grey columns are read-only and ignored on import.",false,10],
+    ["4. Ref ID blank → new content (Ref ID is created automatically). Ref ID that already exists → you can choose to update that content when importing; every change is kept in History and can be restored.",false,10],
+    ["5. Dates dd/mm/yyyy, time 24-hour (18:30). Y/N columns: Y = done, blank = not yet.",false,10],
+    ["6. Ads Setup = agency runs a dark post first → sends Post ID → we publish on our page on the Publish Date.",false,10],
+    ["7. Several download links in one cell: one per line (Alt+Enter). Links must start with https://",false,10]
+  ];
+  how.getColumn(1).width=130;
+  lines.forEach(([t,b,sz],i)=>{ const c=how.getCell(i+1,1); c.value=t; c.font={...font,bold:b,size:sz}; c.alignment={wrapText:true,vertical:"top"}; });
+  // summary
+  if(sum){
+    const n=items.length+1, colOf=k=>colLetter(XCOLS.findIndex(c=>c.k===k)+1), rng=k=>`Content!$${colOf(k)}$2:$${colOf(k)}$${Math.max(n,2)}`;
+    sum.getColumn(1).width=28; sum.getColumn(2).width=14; sum.getColumn(3).width=18;
+    let r=1; const put=(a,b,bold)=>{ const row=sum.getRow(r++); row.getCell(1).value=a; if(b!==undefined) row.getCell(2).value=b; row.font={...font,bold:!!bold}; return row; };
+    put(`${SETTINGS.appName} — Summary`,undefined,true).font={...font,bold:true,size:14};
+    put(`Period: ${from?niceDate(from):"all"} – ${to?niceDate(to):"all"}`);
+    put(`Generated ${new Date().toLocaleString("en-GB")}`); r++;
+    put("Total content",{formula:`COUNTA(${rng("title")})`,result:items.length},true); r++;
+    const block=(title,key,vals,valOf)=>{ put(title,"Count",true); vals.forEach(v=>{ const cnt=items.filter(c=>valOf(c)===v).length; if(!cnt) return; put(v,{formula:`COUNTIF(${rng(key)},"${String(v).replace(/"/g,'""')}")`,result:cnt}); }); r++; };
+    block("By status","status",STATUSES,c=>c.status);
+    block("By platform","platform",PLATFORMS,c=>c.platform);
+    block("By brand","brand",BRANDS,c=>c.brand);
+    block("By media","media",MEDIA,c=>c.media);
+    const adItems=items.filter(isAd), budget=adItems.reduce((s,c)=>s+(Number(c.budget)||0),0);
+    put("Ads (Boost Post + Ads Setup)",undefined,true);
+    put("Total ad budget (THB)",{formula:`SUM(${rng("budget")})`,result:budget}).getCell(2).numFmt="#,##0";
+    PLATFORMS.forEach(pl=>{ const b=adItems.filter(c=>c.platform===pl).reduce((s,c)=>s+(Number(c.budget)||0),0); if(!b) return;
+      put(`  ${pl}`,{formula:`SUMIF(${rng("platform")},"${pl}",${rng("budget")})`,result:b}).getCell(2).numFmt="#,##0"; });
+  }
+  return wb;
+}
+async function downloadWorkbook(wb,name){
+  const buf=await wb.xlsx.writeBuffer();
+  const blob=new Blob([buf],{type:"application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"});
+  const a=document.createElement("a"); a.href=URL.createObjectURL(blob); a.download=name; document.body.appendChild(a); a.click();
+  setTimeout(()=>{ URL.revokeObjectURL(a.href); a.remove(); },2000);
+}
+function monthRange(offset){ const t=new Date(); const s=new Date(t.getFullYear(),t.getMonth()+offset,1), e=new Date(t.getFullYear(),t.getMonth()+offset+1,0); return [iso(s),iso(e)]; }
+const EXPORT_PRESETS={thisweek:()=>weekRange(),nextweek:()=>{ const [s]=weekRange(); return [addDays(s,7),addDays(s,13)]; },
+  thismonth:()=>monthRange(0),nextmonth:()=>monthRange(1),lastmonth:()=>monthRange(-1),all:()=>["",""]};
+function exportItems(){
+  const from=$("expFrom").value, to=$("expTo").value, useF=$("expFilters").checked;
+  return contents.filter(c=>(!from||c.publishDate>=from)&&(!to||c.publishDate<=to)&&(!useF||matches(c,currentView==="tiktok"?true:false))&&(currentView!=="tiktok"||!useF||isTT(c)))
+    .sort((a,b)=>a.publishDate.localeCompare(b.publishDate)||(a.postTime||"").localeCompare(b.postTime||""));
+}
+function updateExportCount(){
+  const n=exportItems().length; $("expCount").textContent=`${n} content${n===1?"":"s"} will be exported`;
+  $("confirmExport").disabled=!n;
+  document.querySelectorAll("[data-exp-preset]").forEach(b=>{ const [f,t]=EXPORT_PRESETS[b.dataset.expPreset](); b.classList.toggle("active",f===$("expFrom").value&&t===$("expTo").value); });
+}
+function openExport(){
+  const [f,t]=EXPORT_PRESETS.thismonth(); $("expFrom").value=f; $("expTo").value=t;
+  const active=[filters.brand,filters.platform,filters.status,filters.media,filters.q].filter(Boolean).length+(currentView==="tiktok"?1:0);
+  $("expFilters").checked=active>0; $("expFiltersNote").textContent=active?`(${[filters.platform||(currentView==="tiktok"?"TikTok":""),filters.brand,filters.status,filters.media,filters.q&&`“${filters.q}”`].filter(Boolean).join(", ")})`:"(none active)";
+  updateExportCount(); $("exportDialog").showModal();
+}
+$("exportBtn").onclick=openExport;
+document.querySelectorAll("[data-exp-preset]").forEach(b=>b.onclick=()=>{ const [f,t]=EXPORT_PRESETS[b.dataset.expPreset](); $("expFrom").value=f; $("expTo").value=t; updateExportCount(); });
+["expFrom","expTo","expFilters"].forEach(id=>$(id).onchange=updateExportCount);
+$("closeExport").onclick=$("cancelExport").onclick=()=>$("exportDialog").close();
+$("confirmExport").onclick=async()=>{
+  const btn=$("confirmExport"); btn.disabled=true; btn.textContent="Preparing…";
+  try{
+    const from=$("expFrom").value, to=$("expTo").value;
+    const wb=await buildWorkbook(exportItems(),{from,to,summary:$("expSummary").checked});
+    await downloadWorkbook(wb,`Content_${from||"start"}_to_${to||"end"}.xlsx`);
+    $("exportDialog").close(); toast("Excel file downloaded");
+  }catch(err){ console.error(err); toast(err.message||"Export failed"); }
+  finally{ btn.textContent="Export"; btn.disabled=false; }
+};
+$("templateLink").onclick=async()=>{
+  try{ const wb=await buildWorkbook([],{template:true}); await downloadWorkbook(wb,"Content_Import_Template.xlsx"); toast("Template downloaded"); }
+  catch(err){ console.error(err); toast(err.message||"Couldn't build the template"); }
 };
 
 /* ============ wiring ============ */
@@ -1523,13 +2064,16 @@ $("searchInput").oninput=e=>{filters.q=e.target.value;renderAll()};
 $("brandFilter").onchange=e=>{filters.brand=e.target.value;renderAll()};
 $("statusFilter").onchange=e=>{filters.status=e.target.value;renderAll()};
 $("mediaFilter").onchange=e=>{filters.media=e.target.value;renderAll()};
-$("prevMonth").onclick=()=>{calendarCursor=new Date(calendarCursor.getFullYear(),calendarCursor.getMonth()-1,1);renderCalendar()};
-$("nextMonth").onclick=()=>{calendarCursor=new Date(calendarCursor.getFullYear(),calendarCursor.getMonth()+1,1);renderCalendar()};
-$("todayBtn").onclick=()=>{calendarCursor=new Date();calendarCursor.setDate(1);renderCalendar()};
+const moveMonth=n=>{ calendarCursor=new Date(calendarCursor.getFullYear(),calendarCursor.getMonth()+n,1); renderAll(); };
+$("prevMonth").onclick=()=>moveMonth(-1); $("nextMonth").onclick=()=>moveMonth(1);
+$("agPrev").onclick=()=>moveMonth(-1); $("agNext").onclick=()=>moveMonth(1);
+$("todayBtn").onclick=$("agToday").onclick=()=>{calendarCursor=new Date();calendarCursor.setDate(1);renderAll()};
+$("agencySwitch").querySelectorAll("[data-agency-mode]").forEach(b=>b.onclick=()=>{ agencyMode=b.dataset.agencyMode; renderAgency(); });
+$("ttNewBtn").onclick=()=>openEditor(null,null,{platform:"TikTok"});
 $("resetBtn").onclick=resetFilters;
 $("closeDrawer").onclick=closeDrawer;
 $("overlay").onclick=()=>{ closeDrawer(); closeHistory(); };
-$("drawerAddBtn").onclick=()=>openEditor(null,drawerDate);
+$("drawerAddBtn").onclick=()=>openEditor(null,drawerDate,drawerMode==="agency"?{media:"Boost Post"}:{});
 $("todayToggle").onclick=()=>{ todayCollapsed=!todayCollapsed; try{localStorage.setItem("cw_today_collapsed",todayCollapsed?"1":"0")}catch(e){} renderToday(); };
 $("copySelectedBtn").onclick=()=>copyContents([...selectedIds]);
 $("deleteSelectedBtn").onclick=deleteSelected;
