@@ -8,7 +8,7 @@
    ========================================================= */
 window.WORKSPACE_CONFIG = {
   // Name shown at the top-left, on the sign-in page and in the browser tab
-  appName: "Content OS",
+  appName: "Scotch Content Hub",
 
   supabaseUrl: "https://bdrfaeyztoszimqrdcuj.supabase.co",
   supabaseAnonKey: "sb_publishable_A5aXGj_b2w57rNa7d0byWw_g5Cmqhm_",
