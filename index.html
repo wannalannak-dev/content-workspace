@@ -4,6 +4,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Content Workspace</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Anuphan:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style id="statusStyles"></style>
   <style>
     :root{
@@ -325,6 +327,123 @@
       .image-preview-wrap{grid-template-columns:1fr}.image-info{border-left:0;border-top:1px solid var(--border)}
       .stat-value{font-size:20px}
     }
+    /* ================= Vivid & Friendly theme ================= */
+    :root{
+      --bg:#F6F5FB; --panel:#FFFFFF; --panel-2:#FAF9FE; --border:#E9E6F3; --text:#1E1B2E; --muted:#6E6A85;
+      --primary:#6C4CF1; --primary-soft:#F0EBFF; --accent:#FF5C8A;
+      --grad:linear-gradient(135deg,#6C4CF1 0%,#A44CF1 55%,#FF5C8A 100%);
+      --radius:18px; --shadow:0 14px 36px rgba(46,30,120,.10); --sidebar:236px;
+    }
+    body{font-family:"Anuphan",Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI","Noto Sans Thai",sans-serif;background:var(--bg);font-size:14.5px}
+    ::selection{background:#E4DBFF}
+    /* sidebar: light */
+    .sidebar{background:#FFFFFF;color:var(--text);border-right:1px solid var(--border);gap:22px}
+    .brandmark{font-size:17px;letter-spacing:-.01em}
+    .brandmark .dot{width:28px;height:28px;border-radius:9px;background:var(--grad);box-shadow:0 6px 14px rgba(108,76,241,.30)}
+    .app-name-btn:hover{background:var(--panel-2)}
+    .app-name-btn .pen{color:var(--muted)}
+    .nav{gap:4px}
+    .nav button{color:var(--muted);font-weight:600;padding:10px 12px;border-radius:12px}
+    .nav button svg{flex:0 0 auto}
+    .nav button:hover{background:var(--panel-2);color:var(--text)}
+    .nav button.active{background:var(--primary-soft);color:var(--primary)}
+    .settings-btn{color:var(--muted);font-weight:600;display:flex;align-items:center;gap:10px}
+    .settings-btn:hover{background:var(--panel-2);color:var(--text)}
+    .sidebar-note{color:var(--muted)}
+    .user-box{background:var(--panel-2);border:1px solid var(--border)}
+    .avatar{background:var(--grad)}
+    .user-mail{color:var(--text)}
+    .signout{color:var(--muted)} .signout:hover{background:#fff;color:var(--text)}
+    /* header */
+    .eyebrow{text-transform:none;letter-spacing:0;color:var(--primary);font-weight:600;font-size:13px}
+    h1{font-size:30px;letter-spacing:-.02em;font-weight:700}
+    /* buttons + inputs */
+    .btn{border-radius:12px;font-weight:600}
+    .btn.primary{background:var(--grad);border-color:transparent;color:#fff;box-shadow:0 8px 18px rgba(108,76,241,.28)}
+    .btn.primary:hover{filter:brightness(1.06);box-shadow:0 10px 22px rgba(108,76,241,.34)}
+    select,input[type="date"],input[type="text"],input[type="email"],input[type="password"],input[type="number"],input[type="time"],textarea,.search input{border-radius:12px;border-color:var(--border)}
+    select:focus,input:focus,textarea:focus{outline:none;border-color:var(--primary);box-shadow:0 0 0 3px rgba(108,76,241,.16)}
+    .view-switch{background:#EFEDF7;border-radius:12px}
+    .view-switch button.active{color:var(--primary)}
+    /* stat tiles: the one colourful moment */
+    .stats{gap:14px}
+    .stat{border:0;border-radius:20px;padding:16px 18px;background:var(--tint);display:grid;grid-template-columns:auto 1fr;column-gap:14px;align-items:center}
+    .stat:hover{box-shadow:0 10px 26px color-mix(in srgb,var(--ic) 22%,transparent);transform:translateY(-1px)}
+    .stat-ico{grid-row:span 3;width:44px;height:44px;border-radius:14px;background:var(--ic);color:#fff;display:grid;place-items:center;box-shadow:0 8px 16px color-mix(in srgb,var(--ic) 35%,transparent)}
+    .stat-label{color:color-mix(in srgb,var(--ic) 70%,#1E1B2E);font-weight:600}
+    .stat-value{font-size:28px;line-height:1.1;margin-top:2px;letter-spacing:-.02em}
+    .stat-sub{color:color-mix(in srgb,var(--ic) 45%,#55516B)}
+    .stat-go{color:var(--ic)}
+    .t-total{--tint:#EFEAFF;--ic:#6C4CF1} .t-week{--tint:#E1F7EF;--ic:#0F9F75}
+    .t-wip{--tint:#FFEFE2;--ic:#F2700C} .t-ads{--tint:#FFE8F0;--ic:#E3266A}
+    @media (prefers-reduced-motion:reduce){.stat:hover{transform:none}}
+    /* panels */
+    .today,.toolbar,.panel{border-color:var(--border);border-radius:var(--radius);box-shadow:0 1px 2px rgba(46,30,120,.04)}
+    .today-col h3{text-transform:none;letter-spacing:0;font-size:13.5px;color:var(--text);font-weight:700}
+    .today-col h3 .n{background:var(--primary-soft);color:var(--primary)}
+    .t-item{border-radius:12px;border-color:var(--border)}
+    .t-sub{text-transform:none;letter-spacing:0;font-size:12px;color:var(--text)}
+    .t-plat{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--text);font-weight:700}
+    th{text-transform:none;letter-spacing:0;font-size:12.5px;font-weight:600;background:var(--panel-2);color:var(--muted)}
+    tbody tr:hover{background:#FBFAFF}
+    tr.selected{background:#F4F0FF!important}
+    .thumb{border-radius:12px}
+    .panel-title{font-size:16px}
+    #listContainer td:nth-child(8){max-width:170px;min-width:140px}
+    #listContainer .actions{flex-direction:column;gap:5px}
+    #listContainer td:nth-child(6) input[type=date]{max-width:150px;padding:8px 10px}
+    #listContainer .inline-select{min-width:0;max-width:130px}
+    #listContainer th,#listContainer td{padding-left:10px;padding-right:10px}
+    #listContainer .content-cell{min-width:180px}
+    @media(max-width:1360px){#listContainer th:nth-child(4),#listContainer td:nth-child(4){display:none}}
+    @media(max-width:1180px){#listContainer th:nth-child(2),#listContainer td:nth-child(2){display:none}}
+    /* platform chips + tabs */
+    .pi{display:inline-grid;place-items:center;width:20px;height:20px;border-radius:50%;background:var(--pc);color:#fff;font-size:8.5px;font-weight:700;letter-spacing:.02em;flex:0 0 auto;overflow:hidden;line-height:1}
+    .pi img{width:100%;height:100%;object-fit:cover}
+    .pi.lg{width:26px;height:26px;font-size:10px}
+    .platform{background:color-mix(in srgb,var(--pc) 11%,#fff);color:color-mix(in srgb,var(--pc) 78%,#1E1B2E);border:1px solid color-mix(in srgb,var(--pc) 22%,#fff);padding:4px 10px 4px 4px;gap:6px}
+    .ptab{border-radius:999px;padding:5px 12px 5px 6px;gap:8px;font-weight:600}
+    .ptab.all{padding-left:13px}
+    .ptab:hover{border-color:color-mix(in srgb,var(--pc,#6C4CF1) 45%,#fff)}
+    .ptab.active{background:var(--pc,#1E1B2E);border-color:transparent;color:#fff;box-shadow:0 6px 14px color-mix(in srgb,var(--pc,#1E1B2E) 30%,transparent)}
+    .ptab.active .pi{box-shadow:0 0 0 2px rgba(255,255,255,.85)}
+    .ptab.active .n{background:rgba(255,255,255,.22);color:#fff}
+    .ptab.all.active{background:var(--grad)}
+    /* calendar */
+    .day.today .day-num{background:var(--grad)}
+    .cal-card{border-radius:10px}
+    .dow{text-transform:none;font-size:12.5px;font-weight:600}
+    /* dialogs + drawers */
+    dialog{border-radius:22px}
+    .drawer{border-radius:22px 0 0 22px}
+    .gate-box{border-radius:22px}
+    .gate{background:radial-gradient(1200px 500px at 15% -10%,#EAE2FF 0%,transparent 60%),radial-gradient(900px 500px at 110% 110%,#FFE3EE 0%,transparent 60%),var(--bg)}
+    .toast{background:#1E1B2E;border-radius:14px}
+    /* pager */
+    .pager{display:flex;align-items:center;gap:6px;justify-content:flex-end;padding:12px 16px;border-top:1px solid var(--border);flex-wrap:wrap}
+    .pager .info{margin-right:auto;color:var(--muted);font-size:13px}
+    .pager button{min-width:34px;height:34px;border:1px solid var(--border);background:#fff;border-radius:10px;font-weight:600;color:var(--text);padding:0 10px}
+    .pager button:hover:not(:disabled){border-color:var(--primary);color:var(--primary)}
+    .pager button.on{background:var(--grad);border-color:transparent;color:#fff}
+    .pager .gap{color:var(--muted);padding:0 2px}
+    /* settings: platform icons */
+    .pi-row{display:flex;align-items:center;gap:10px;padding:6px 0;border-bottom:1px solid var(--border)}
+    .pi-row:last-child{border-bottom:0}
+    .pi-row .name{font-size:13px;font-weight:600;flex:1}
+    @media(max-width:760px){
+      .sidebar{border-right:0;border-bottom:1px solid var(--border);flex-wrap:wrap;gap:10px;padding:10px 12px}
+      .sidebar .brandmark{flex:1;min-width:0} .sidebar .brandmark .app-name{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+      .nav{order:3;width:100%;justify-content:space-between}
+      .nav button{flex:1;justify-content:center}
+      .sidebar-note{display:none!important}
+      .settings-btn .label{display:none}
+      .drawer{border-radius:0}
+      .stats{gap:10px}
+      .stat{grid-template-columns:1fr;padding:14px;min-width:0}
+      .stat-ico{grid-row:auto;width:34px;height:34px;border-radius:11px;margin-bottom:8px}
+      .stat-value{font-size:22px;overflow-wrap:anywhere}
+      .stat-go{display:none}
+    }
   </style>
   <script src="config.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -334,13 +453,13 @@
   <aside class="sidebar">
     <div class="brandmark"><button class="app-name-btn" id="appNameBtn" title="Rename / workspace settings"><span class="dot"></span><span class="app-name">Content OS</span><span class="pen">✎</span></button></div>
     <div class="nav">
-      <button class="active" data-view="list" title="Content List">☷ <span class="label">Content List</span></button>
-      <button data-view="calendar" title="Calendar">▦ <span class="label">Calendar</span></button>
-      <button data-view="agency" title="Agency">⇄ <span class="label">Agency</span></button>
-      <button data-view="tiktok" title="TikTok Hub">♪ <span class="label">TikTok Hub</span></button>
+      <button class="active" data-view="list" title="Content List"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 6h11M9 12h11M9 18h11"/><circle cx="4.5" cy="6" r="1.2" fill="currentColor"/><circle cx="4.5" cy="12" r="1.2" fill="currentColor"/><circle cx="4.5" cy="18" r="1.2" fill="currentColor"/></svg> <span class="label">Content List</span></button>
+      <button data-view="calendar" title="Calendar"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3.5" y="5" width="17" height="15.5" rx="3"/><path d="M3.5 10h17M8 3v4M16 3v4"/></svg> <span class="label">Calendar</span></button>
+      <button data-view="agency" title="Agency"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h13l-3-3M20 16H7l3 3"/></svg> <span class="label">Agency</span></button>
+      <button data-view="tiktok" title="TikTok Hub"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><rect x="3.5" y="5" width="17" height="14" rx="3.5"/><path d="M10.5 9.3v5.4l4.6-2.7z" fill="currentColor"/></svg> <span class="label">TikTok Hub</span></button>
     </div>
     <div class="sidebar-foot">
-      <button class="settings-btn" id="settingsBtn" title="Workspace settings">⚙ <span class="label">Settings</span></button>
+      <button class="settings-btn" id="settingsBtn" title="Workspace settings"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1A2 2 0 1 1 4.3 17l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1A2 2 0 1 1 7 4.3l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1A2 2 0 1 1 19.7 7l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></svg> <span class="label">Settings</span></button>
       <div class="sidebar-note" id="sidebarNote">Master content database + synced calendar + drag &amp; drop rescheduling.</div>
       <div class="user-box" id="userBox">
         <div class="avatar" id="userAvatar">?</div>
@@ -353,7 +472,7 @@
   <main class="main">
     <div class="topbar">
       <div>
-        <div class="eyebrow">Marketing Workspace</div>
+        <div class="eyebrow">Marketing workspace</div>
         <h1>Content Workspace</h1>
         <div class="subtitle">Plan, review, schedule and move content from one shared source of truth.</div>
       </div>
@@ -567,6 +686,11 @@
         <div id="statusColorList"></div>
         <button class="link-btn" type="button" id="resetColors" style="align-self:flex-start;margin-top:6px">Reset to default colours</button>
       </div>
+      <div class="field" style="margin-top:18px">
+        <label>Platform icons</label>
+        <span class="help">Optional. Upload the official icon from each platform's brand resources page (square PNG/SVG works best). Until then a coloured badge is shown.</span>
+        <div id="platformIconList"></div>
+      </div>
     </div>
     <div class="modal-foot" style="justify-content:flex-end">
       <button class="btn" type="button" id="cancelSettings">Cancel</button>
@@ -645,6 +769,7 @@
     </div>
   </div>
 </dialog>
+<input type="file" id="platformIconInput" accept="image/png,image/jpeg,image/webp,image/svg+xml" style="display:none">
 <input type="file" id="editorImageInput" accept="image/png,image/jpeg,image/webp,image/gif" style="display:none">
 <input type="file" id="imageFileInput" accept="image/png,image/jpeg,image/webp,image/gif" style="display:none">
 <div class="paste-hint" id="pasteHint">Paste image with Ctrl+V</div>
@@ -691,7 +816,11 @@ const $ = id => document.getElementById(id);
 const brandColor = b => BRAND_COLORS[b] || "#7b8190";
 const DEFAULT_STATUS_COLORS = Object.assign({Briefing:"#64748b",Designing:"#8b5cf6",Revision:"#f97316",Approved:"#16a34a",Scheduled:"#2563eb",Published:"#0d9488"}, CFG.statusColors||{});
 const FALLBACK_COLORS=["#e11d48","#0891b2","#ca8a04","#7c3aed","#059669","#db2777"];
-const SETTINGS = {appName:(CFG.appName||"Content OS").trim(), statusColors:{}};
+const SETTINGS = {appName:(CFG.appName||"Content OS").trim(), statusColors:{}, platformIcons:{}};
+const PLATFORM_META = Object.assign({Facebook:{c:"#1877F2",a:"FB"},Instagram:{c:"#E1306C",a:"IG"},TikTok:{c:"#161823",a:"TT"},YouTube:{c:"#FF0033",a:"YT"},LINE:{c:"#06C755",a:"LN"},X:{c:"#2F3336",a:"X"}}, CFG.platformMeta||{});
+function platMeta(p){ const m=PLATFORM_META[p]; if(m) return m; const pal=["#0EA5E9","#8B5CF6","#F59E0B","#10B981","#EF4444"]; return {c:pal[Math.abs([...String(p||"?")].reduce((a,ch)=>a*31+ch.charCodeAt(0)|0,3))%pal.length],a:String(p||"?").replace(/[^A-Za-z0-9]/g,"").slice(0,2).toUpperCase()||"?"}; }
+function pIcon(p,cls=""){ const m=platMeta(p), img=SETTINGS.platformIcons[p]; return `<span class="pi ${cls}" style="--pc:${m.c}" aria-hidden="true">${img&&/^data:image\//.test(img)?`<img src="${img}" alt="">`:m.a}</span>`; }
+function pChip(p){ return `<span class="platform" style="--pc:${platMeta(p).c}">${pIcon(p)}${esc(p)}</span>`; }
 function statusColor(st){ return SETTINGS.statusColors[st] || DEFAULT_STATUS_COLORS[st] || FALLBACK_COLORS[Math.abs([...String(st)].reduce((a,ch)=>a*31+ch.charCodeAt(0)|0,7))%FALLBACK_COLORS.length]; }
 function shade(hex,amt){ const n=parseInt(hex.slice(1),16); let r=n>>16,g=n>>8&255,b=n&255; const f=v=>Math.max(0,Math.min(255,Math.round(amt<0?v*(1+amt):v+(255-v)*amt))); return "#"+[f(r),f(g),f(b)].map(v=>v.toString(16).padStart(2,"0")).join(""); }
 function stStyle(st){ const c=statusColor(st); return `background:${c}22;color:${shade(c,-.3)};border-color:${c}55`; }
@@ -702,7 +831,7 @@ function applySettings(){
   const all=[...new Set([...Object.keys(DEFAULT_STATUS_COLORS),...(CFG.statuses||[]),...Object.keys(SETTINGS.statusColors)])];
   $("statusStyles").textContent = all.map(st=>{ const c=statusColor(st); return `[data-st=${cssStr(st)}]{background-color:${c}22!important;color:${shade(c,-.3)}!important;border-color:${c}66!important}`; }).join("\n");
 }
-function loadLocalSettings(){ try{ const v=JSON.parse(localStorage.getItem("cw_settings")||"{}"); if(v.appName) SETTINGS.appName=v.appName; if(v.statusColors) SETTINGS.statusColors=v.statusColors; }catch(e){} }
+function loadLocalSettings(){ try{ const v=JSON.parse(localStorage.getItem("cw_settings")||"{}"); if(v.appName) SETTINGS.appName=v.appName; if(v.statusColors) SETTINGS.statusColors=v.statusColors; if(v.platformIcons) SETTINGS.platformIcons=v.platformIcons; }catch(e){} }
 
 /* ============ dates / helpers ============ */
 function iso(d){return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,"0")}-${String(d.getDate()).padStart(2,"0")}`}
@@ -871,7 +1000,7 @@ async function loadRemote(){
   if(error) throw error;
   contents = (data||[]).map(fromRow);
   synced = {}; contents.forEach(c=>synced[c.id]=sig(c));
-  try{ const st=await sb.from("settings").select("*").in("key",["app_name","status_colors"]); (st.data||[]).forEach(applyRemoteSetting); applySettings(); }catch(e){}
+  try{ const st=await sb.from("settings").select("*").in("key",["app_name","status_colors","platform_icons"]); (st.data||[]).forEach(applyRemoteSetting); applySettings(); }catch(e){}
   setSync("ok","All changes saved");
 }
 function listenRemote(){
@@ -1003,7 +1132,7 @@ function renderPlatformTabs(){
   const base=contents.filter(c=>matches(c,true));
   const count=p=>base.filter(c=>!p||c.platform===p).length;
   $("platformTabs").innerHTML=[["","All platforms"],...PLATFORMS.map(p=>[p,p])].map(([v,l])=>
-    `<button class="ptab ${filters.platform===v?"active":""}" role="tab" aria-selected="${filters.platform===v}" data-ptab="${esc(v)}">${esc(l)} <span class="n">${count(v)}</span></button>`).join("");
+    `<button class="ptab ${v?"":"all"} ${filters.platform===v?"active":""}" role="tab" aria-selected="${filters.platform===v}" data-ptab="${esc(v)}" ${v?`style="--pc:${platMeta(v).c}"`:""}>${v?pIcon(v):""}${esc(l)} <span class="n">${count(v)}</span></button>`).join("");
   $("platformTabs").querySelectorAll("[data-ptab]").forEach(b=>b.onclick=()=>{ filters.platform=b.dataset.ptab; writeUrl(); renderAll(); });
 }
 
@@ -1019,7 +1148,7 @@ function tItem(c, extra, level, opts={}){
 function groupByPlatform(list, render){
   const groups={}; list.forEach(c=>(groups[c.platform]=groups[c.platform]||[]).push(c));
   const order=PLATFORMS.concat(Object.keys(groups).filter(k=>!PLATFORMS.includes(k)));
-  return order.filter(p=>groups[p]).map(p=>`<div class="t-group">${filters.platform?"":`<div class="t-plat">${esc(p)} · ${groups[p].length}</div>`}${groups[p].map(render).join("")}</div>`).join("");
+  return order.filter(p=>groups[p]).map(p=>`<div class="t-group">${filters.platform?"":`<div class="t-plat">${pIcon(p)}${esc(p)} <span style="color:var(--muted);font-weight:500">${groups[p].length}</span></div>`}${groups[p].map(render).join("")}</div>`).join("");
 }
 function renderToday(){
   const data=filtered();
@@ -1069,7 +1198,8 @@ function renderStats(){
   const weekLeft=S.week.items.filter(c=>c.status!==DONE).length;
   const budget=S.ads.items.reduce((s,c)=>s+(Number(c.budget)||0),0);
   const waitingId=filtered().filter(c=>flowOf(c)==="agency"&&!c.postRef&&c.status!==DONE&&c.publishDate>=TODAY).length;
-  const tile=(key,label,value,sub)=>`<button class="stat" data-stat="${key}" title="Click to see the list"><div class="stat-label">${label} <span class="stat-go">View ›</span></div><div class="stat-value">${value}</div><div class="stat-sub">${sub}</div></button>`;
+  const ICONS={"total": "<svg width=\"22\" height=\"22\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linejoin=\"round\"><rect x=\"4\" y=\"4\" width=\"7\" height=\"7\" rx=\"2\"/><rect x=\"13\" y=\"4\" width=\"7\" height=\"7\" rx=\"2\"/><rect x=\"4\" y=\"13\" width=\"7\" height=\"7\" rx=\"2\"/><rect x=\"13\" y=\"13\" width=\"7\" height=\"7\" rx=\"2\"/></svg>", "week": "<svg width=\"22\" height=\"22\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\"><rect x=\"3.5\" y=\"5\" width=\"17\" height=\"15.5\" rx=\"3\"/><path d=\"M3.5 10h17M8 3v4M16 3v4\"/></svg>", "wip": "<svg width=\"22\" height=\"22\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\"><path d=\"M4 20h4L19 9l-4-4L4 16z\"/><path d=\"M13.5 6.5l4 4\"/></svg>", "ads": "<svg width=\"22\" height=\"22\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M13 3L5 13.5h6L10 21l8-10.5h-6z\"/></svg>"};
+  const tile=(key,label,value,sub)=>`<button class="stat t-${key}" data-stat="${key}" title="Click to see the list"><span class="stat-ico">${ICONS[key]}</span><div class="stat-label">${label} <span class="stat-go">View ›</span></div><div class="stat-value">${value}</div><div class="stat-sub">${sub}</div></button>`;
   $("stats").innerHTML =
     tile("total","Total content", S.total.items.length, filters.brand||filters.platform||filters.status||filters.media||filters.q ? "matching filters" : "in workspace") +
     tile("week","This week", S.week.items.length, weekLeft ? `${weekLeft} not yet published` : "all published") +
@@ -1142,18 +1272,39 @@ function mediaCell(c){
   return h;
 }
 
+const PAGE_SIZE=20;
+const pages={list:{n:1,sig:""},tiktok:{n:1,sig:""}};
+function pageOf(key,all){
+  const sig=JSON.stringify([filters,currentView]); const st=pages[key];
+  if(st.sig!==sig){ st.sig=sig; st.n=1; }
+  const total=Math.max(1,Math.ceil(all.length/PAGE_SIZE)); if(st.n>total) st.n=total;
+  return {items:all.slice((st.n-1)*PAGE_SIZE,st.n*PAGE_SIZE),page:st.n,total};
+}
+function pagerHtml(key,len,page,total){
+  if(len<=PAGE_SIZE) return "";
+  const from=(page-1)*PAGE_SIZE+1, to=Math.min(page*PAGE_SIZE,len);
+  const nums=[]; for(let i=1;i<=total;i++){ if(i===1||i===total||Math.abs(i-page)<=1) nums.push(i); else if(nums[nums.length-1]!=="…") nums.push("…"); }
+  return `<div class="pager" data-pager="${key}"><span class="info">${from}–${to} of ${len}</span>
+    <button data-pg="${page-1}" ${page===1?"disabled":""} aria-label="Previous page">‹</button>
+    ${nums.map(n=>n==="…"?`<span class="gap">…</span>`:`<button data-pg="${n}" class="${n===page?"on":""}" ${n===page?'aria-current="page"':""}>${n}</button>`).join("")}
+    <button data-pg="${page+1}" ${page===total?"disabled":""} aria-label="Next page">›</button></div>`;
+}
+function bindPager(root,key,rerender){
+  root.querySelectorAll(`[data-pager="${key}"] [data-pg]`).forEach(b=>b.onclick=()=>{ pages[key].n=+b.dataset.pg; rerender(); root.closest(".panel").scrollIntoView({block:"start",behavior:"smooth"}); });
+}
 function renderList(){
-  const data=filtered().sort((a,b)=>(a.publishDate||"").localeCompare(b.publishDate||"")||(a.postTime||"").localeCompare(b.postTime||""));
+  const all=filtered().sort((a,b)=>(a.publishDate||"").localeCompare(b.publishDate||"")||(a.postTime||"").localeCompare(b.postTime||""));
   $("listTitle").textContent = filters.platform ? `${filters.platform} content` : "Content List";
-  $("listMeta").textContent=`${data.length} of ${contents.length} contents`;
+  $("listMeta").textContent=`${all.length} of ${contents.length} contents`;
+  const pg=pageOf("list",all), data=pg.items;
   const root=$("listContainer");
   updateBulkBar();
   if(!contents.length){root.innerHTML=`<div class="empty"><b>No content yet</b>Click “＋ New Content” or “⇪ Import Excel” to get started.</div>`;return}
-  if(!data.length){root.innerHTML=`<div class="empty"><b>No content matches the current filters</b>Try “Reset filters” or choose “All platforms”.</div>`;return}
-  const allVisibleSelected=data.every(c=>selectedIds.has(c.id));
+  if(!all.length){root.innerHTML=`<div class="empty"><b>No content matches the current filters</b>Try “Reset filters” or choose “All platforms”.</div>`;return}
+  const allVisibleSelected=data.length>0&&data.every(c=>selectedIds.has(c.id));
   root.innerHTML=`<table>
     <thead><tr>
-      <th style="width:44px"><input class="head-check" id="selectAllVisible" type="checkbox" aria-label="Select all" ${allVisibleSelected?"checked":""}></th>
+      <th style="width:44px"><input class="head-check" id="selectAllVisible" type="checkbox" aria-label="Select all on this page" title="Select all on this page" ${allVisibleSelected?"checked":""}></th>
       <th class="preview-cell">Preview</th><th>Content</th><th>Brand</th><th>Platform</th><th>Publish</th><th>Status</th><th>Media</th><th></th>
     </tr></thead>
     <tbody>${data.map(c=>{ const id=esc(c.id); const late=c.publishDate<TODAY&&c.status!==DONE; return `
@@ -1168,7 +1319,7 @@ function renderList(){
           <div style="min-width:0">${c.refId?`<div class="ref">${esc(c.refId)}</div>`:""}<div class="content-title">${esc(c.title)}</div><div class="content-sub">${esc(c.type)} · ${esc(c.remark||"No remark")}</div>${assetChips(c)}</div>
         </div></td>
         <td>${brandBadge(c.brand)}</td>
-        <td><span class="platform">${esc(c.platform)}</span></td>
+        <td>${pChip(c.platform)}</td>
         <td>
           <input type="date" value="${esc(c.publishDate)}" data-date-id="${id}" aria-label="Publish date" ${late?'style="border-color:#f0c9a8"':""}>
           ${(c.media==="Organic"||isBoost(c))&&c.postTime?`<div class="media-detail">Post ${esc(c.postTime)}</div>`:""}
@@ -1181,6 +1332,7 @@ function renderList(){
     </tbody>
   </table>`;
 
+  root.insertAdjacentHTML("beforeend",pagerHtml("list",all.length,pg.page,pg.total)); bindPager(root,"list",renderList);
   hydratePreviewImages(data);
   root.querySelectorAll("[data-edit]").forEach(b=>b.onclick=()=>openEditor(b.dataset.edit));
   root.querySelectorAll("[data-copy-one]").forEach(b=>b.onclick=()=>copyContents([b.dataset.copyOne]));
@@ -1437,11 +1589,12 @@ function renderAgency(){
 
 /* ============ TikTok hub ============ */
 function renderTikTok(){
-  const data=contents.filter(c=>isTT(c)&&matches(c,true)).sort((a,b)=>a.publishDate.localeCompare(b.publishDate)||(a.postTime||"").localeCompare(b.postTime||""));
-  const withCode=data.filter(c=>c.sparkCode).length, needCode=data.filter(c=>isAd(c)&&!c.sparkCode&&runEndOf(c)>=TODAY).length;
-  $("ttMeta").textContent=`${data.length} TikTok contents · ${withCode} with Spark code${needCode?` · ${needCode} ads still need a code`:""}`;
+  const all=contents.filter(c=>isTT(c)&&matches(c,true)).sort((a,b)=>a.publishDate.localeCompare(b.publishDate)||(a.postTime||"").localeCompare(b.postTime||""));
+  const withCode=all.filter(c=>c.sparkCode).length, needCode=all.filter(c=>isAd(c)&&!c.sparkCode&&runEndOf(c)>=TODAY).length;
+  const pg=pageOf("tiktok",all), data=pg.items;
+  $("ttMeta").textContent=`${all.length} TikTok contents · ${withCode} with Spark code${needCode?` · ${needCode} ads still need a code`:""}`;
   const root=$("tiktokContainer");
-  if(!data.length){ root.innerHTML=`<div class="empty"><b>No TikTok content yet</b>Click “＋ New TikTok content”.</div>`; return; }
+  if(!all.length){ root.innerHTML=`<div class="empty"><b>No TikTok content yet</b>Click “＋ New TikTok content”.</div>`; return; }
   root.innerHTML=`<table class="tt-table"><thead><tr><th class="preview-cell">Preview</th><th>Content</th><th>Publish</th><th>Status</th><th>Clip</th><th>Spark Ads code</th><th>Sent</th><th>Ad run</th><th>Downloads</th><th></th></tr></thead><tbody>${
     data.map(c=>{ const id=esc(c.id); const al=alertsFor(c); const clip=safeUrl(c.clipUrl); return `<tr>
       <td class="preview-cell"><div class="preview-box" data-preview-box="${id}" title="Click to add/preview image"><div class="preview-placeholder">Paste<br>image</div></div></td>
@@ -1457,6 +1610,7 @@ function renderTikTok(){
       <td>${assetChips(c,3)||`<span class="media-detail">—</span>`}</td>
       <td><button class="icon-btn" data-edit="${id}" title="Edit" aria-label="Edit">✎</button></td>
     </tr>`;}).join("")}</tbody></table>`;
+  root.insertAdjacentHTML("beforeend",pagerHtml("tiktok",all.length,pg.page,pg.total)); bindPager(root,"tiktok",renderTikTok);
   hydratePreviewImages(data);
   bindCopyCode(root);
   root.querySelectorAll("[data-edit]").forEach(b=>b.onclick=()=>openEditor(b.dataset.edit));
@@ -1640,8 +1794,33 @@ function openSettings(){
     const st=inp.dataset.colorFor, c=inp.value; const pv=$("statusColorList").querySelector(`[data-preview-st="${CSS.escape(st)}"]`);
     pv.style.cssText=`background:${c}22;color:${shade(c,-.3)};border-color:${c}55`;
   });
+  pendingIcons=Object.assign({},SETTINGS.platformIcons);
+  renderIconList();
   $("settingsDialog").showModal();
 }
+let pendingIcons={}, iconTarget=null;
+function renderIconList(){
+  $("platformIconList").innerHTML=PLATFORMS.map(pl=>{ const m=platMeta(pl), img=pendingIcons[pl];
+    return `<div class="pi-row"><span class="pi lg" style="--pc:${m.c}">${img?`<img src="${img}" alt="">`:m.a}</span><span class="name">${esc(pl)}</span>
+      <button class="btn small" type="button" data-icon-up="${esc(pl)}">${img?"Replace":"Upload"}</button>${img?`<button class="link-btn" type="button" data-icon-rm="${esc(pl)}" style="color:var(--danger)">Remove</button>`:""}</div>`; }).join("");
+  $("platformIconList").querySelectorAll("[data-icon-up]").forEach(b=>b.onclick=()=>{ iconTarget=b.dataset.iconUp; $("platformIconInput").value=""; $("platformIconInput").click(); });
+  $("platformIconList").querySelectorAll("[data-icon-rm]").forEach(b=>b.onclick=()=>{ delete pendingIcons[b.dataset.iconRm]; renderIconList(); });
+}
+async function iconToDataUrl(file){
+  const url=URL.createObjectURL(file);
+  try{
+    const img=await new Promise((res,rej)=>{ const im=new Image(); im.onload=()=>res(im); im.onerror=()=>rej(new Error("Couldn't read this image")); im.src=url; });
+    const S=96, cv=document.createElement("canvas"); cv.width=cv.height=S; const ctx=cv.getContext("2d");
+    const w=img.naturalWidth||S, h=img.naturalHeight||S, k=Math.max(S/w,S/h);
+    ctx.drawImage(img,(S-w*k)/2,(S-h*k)/2,w*k,h*k);
+    return cv.toDataURL("image/png");
+  } finally { URL.revokeObjectURL(url); }
+}
+$("platformIconInput").onchange=async e=>{
+  const f=e.target.files?.[0]; if(!f||!iconTarget) return;
+  if(f.size>2*1024*1024){ toast("Please use an image under 2 MB"); return; }
+  try{ pendingIcons[iconTarget]=await iconToDataUrl(f); renderIconList(); }catch(err){ toast(err.message); }
+};
 $("resetColors").onclick=()=>{ $("statusColorList").querySelectorAll("[data-color-for]").forEach(inp=>{ inp.value=DEFAULT_STATUS_COLORS[inp.dataset.colorFor]||statusColor(inp.dataset.colorFor); inp.oninput(); }); };
 $("settingsBtn").onclick=openSettings; $("appNameBtn").onclick=openSettings;
 $("closeSettings").onclick=()=>$("settingsDialog").close(); $("cancelSettings").onclick=()=>$("settingsDialog").close();
@@ -1649,11 +1828,11 @@ $("settingsForm").onsubmit=async e=>{
   e.preventDefault();
   const name=$("appNameInput").value.trim()||"Content OS";
   const colors={}; $("statusColorList").querySelectorAll("[data-color-for]").forEach(inp=>{ if(inp.value.toLowerCase()!==(DEFAULT_STATUS_COLORS[inp.dataset.colorFor]||"").toLowerCase()) colors[inp.dataset.colorFor]=inp.value; });
-  SETTINGS.appName=name; SETTINGS.statusColors=colors;
+  SETTINGS.appName=name; SETTINGS.statusColors=colors; SETTINGS.platformIcons=Object.assign({},pendingIcons);
   applySettings(); renderAll(); $("settingsDialog").close();
   if(ONLINE){
     setSync("saving","Saving…");
-    const {error}=await sb.from("settings").upsert([{key:"app_name",value:name},{key:"status_colors",value:colors}]);
+    const {error}=await sb.from("settings").upsert([{key:"app_name",value:name},{key:"status_colors",value:colors},{key:"platform_icons",value:SETTINGS.platformIcons}]);
     if(error){ console.error(error); setSync("err","Settings not saved"); toast("Couldn't save settings for the team: "+error.message); return; }
     setSync("ok","All changes saved");
   }else{ try{ localStorage.setItem("cw_settings",JSON.stringify(SETTINGS)); }catch(err){} }
@@ -1663,6 +1842,7 @@ function applyRemoteSetting(row){
   if(!row) return;
   if(row.key==="app_name" && typeof row.value==="string" && row.value.trim()) SETTINGS.appName=row.value.trim();
   if(row.key==="status_colors" && row.value && typeof row.value==="object") SETTINGS.statusColors=row.value;
+  if(row.key==="platform_icons" && row.value && typeof row.value==="object") SETTINGS.platformIcons=row.value;
 }
 
 /* ============ history (online) ============ */
