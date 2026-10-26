@@ -444,6 +444,80 @@
       .stat-value{font-size:22px;overflow-wrap:anywhere}
       .stat-go{display:none}
     }
+    /* ===== Page covers ===== */
+    .in-covers #importBtn,.in-covers #exportBtn,.in-covers #newContentBtn,.in-covers #historyBtn,.in-covers .toolbar,.in-covers #platformTabs,.in-covers #bulkbar{display:none!important}
+    .nav button{position:relative}
+    .main{min-width:0}
+    #coversView{min-width:0;max-width:100%}
+    .nav-badge{margin-left:auto;min-width:19px;height:19px;padding:0 6px;border-radius:999px;background:#e5484d;color:#fff;font-size:11px;font-weight:700;display:inline-grid;place-items:center;line-height:1}
+    .nav-badge[hidden]{display:none}
+    #covNewBtn{white-space:nowrap}
+    .cov-head-tools{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+    .cov-plats{display:flex;flex-wrap:wrap;gap:6px;padding:12px 18px 0}
+    .cov-banner{margin:14px 18px 0;padding:12px 14px;border-radius:12px;background:var(--warn-soft);color:var(--warn);font-size:13px;font-weight:600}
+    .cov-section-title{display:flex;justify-content:space-between;align-items:baseline;gap:10px;flex-wrap:wrap;padding:16px 18px 8px}
+    .cov-section-title h3{margin:0;font-size:15px}
+    .cov-now{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px;padding:0 18px 4px}
+    .cov-card{border:1px solid var(--border);border-radius:16px;background:#fff;overflow:hidden;display:flex;flex-direction:column;min-width:0}
+    .cov-card.due{border-color:#f1a3a6;box-shadow:0 0 0 3px #fde2e3}
+    .cov-img{height:128px;background:repeating-conic-gradient(#f3f1fa 0 25%,#fbfaff 0 50%) 0 0/16px 16px;display:grid;place-items:center;cursor:pointer;position:relative;overflow:hidden}
+    .cov-img img{max-width:100%;max-height:100%;object-fit:contain;display:block}
+    .cov-img .noimg{color:var(--muted);font-size:12px;font-weight:600;text-align:center}
+    .cov-img .slot-pill{position:absolute;left:8px;top:8px;display:inline-flex;gap:6px;align-items:center;background:rgba(255,255,255,.94);border-radius:999px;padding:3px 9px 3px 4px;font-size:11.5px;font-weight:700;box-shadow:0 1px 3px rgba(0,0,0,.08)}
+    .cov-body{padding:11px 13px 12px;display:flex;flex-direction:column;gap:4px;min-width:0}
+    .cov-place{font-size:11.5px;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:.04em}
+    .cov-title{font-weight:700;overflow-wrap:anywhere}
+    .cov-meta{font-size:12.5px;color:var(--muted)}
+    .cov-next{font-size:12.5px;background:var(--panel-2);border:1px solid var(--border);border-radius:10px;padding:6px 9px;margin-top:4px}
+    .cov-next b{color:var(--text)}
+    .cov-actions{display:flex;gap:6px;flex-wrap:wrap;margin-top:6px}
+    .cov-cal-top{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;padding:18px 18px 10px;border-top:1px solid var(--border);margin-top:16px}
+    .cov-legend{display:flex;gap:12px;flex-wrap:wrap;font-size:12px;color:var(--muted)}
+    .cov-legend i{display:inline-block;width:18px;height:10px;border-radius:4px;vertical-align:-1px;margin-right:5px}
+    .ctl-wrap{overflow-x:auto;padding:0 18px 18px}
+    .ctl{min-width:calc(180px + var(--n) * 28px);border:1px solid var(--border);border-radius:14px;overflow:hidden}
+    .ctl-row{display:grid;grid-template-columns:180px minmax(0,1fr);border-bottom:1px solid var(--border);min-height:58px}
+    .ctl-row:last-child{border-bottom:0}
+    .ctl-head{min-height:0;background:var(--panel-2)}
+    .ctl-label{position:sticky;left:0;z-index:3;background:#fff;border-right:1px solid var(--border);padding:8px 10px;display:flex;gap:8px;align-items:center;min-width:0}
+    .ctl-head .ctl-label{background:var(--panel-2);font-size:12px;color:var(--muted);font-weight:700}
+    .ctl-label .t{min-width:0}
+    .ctl-label .t b{display:block;font-size:13px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+    .ctl-label .t span{display:block;font-size:11.5px;color:var(--muted);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+    .ctl-days{display:grid;grid-template-columns:repeat(var(--n),minmax(28px,1fr));min-width:0}
+    .ctl-dh{grid-row:1;text-align:center;padding:6px 0;font-size:11px;color:var(--muted);border-right:1px solid var(--border)}
+    .ctl-dh b{display:block;font-size:12.5px;color:var(--text)}
+    .ctl-dh.we{background:#f3f1fa}
+    .ctl-dh.today b{display:grid;margin:0 auto 1px;place-items:center;width:22px;height:22px;border-radius:50%;background:var(--grad);color:#fff}
+    .ctl-cell{grid-row:1;border-right:1px solid #f1eff7;cursor:pointer;min-height:58px}
+    .ctl-cell.we{background:#faf9fd}
+    .ctl-cell.today{background:#f0ebff}
+    .ctl-cell:hover{background:#ebe5ff}
+    .ctl-bar{grid-row:1;z-index:1;margin:7px 2px;border-radius:10px;background:color-mix(in srgb,var(--pc) 13%,#fff);border:1px solid color-mix(in srgb,var(--pc) 40%,#fff);border-left:4px solid var(--pc);display:flex;align-items:center;gap:7px;padding:4px 7px;min-width:0;overflow:hidden;cursor:pointer;font-size:12px;text-align:left;color:var(--text)}
+    .ctl-bar:hover{filter:brightness(.97);box-shadow:0 2px 8px rgba(46,30,120,.12)}
+    .ctl-bar.cont-l{border-left-style:dashed;border-top-left-radius:3px;border-bottom-left-radius:3px}
+    .ctl-bar.cont-r{border-top-right-radius:3px;border-bottom-right-radius:3px}
+    .ctl-bar.future{background:repeating-linear-gradient(135deg,color-mix(in srgb,var(--pc) 9%,#fff) 0 6px,#fff 6px 12px);border-style:dashed;border-left-style:solid}
+    .ctl-bar.past{opacity:.6}
+    .ctl-bar.due{box-shadow:0 0 0 2px #e5484d}
+    .ctl-bar .th{width:30px;height:30px;border-radius:7px;background:#fff;flex:0 0 auto;overflow:hidden;display:grid;place-items:center;border:1px solid var(--border);font-size:13px}
+    .ctl-bar .th img{width:100%;height:100%;object-fit:cover}
+    .ctl-bar .tx{min-width:0;line-height:1.25}
+    .ctl-bar .tx b{display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-weight:700}
+    .ctl-bar .tx span{display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:var(--muted);font-size:11px}
+    .ctl-bar .chg{font-size:10px;font-weight:800;color:var(--pc);flex:0 0 auto}
+    .ctl-empty{padding:40px;text-align:center;color:var(--muted)}
+    .cov-drop{border:1.5px dashed #cfc6f3;border-radius:14px;min-height:130px;display:grid;place-items:center;background:var(--panel-2);cursor:pointer;overflow:hidden;position:relative;text-align:center;color:var(--muted);font-size:13px;padding:10px}
+    .cov-drop.drop-active{border-color:var(--primary);background:var(--primary-soft)}
+    .cov-drop img{max-width:100%;max-height:260px;object-fit:contain;display:block;border-radius:8px}
+    .cov-drop-tools{display:flex;gap:6px;margin-top:6px}
+    .cov-hint{font-size:12.5px;border-radius:10px;padding:9px 11px;background:var(--primary-soft);color:#4b33b8;grid-column:1/-1}
+    .cov-hint:empty{display:none}
+    .cov-hist-item{display:grid;grid-template-columns:88px minmax(0,1fr) auto;gap:12px;align-items:center;padding:10px 0;border-bottom:1px solid var(--border)}
+    .cov-hist-item:last-child{border-bottom:0}
+    .cov-hist-item .th{width:88px;height:56px;border-radius:9px;background:var(--panel-2);display:grid;place-items:center;overflow:hidden;font-size:11px;color:var(--muted);border:1px solid var(--border)}
+    .cov-hist-item .th img{width:100%;height:100%;object-fit:contain}
+    @media(max-width:760px){.ctl-row{grid-template-columns:140px 1fr}.ctl{min-width:calc(140px + var(--n) * 34px)}.cov-hist-item{grid-template-columns:64px minmax(0,1fr)}.cov-hist-item .th{width:64px;height:44px}.cov-hist-item>div:last-child{grid-column:1/-1}}
   </style>
   <script src="config.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -457,6 +531,7 @@
       <button data-view="calendar" title="Calendar"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3.5" y="5" width="17" height="15.5" rx="3"/><path d="M3.5 10h17M8 3v4M16 3v4"/></svg> <span class="label">Calendar</span></button>
       <button data-view="agency" title="Agency"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h13l-3-3M20 16H7l3 3"/></svg> <span class="label">Agency</span></button>
       <button data-view="tiktok" title="TikTok Hub"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><rect x="3.5" y="5" width="17" height="14" rx="3.5"/><path d="M10.5 9.3v5.4l4.6-2.7z" fill="currentColor"/></svg> <span class="label">TikTok Hub</span></button>
+      <button data-view="covers" title="Page Covers"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4.5" width="18" height="15" rx="3"/><path d="M3 9.5h18"/><circle cx="8" cy="14.5" r="2.2"/><path d="M12.5 14h5M12.5 16.5h3.5"/></svg> <span class="label">Page Covers</span><span class="nav-badge" id="covBadge" hidden></span></button>
     </div>
     <div class="sidebar-foot">
       <button class="settings-btn" id="settingsBtn" title="Workspace settings"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1A2 2 0 1 1 4.3 17l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1A2 2 0 1 1 7 4.3l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1A2 2 0 1 1 19.7 7l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></svg> <span class="label">Settings</span></button>
@@ -565,6 +640,28 @@
         <button class="btn primary small" id="ttNewBtn">＋ New TikTok content</button>
       </div>
       <div id="tiktokContainer" class="table-scroll"></div>
+    </section>
+
+    <section id="coversView" class="panel" style="display:none">
+      <div class="panel-head">
+        <div><div class="panel-title">🖼 Page Covers</div><div class="panel-meta" id="covMeta">Cover / banner artwork on our own pages. Each cover shows every day until it is replaced.</div></div>
+        <div class="cov-head-tools"><button class="btn primary small" id="covNewBtn">＋ New cover</button></div>
+      </div>
+      <div id="covBanner"></div>
+      <div class="cov-plats" id="covPlats"></div>
+      <div class="cov-section-title"><h3>Live now</h3><span class="panel-meta" id="covNowMeta"></span></div>
+      <div class="cov-now" id="covNow"></div>
+      <div class="cov-cal-top">
+        <div class="calendar-nav">
+          <button class="icon-btn" id="covPrev" aria-label="Previous month">‹</button>
+          <div class="calendar-month" id="covTitle"></div>
+          <button class="icon-btn" id="covNext" aria-label="Next month">›</button>
+        </div>
+        <div class="cov-legend"><span><i style="background:#e8e3fb;border:1px solid #c7bbf4"></i>Live</span><span><i style="background:repeating-linear-gradient(135deg,#e8e3fb 0 4px,#fff 4px 8px);border:1px dashed #c7bbf4"></i>Scheduled</span><span><i style="background:#fff;box-shadow:0 0 0 2px #e5484d"></i>Not changed on page yet</span><span>● = change day</span></div>
+        <button class="btn" id="covToday">Today</button>
+      </div>
+      <div class="ctl-wrap" id="covTimeline"></div>
+      <div class="panel-meta" style="padding:0 18px 18px">Click an empty day to put a new cover from that day · click a bar to edit it.</div>
     </section>
   </main>
 </div>
@@ -771,6 +868,44 @@
 </dialog>
 <input type="file" id="platformIconInput" accept="image/png,image/jpeg,image/webp,image/svg+xml" style="display:none">
 <input type="file" id="editorImageInput" accept="image/png,image/jpeg,image/webp,image/gif" style="display:none">
+<dialog id="coverDialog">
+  <form method="dialog" id="coverForm">
+    <div class="modal-head">
+      <strong id="covDialogTitle">New page cover</strong>
+      <button class="icon-btn" type="button" id="covClose" aria-label="Close">×</button>
+    </div>
+    <div class="modal-body">
+      <input type="hidden" id="covId">
+      <div class="field"><label for="covPlatform">Platform</label><select id="covPlatform"></select></div>
+      <div class="field"><label for="covChannel">Page / account</label><input type="text" id="covChannel" list="covChannelList" required placeholder="e.g. Scotch Thailand" autocomplete="off"><datalist id="covChannelList"></datalist></div>
+      <div class="field"><label for="covPlacement">Placement</label><input type="text" id="covPlacement" list="covPlacementList" required autocomplete="off"><datalist id="covPlacementList"></datalist></div>
+      <div class="field"><label for="covBrand">Brand <span style="font-weight:600">(optional)</span></label><select id="covBrand"></select></div>
+      <div class="field full"><label for="covTitleInput">Artwork name</label><input type="text" id="covTitleInput" required placeholder="e.g. Year-end Gift Set cover"></div>
+      <div class="field"><label for="covStart">Live from</label><input type="date" id="covStart" required></div>
+      <div class="field"><label for="covTime">Change time <span style="font-weight:600">(optional)</span></label><input type="time" id="covTime"></div>
+      <div class="field"><label for="covEnd">Ends <span style="font-weight:600">(optional)</span></label><input type="date" id="covEnd"><span class="help">Blank = shows every day until the next cover. With an end date, the page goes back to the previous cover.</span></div>
+      <div class="field" style="justify-content:flex-end"><label class="ck-inline" id="covChangedWrap"><input type="checkbox" id="covChanged"> Changed on the page ✓</label></div>
+      <div class="cov-hint" id="covHint"></div>
+      <div class="field full"><label>Artwork image</label>
+        <div class="cov-drop" id="covDrop" tabindex="0" title="Click to choose, drop a file, or paste an image"></div>
+        <div class="cov-drop-tools"><button type="button" class="btn small" id="covPick">Choose image</button><button type="button" class="btn small ghost" id="covRemoveImg">Remove image</button><span class="help" style="align-self:center">or paste (Ctrl+V) while this window is open</span></div>
+      </div>
+      <div class="field full"><label for="covAssets">Download links (AW files)</label><textarea id="covAssets" rows="2" placeholder="One link per line — Google Drive, Dropbox..."></textarea></div>
+      <div class="field full"><label for="covNote">Note</label><textarea id="covNote" rows="2" placeholder="Campaign, who approved, text on the cover..."></textarea></div>
+    </div>
+    <div class="modal-foot">
+      <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap"><button type="button" class="btn ghost" id="covDelete" style="color:var(--danger)">Delete</button><span class="panel-meta" id="covBy"></span></div>
+      <div style="display:flex;gap:8px"><button type="button" class="btn" id="covCancel">Cancel</button><button type="submit" class="btn primary" id="covSave">Save cover</button></div>
+    </div>
+  </form>
+</dialog>
+
+<dialog id="coverHistDialog" style="width:min(620px,calc(100vw - 32px))">
+  <div class="modal-head"><div><strong id="covHistTitle">Cover history</strong><div class="panel-meta" id="covHistMeta"></div></div><button class="icon-btn" type="button" id="covHistClose" aria-label="Close">×</button></div>
+  <div style="padding:6px 20px 16px;max-height:70vh;overflow:auto" id="covHistBody"></div>
+</dialog>
+<input type="file" id="covFileInput" accept="image/png,image/jpeg,image/webp,image/gif" style="display:none">
+
 <input type="file" id="imageFileInput" accept="image/png,image/jpeg,image/webp,image/gif" style="display:none">
 <div class="paste-hint" id="pasteHint">Paste image with Ctrl+V</div>
 
@@ -1117,7 +1252,7 @@ const filtered = () => contents.filter(c=>matches(c,false));
 function readUrl(){
   const p=new URLSearchParams(location.search);
   const pl=p.get("platform"); if(pl){ const m=PLATFORMS.find(x=>x.toLowerCase()===pl.toLowerCase()); if(m) filters.platform=m; }
-  const v=p.get("view"); if(["calendar","agency","tiktok"].includes(v)) currentView=v;
+  const v=p.get("view"); if(["calendar","agency","tiktok","covers"].includes(v)) currentView=v;
 }
 function writeUrl(){
   const p=new URLSearchParams();
@@ -1245,7 +1380,8 @@ function ensureOption(sel,val){ if(val && ![...sel.options].some(o=>o.value===va
 /* ============ views ============ */
 function setView(view){
   currentView=view;
-  ["list","calendar","agency","tiktok"].forEach(v=>$(v+"View").style.display=v===view?"block":"none");
+  ["list","calendar","agency","tiktok","covers"].forEach(v=>$(v+"View").style.display=v===view?"block":"none");
+  document.body.classList.toggle("in-covers",view==="covers");
   const main = view==="list"||view==="calendar";
   $("today").style.display=main?"block":"none";
   $("stats").style.display=main?"grid":"none";
@@ -1618,6 +1754,279 @@ function renderTikTok(){
   root.querySelectorAll("[data-code-sent]").forEach(cb=>cb.onchange=()=>{ const c=byId(cb.dataset.codeSent); if(!c) return; c.codeSent=cb.checked; save(); renderAll(); toast(cb.checked?"Marked: Spark code sent":"Marked: not sent"); });
 }
 
+/* ============ Page covers (separate from content: own table, own page) ============ */
+const COVER_PLATFORMS = CFG.coverPlatforms || ["Facebook","YouTube","LINE"];
+const COVER_PLACEMENTS = Object.assign({Facebook:["Cover photo","Profile picture"],YouTube:["Channel banner","Profile picture","Video watermark"],LINE:["Cover image","Rich menu","Profile picture","Greeting message"]}, CFG.coverPlacements||{});
+const COVER_KEY = "content_workspace_covers_demo_v1";
+let covers=[], coversMissing=false, coverFilter="", coverChannel=null;
+let coverCursor=new Date(); coverCursor.setDate(1);
+let covEdit={file:null,remove:false,id:null,objUrl:null}, covDelArm=0;
+const covOpts=items=>items.map(x=>`<option value="${esc(x)}">${esc(x)||"—"}</option>`).join("");
+function normCover(v){ return Object.assign({id:"",platform:COVER_PLATFORMS[0],channel:"",placement:"",brand:"",title:"",startDate:TODAY,startTime:"",endDate:"",image:null,assets:"",note:"",changed:false,by:"",at:"",created:""},v); }
+function coverToRow(v){ return {id:v.id,platform:v.platform,channel:v.channel,placement:v.placement,brand:nn(v.brand),title:v.title,start_date:v.startDate,start_time:nn(v.startTime),end_date:nn(v.endDate),image_path:v.image||null,asset_links:nn(v.assets),note:v.note||"",changed_on_page:!!v.changed,updated_by:me?me.email:null}; }
+function coverFromRow(r){ return normCover({id:r.id,platform:r.platform,channel:r.channel||"",placement:r.placement||"",brand:r.brand||"",title:r.title||"",startDate:r.start_date,startTime:r.start_time?String(r.start_time).slice(0,5):"",endDate:r.end_date||"",image:r.image_path||null,assets:r.asset_links||"",note:r.note||"",changed:!!r.changed_on_page,by:r.updated_by||"",at:r.updated_at||"",created:r.created_at||""}); }
+const coverById=id=>covers.find(v=>v.id===id);
+const slotKeyOf=(p,ch,pl)=>[p,String(ch||"").trim().toLowerCase(),String(pl||"").trim().toLowerCase()].join("|");
+const slotKey=v=>slotKeyOf(v.platform,v.channel,v.placement);
+function placeIdx(p,pl){ const i=(COVER_PLACEMENTS[p]||[]).map(x=>x.toLowerCase()).indexOf(String(pl).toLowerCase()); return i<0?99:i; }
+function coverSlots(){
+  const m=new Map();
+  covers.forEach(v=>{ const k=slotKey(v); if(!m.has(k)) m.set(k,{key:k,platform:v.platform,versions:[]}); m.get(k).versions.push(v); });
+  m.forEach(s=>{ s.versions.sort((a,b)=>a.startDate.localeCompare(b.startDate)||(a.created||a.id).localeCompare(b.created||b.id)); const last=s.versions[s.versions.length-1]; s.channel=last.channel; s.placement=last.placement; });
+  const pi=p=>{ const i=COVER_PLATFORMS.indexOf(p); return i<0?99:i; };
+  return [...m.values()].sort((a,b)=>pi(a.platform)-pi(b.platform)||a.channel.localeCompare(b.channel)||placeIdx(a.platform,a.placement)-placeIdx(b.platform,b.placement)||a.placement.localeCompare(b.placement));
+}
+const slotByKey=k=>coverSlots().find(s=>s.key===k);
+/* the cover on a day = the latest-starting cover whose range includes that day */
+function activeOn(slot,date,skip){ let cur=null; for(const v of slot.versions){ if(v===skip) continue; if(v.startDate<=date && (!v.endDate||v.endDate>=date)) cur=v; } return cur; }
+function coverBounds(slot){ const b=new Set(); slot.versions.forEach(v=>{ b.add(v.startDate); if(v.endDate) b.add(addDays(v.endDate,1)); }); return [...b].sort(); }
+function nextChange(slot,date){ const cur=activeOn(slot,date); for(const b of coverBounds(slot)){ if(b<=date) continue; const n=activeOn(slot,b); if(n!==cur) return {date:b,v:n}; } return null; }
+function sinceOf(slot,date){ const cur=activeOn(slot,date); if(!cur) return null; for(const b of coverBounds(slot).filter(b=>b<=date).reverse()){ if(activeOn(slot,addDays(b,-1))!==cur) return b; } return cur.startDate; }
+function liveNow(slot){ const a=activeOn(slot,TODAY); if(a && a.startDate===TODAY && a.startTime && a.startTime>nowHM()) return {v:activeOn(slot,TODAY,a),pending:a}; return {v:a,pending:null}; }
+const relDay=d=>{ const n=daysBetween(TODAY,d); return n===0?"today":n===1?"tomorrow":n>1?`in ${n} days`:`${-n} days ago`; };
+function slotAlerts(slot){
+  const out=[], cur=activeOn(slot,TODAY);
+  if(cur && !cur.changed && cur.startDate<=TODAY){
+    if(cur.startDate===TODAY && cur.startTime && cur.startTime>nowHM()) out.push({level:"orange",text:`Change on page today at ${cur.startTime}`,due:cur});
+    else out.push({level:cur.startDate<TODAY?"red":"orange",text:cur.startDate<TODAY?`Not changed on page yet (since ${shortDate(cur.startDate)})`:"Change on page today",due:cur});
+  }
+  if(cur && cur.startDate<TODAY && sinceOf(slot,TODAY)===TODAY) out.push({level:"orange",text:"Switch back to this cover today"});
+  const nx=nextChange(slot,TODAY);
+  if(nx && daysBetween(TODAY,nx.date)<=3 && nx.v && !nx.v.image) out.push({level:"orange",text:"Next cover has no artwork yet"});
+  return out;
+}
+const needsAttention=s=>slotAlerts(s).some(a=>a.level==="red"||a.level==="orange");
+
+/* --- storage --- */
+function demoCovers(){
+  const d=n=>addDays(TODAY,n);
+  return [
+    {id:"V-1",platform:"Facebook",channel:"Scotch Thailand",placement:"Cover photo",title:"Halloween 2026 cover",startDate:d(-25),changed:true,note:"Main KV",created:"1"},
+    {id:"V-2",platform:"Facebook",channel:"Scotch Thailand",placement:"Cover photo",title:"Year-end Gift Set cover",startDate:d(6),startTime:"00:00",assets:"https://drive.google.com/drive/folders/demo-cover",created:"2"},
+    {id:"V-3",platform:"Facebook",channel:"Scotch Thailand",placement:"Profile picture",title:"Scotch logo (always-on)",startDate:d(-200),changed:true,created:"3"},
+    {id:"V-4",platform:"YouTube",channel:"Scotch Thailand",placement:"Channel banner",title:"Brand banner 2026",startDate:d(-70),changed:true,created:"4"},
+    {id:"V-5",platform:"YouTube",channel:"Scotch Thailand",placement:"Channel banner",title:"11.11 Mega Sale banner",startDate:d(14),endDate:d(17),note:"Goes back to the brand banner after the sale",created:"5"},
+    {id:"V-6",platform:"LINE",channel:"Scotch Official",placement:"Rich menu",brand:"BN",title:"Bird's Nest promo rich menu",startDate:d(-1),created:"6"},
+    {id:"V-7",platform:"LINE",channel:"Scotch Official",placement:"Cover image",title:"Brand KV cover",startDate:d(-100),changed:true,created:"7"}
+  ].map(normCover);
+}
+async function loadCovers(){
+  if(!ONLINE){ try{ const v=localStorage.getItem(COVER_KEY); covers=v?JSON.parse(v).map(normCover):demoCovers(); }catch(e){ covers=demoCovers(); } return; }
+  const {data,error}=await sb.from("cover_assets").select("*").eq("archived",false).order("start_date",{ascending:true});
+  if(error){ console.error(error); covers=[]; coversMissing=true; return; }
+  covers=(data||[]).map(coverFromRow); coversMissing=false;
+  listenCovers();
+}
+function listenCovers(){
+  if(coverChannel) return;
+  coverChannel=sb.channel("covers-live").on("postgres_changes",{event:"*",schema:"public",table:"cover_assets"},p=>{
+    if(p.eventType==="DELETE"){ const id=p.old&&p.old.id; covers=covers.filter(v=>v.id!==id); }
+    else{ const v=coverFromRow(p.new), i=covers.findIndex(x=>x.id===v.id); if(p.new.archived){ if(i>=0) covers.splice(i,1); } else if(i>=0) covers[i]=v; else covers.push(v); }
+    renderCoverBadge(); if(currentView==="covers") renderCovers();
+  }).subscribe();
+}
+function saveCoversLocal(){ try{ localStorage.setItem(COVER_KEY,JSON.stringify(covers)); }catch(e){} }
+async function persistCover(v){
+  if(!ONLINE){ const i=covers.findIndex(x=>x.id===v.id); if(i>=0) covers[i]=v; else covers.push(v); saveCoversLocal(); return true; }
+  setSync("saving","Saving…");
+  const {data,error}=await sb.from("cover_assets").upsert(coverToRow(v)).select().single();
+  if(error){ console.error(error); setSync("err","Couldn't save cover"); toast(/cover_assets|does not exist|schema cache/i.test(error.message||"")?"Please run supabase-update-v5.sql in Supabase first.":"Couldn't save: "+error.message); return false; }
+  const nv=coverFromRow(data), i=covers.findIndex(x=>x.id===nv.id); if(i>=0) covers[i]=nv; else covers.push(nv);
+  setSync("ok","All changes saved"); return true;
+}
+async function archiveCover(id){
+  if(!ONLINE){ covers=covers.filter(v=>v.id!==id); saveCoversLocal(); return true; }
+  const {error}=await sb.from("cover_assets").update({archived:true,updated_by:me?me.email:null}).eq("id",id);
+  if(error){ toast("Couldn't delete: "+error.message); return false; }
+  covers=covers.filter(v=>v.id!==id); return true;
+}
+async function coverImgUrl(v){
+  if(!v||!v.image) return null;
+  if(ONLINE){ await signUrls([v.image]); return urlCache[v.image]?urlCache[v.image].url:null; }
+  const k="local:cover:"+v.id; if(urlCache[k]) return urlCache[k].url;
+  const blob=await idbGet("cover:"+v.id); if(!blob) return null;
+  const url=URL.createObjectURL(blob); urlCache[k]={url,exp:Infinity}; return url;
+}
+async function hydrateCoverImgs(root){
+  const els=[...root.querySelectorAll("[data-cov-img]")];
+  if(ONLINE){ try{ await signUrls(els.map(e=>coverById(e.dataset.covImg)?.image).filter(Boolean)); }catch(e){} }
+  for(const el of els){ try{ const url=await coverImgUrl(coverById(el.dataset.covImg)); if(url) el.innerHTML=`<img src="${esc(url)}" alt="" loading="lazy">`; }catch(e){} }
+}
+
+/* --- page --- */
+function renderCoverBadge(){ const n=coverSlots().filter(needsAttention).length, b=$("covBadge"); b.hidden=!n; b.textContent=n; b.title=n?`${n} cover${n>1?"s":""} need attention`:""; }
+function renderCovers(){
+  renderCoverBadge();
+  const all=coverSlots();
+  $("covBanner").innerHTML=coversMissing?`<div class="cov-banner">The database doesn't have the Page Covers table yet. Run <b>supabase-update-v5.sql</b> in Supabase → SQL Editor, then reload this page.</div>`:"";
+  $("covPlats").innerHTML=[["","All pages"],...COVER_PLATFORMS.map(p=>[p,p])].map(([v,l])=>`<button class="ptab ${v?"":"all"} ${coverFilter===v?"active":""}" data-cp="${esc(v)}" ${v?`style="--pc:${platMeta(v).c}"`:""}>${v?pIcon(v):""}${esc(l)} <span class="n">${all.filter(s=>!v||s.platform===v).length}</span></button>`).join("");
+  $("covPlats").querySelectorAll("[data-cp]").forEach(b=>b.onclick=()=>{ coverFilter=b.dataset.cp; renderCovers(); });
+  const slots=all.filter(s=>!coverFilter||s.platform===coverFilter);
+  renderCoverNow(slots); renderCoverTimeline(slots);
+}
+function renderCoverNow(slots){
+  const root=$("covNow"), due=slots.filter(needsAttention).length;
+  $("covNowMeta").textContent=slots.length?`${slots.length} placement${slots.length>1?"s":""}${due?` · ${due} need attention`:" · all up to date"}`:"";
+  if(!slots.length){ root.innerHTML=`<div class="empty" style="grid-column:1/-1;padding:28px"><b>No page covers yet</b>Click “＋ New cover” and add the cover / banner that is on the page right now.</div>`; return; }
+  root.innerHTML=slots.map(s=>{
+    const ln=liveNow(s), v=ln.v, al=slotAlerts(s), nx=nextChange(s,TODAY), since=v?sinceOf(s,TODAY):null;
+    const shown=v||ln.pending||(nx&&nx.v), dueV=(al.find(a=>a.due)||{}).due, key=esc(s.key);
+    let main;
+    if(v) main=`<div class="cov-title">${esc(v.title)}</div><div class="cov-meta">Live since ${shortDate(since)} · day ${daysBetween(since,TODAY)+1}${v.brand?` · ${esc(v.brand)}`:""}</div>`;
+    else if(nx&&nx.v) main=`<div class="cov-title" style="color:var(--muted)">Nothing live yet</div><div class="cov-meta">First cover starts ${shortDate(nx.date)} (${relDay(nx.date)})</div>`;
+    else main=`<div class="cov-title" style="color:var(--muted)">Nothing live</div><div class="cov-meta">Add a cover to fill this placement</div>`;
+    let next;
+    if(ln.pending) next=`<div class="cov-next">Switches to <b>${esc(ln.pending.title)}</b> today at ${esc(ln.pending.startTime)}</div>`;
+    else if(nx) next=`<div class="cov-next">${nx.v?(nx.v.startDate<nx.date?"Back to ":"Next: ")+`<b>${esc(nx.v.title)}</b>`:"<b>Ends</b> — nothing after"} · ${shortDate(nx.date)}${nx.v&&nx.v.startDate===nx.date&&nx.v.startTime?" "+esc(nx.v.startTime):""} (${relDay(nx.date)})</div>`;
+    else if(v) next=`<div class="cov-next">Shows every day until changed</div>`;
+    else next="";
+    return `<div class="cov-card ${al.some(a=>a.level==="red")?"due":""}">
+      <div class="cov-img" ${shown?`data-cov-img="${esc(shown.id)}" data-cov-open="${esc(shown.id)}"`:`data-cov-new="${key}"`}><div class="noimg">${shown?"No artwork image yet<br>click to add":"＋ Add cover"}</div></div>
+      <div class="cov-body">
+        <div class="cov-place" style="display:flex;gap:6px;align-items:center">${pIcon(s.platform)}<span style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${esc(s.channel)} · ${esc(s.placement)}</span></div>
+        ${main}${next}
+        <div>${al.map(a=>`<span class="flag ${a.level}">${esc(a.text)}</span>`).join(" ")}</div>
+        <div class="cov-actions">${dueV?`<button class="btn small primary" data-cov-done="${esc(dueV.id)}">✓ Changed on page</button>`:""}<button class="btn small" data-cov-sched="${key}">Schedule change</button><button class="btn small ghost" data-cov-hist="${key}">History (${s.versions.length})</button></div>
+      </div></div>`;
+  }).join("");
+  bindCoverActions(root); hydrateCoverImgs(root);
+}
+function renderCoverTimeline(slots){
+  const y=coverCursor.getFullYear(), m=coverCursor.getMonth(), n=new Date(y,m+1,0).getDate();
+  $("covTitle").textContent=(coverFilter?coverFilter+" · ":"")+new Intl.DateTimeFormat("en",{month:"long",year:"numeric"}).format(coverCursor);
+  const days=[...Array(n)].map((_,i)=>iso(new Date(y,m,i+1)));
+  const root=$("covTimeline");
+  if(!slots.length){ root.innerHTML=`<div class="ctl-empty">Covers you add will run across this calendar every day until they are replaced.</div>`; return; }
+  const dowOf=d=>new Date(d+"T12:00:00").getDay(), we=d=>dowOf(d)===0||dowOf(d)===6, L="SMTWTFS";
+  let h=`<div class="ctl" style="--n:${n}"><div class="ctl-row ctl-head"><div class="ctl-label">Page · placement</div><div class="ctl-days">${days.map(d=>`<div class="ctl-dh ${we(d)?"we":""} ${d===TODAY?"today":""}"><b>${+d.slice(8)}</b>${L[dowOf(d)]}</div>`).join("")}</div></div>`;
+  slots.forEach(s=>{
+    const segs=[]; let cur=null;
+    days.forEach((d,i)=>{ const v=activeOn(s,d); if(cur&&cur.v===v) cur.len++; else{ cur={v,start:i,len:1}; segs.push(cur); } });
+    h+=`<div class="ctl-row"><div class="ctl-label">${pIcon(s.platform)}<div class="t"><b title="${esc(s.channel)}">${esc(s.channel)}</b><span>${esc(s.placement)}</span></div></div><div class="ctl-days" style="--pc:${platMeta(s.platform).c}">`;
+    days.forEach((d,i)=>{ h+=`<div class="ctl-cell ${we(d)?"we":""} ${d===TODAY?"today":""}" style="grid-column:${i+1}" data-cov-add="${esc(s.key)}" data-date="${d}" title="New cover from ${shortDate(d)}"></div>`; });
+    segs.filter(g=>g.v).forEach(g=>{
+      const v=g.v, sd=days[g.start], ed=days[g.start+g.len-1];
+      const contL=g.start===0 && activeOn(s,addDays(sd,-1))===v, contR=g.start+g.len===n && activeOn(s,addDays(ed,1))===v;
+      const future=sd>TODAY, past=ed<TODAY, due=!v.changed && v.startDate<=TODAY && sd<=TODAY && ed>=TODAY;
+      const since=sinceOf(s,sd), nx=nextChange(s,ed);
+      const sub=(future&&!contL)?`from ${shortDate(sd)}${v.startTime&&sd===v.startDate?" · "+v.startTime:""}`:`since ${shortDate(since)}`;
+      h+=`<button type="button" class="ctl-bar ${contL?"cont-l":""} ${contR?"cont-r":""} ${future?"future":""} ${past?"past":""} ${due?"due":""}" style="grid-column:${g.start+1} / span ${g.len}" data-cov-open="${esc(v.id)}" title="${esc(v.title)} · ${shortDate(since)} → ${nx?shortDate(addDays(nx.date,-1)):"until changed"}${due?" · not changed on page yet":""}">${!contL&&g.len>1?`<span class="chg">●</span>`:""}<span class="th" data-cov-img="${esc(v.id)}">🖼</span>${g.len>=2?`<span class="tx"><b>${esc(v.title)}</b><span>${esc(sub)}</span></span>`:""}</button>`;
+    });
+    h+=`</div></div>`;
+  });
+  root.innerHTML=h+`</div>`;
+  bindCoverActions(root); hydrateCoverImgs(root);
+}
+function bindCoverActions(root){
+  root.querySelectorAll("[data-cov-open]").forEach(el=>el.onclick=e=>{ e.stopPropagation(); openCoverEditor(el.dataset.covOpen); });
+  root.querySelectorAll("[data-cov-add]").forEach(el=>el.onclick=()=>openCoverEditor(null,{slot:el.dataset.covAdd,date:el.dataset.date}));
+  root.querySelectorAll("[data-cov-new]").forEach(el=>el.onclick=()=>openCoverEditor(null,{slot:el.dataset.covNew}));
+  root.querySelectorAll("[data-cov-sched]").forEach(el=>el.onclick=()=>openCoverEditor(null,{slot:el.dataset.covSched,date:addDays(TODAY,1)}));
+  root.querySelectorAll("[data-cov-hist]").forEach(el=>el.onclick=()=>openCoverHistory(el.dataset.covHist));
+  root.querySelectorAll("[data-cov-done]").forEach(el=>el.onclick=()=>markCoverChanged(el.dataset.covDone));
+}
+async function markCoverChanged(id){ const v=coverById(id); if(!v) return; if(await persistCover({...v,changed:true})){ renderCovers(); toast("Marked as changed on the page ✓"); } }
+function openCoverHistory(key){
+  const s=slotByKey(key); if(!s) return;
+  const cur=activeOn(s,TODAY);
+  $("covHistTitle").textContent=`${s.channel} · ${s.placement}`;
+  $("covHistMeta").textContent=`${s.platform} · ${s.versions.length} cover${s.versions.length>1?"s":""} · newest first`;
+  $("covHistBody").innerHTML=[...s.versions].reverse().map(v=>{
+    const nextStart=(s.versions.find(x=>x.startDate>v.startDate)||{}).startDate;
+    let until=v.endDate||null; if(nextStart && (!until||addDays(nextStart,-1)<until)) until=addDays(nextStart,-1);
+    const state=v===cur?`<span class="flag green">Live now</span>`:v.startDate>TODAY?`<span class="flag gray">Scheduled</span>`:`<span class="flag gray">Past</span>`;
+    const conf=v.changed?`<span class="flag green">Changed on page ✓</span>`:v.startDate<=TODAY?`<span class="flag orange">Not confirmed</span>`:"";
+    return `<div class="cov-hist-item"><div class="th" data-cov-img="${esc(v.id)}">no image</div><div style="min-width:0"><b>${esc(v.title)}</b><div class="cov-meta">${shortDate(v.startDate)}${v.startTime?" "+esc(v.startTime):""} → ${until?shortDate(until):"until changed"}${v.by?` · ${esc(v.by.split("@")[0])}`:""}</div>${state} ${conf}${assetChips(v,3)}</div><div><button class="btn small" data-hist-edit="${esc(v.id)}">Edit</button></div></div>`;
+  }).join("");
+  $("covHistBody").querySelectorAll("[data-hist-edit]").forEach(b=>b.onclick=()=>{ $("coverHistDialog").close(); openCoverEditor(b.dataset.histEdit); });
+  hydrateCoverImgs($("covHistBody"));
+  $("coverHistDialog").showModal();
+}
+
+/* --- editor --- */
+function covPlacementList(){ $("covPlacementList").innerHTML=covOpts(COVER_PLACEMENTS[$("covPlatform").value]||[]); }
+function openCoverEditor(id,preset={}){
+  const v=id?coverById(id):null, sl=preset.slot?slotByKey(preset.slot):null;
+  $("covDialogTitle").textContent=v?"Edit page cover":sl?`New cover · ${sl.channel} · ${sl.placement}`:"New page cover";
+  $("covId").value=v?v.id:"";
+  $("covPlatform").innerHTML=covOpts(COVER_PLATFORMS);
+  const plat=v?.platform||sl?.platform||coverFilter||COVER_PLATFORMS[0]; ensureOption($("covPlatform"),plat); $("covPlatform").value=plat;
+  covPlacementList();
+  $("covChannelList").innerHTML=covOpts([...new Set(covers.map(x=>x.channel).filter(Boolean))]);
+  $("covChannel").value=v?.channel||sl?.channel||(covers.find(x=>x.platform===plat)||{}).channel||"";
+  $("covPlacement").value=v?.placement||sl?.placement||(COVER_PLACEMENTS[plat]||[])[0]||"";
+  $("covBrand").innerHTML=covOpts(["",...BRANDS]); ensureOption($("covBrand"),v?.brand); $("covBrand").value=v?.brand||"";
+  $("covTitleInput").value=v?.title||"";
+  $("covStart").value=v?.startDate||preset.date||TODAY;
+  $("covTime").value=v?.startTime||"";
+  $("covEnd").value=v?.endDate||"";
+  $("covChanged").checked=!!v?.changed;
+  $("covAssets").value=v?.assets||"";
+  $("covNote").value=v?.note||"";
+  $("covDelete").style.display=v?"inline-flex":"none"; $("covDelete").textContent="Delete"; covDelArm=0;
+  $("covBy").textContent=v&&v.by?`Last edited by ${v.by.split("@")[0]}`:"";
+  if(covEdit.objUrl) URL.revokeObjectURL(covEdit.objUrl);
+  covEdit={file:null,remove:false,id:v?v.id:null,objUrl:null};
+  renderCovDrop(); covHint();
+  if(!$("coverDialog").open) $("coverDialog").showModal();
+  setTimeout(()=>{ if(!v) $(sl?"covTitleInput":"covChannel").focus(); },30);
+}
+function covFormSlot(){ return {platform:$("covPlatform").value,channel:$("covChannel").value.trim(),placement:$("covPlacement").value.trim()}; }
+function covClash(){
+  const f=covFormSlot(), id=$("covId").value, start=$("covStart").value;
+  return covers.find(x=>x.id!==id && slotKey(x)===slotKeyOf(f.platform,f.channel,f.placement) && x.startDate===start);
+}
+function covHint(){
+  const f=covFormSlot(), start=$("covStart").value, end=$("covEnd").value, id=$("covId").value;
+  $("covChangedWrap").style.display=start&&start<=TODAY?"flex":"none";
+  const el=$("covHint");
+  if(!f.channel||!f.placement||!start){ el.textContent=""; return; }
+  const clash=covClash();
+  if(clash){ el.innerHTML=`⚠ <b>${esc(clash.title)}</b> already starts on ${shortDate(start)} in this placement. Pick another date, or edit that cover instead.`; return; }
+  const s=slotByKey(slotKeyOf(f.platform,f.channel,f.placement)), self=id?coverById(id):null;
+  if(!s || !s.versions.some(x=>x!==self)){ el.innerHTML=`New placement. This cover shows every day from <b>${shortDate(start)}</b>${end?` to <b>${shortDate(end)}</b>`:" until you replace it"}.`; return; }
+  const prev=activeOn(s,start,self), later=s.versions.filter(x=>x!==self&&x.startDate>start)[0];
+  let t=prev?`From <b>${shortDate(start)}</b> this replaces <b>${esc(prev.title)}</b>.`:`Shows from <b>${shortDate(start)}</b>.`;
+  if(end) t+=prev?` After <b>${shortDate(end)}</b> the page goes back to <b>${esc(prev.title)}</b>.`:` Ends ${shortDate(end)}.`;
+  else if(later) t+=` <b>${esc(later.title)}</b> is already scheduled to take over on ${shortDate(later.startDate)}.`;
+  else t+=" It then shows every day until the next cover.";
+  el.innerHTML=t;
+}
+async function renderCovDrop(){
+  const box=$("covDrop"); let url=null;
+  if(covEdit.file){ if(covEdit.objUrl) URL.revokeObjectURL(covEdit.objUrl); covEdit.objUrl=URL.createObjectURL(covEdit.file); url=covEdit.objUrl; }
+  else if(!covEdit.remove && covEdit.id){ try{ url=await coverImgUrl(coverById(covEdit.id)); }catch(e){} }
+  box.innerHTML=url?`<img src="${esc(url)}" alt="Artwork preview">`:`<div><div style="font-size:22px">🖼</div><b>Drop the artwork here</b><br>or click to choose · paste with Ctrl+V</div>`;
+  $("covRemoveImg").style.display=url?"inline-flex":"none";
+}
+function setCovFile(file){ if(!file||!/^image\//.test(file.type)){ toast("Please choose an image file"); return; } covEdit.file=file; covEdit.remove=false; renderCovDrop(); }
+async function saveCoverForm(){
+  const id=$("covId").value, old=id?coverById(id):null, f=covFormSlot();
+  const v=normCover({...(old||{}),id:old?old.id:`V-${Date.now().toString(36)}-${Math.random().toString(36).slice(2,6)}`,
+    platform:f.platform,channel:f.channel,placement:f.placement,brand:$("covBrand").value,title:$("covTitleInput").value.trim(),
+    startDate:$("covStart").value,startTime:$("covTime").value,endDate:$("covEnd").value,assets:$("covAssets").value.trim(),note:$("covNote").value.trim()});
+  v.changed=v.startDate<=TODAY && $("covChanged").checked;
+  if(!v.channel||!v.placement||!v.title||!v.startDate){ toast("Please fill page, placement, artwork name and start date"); return; }
+  if(v.endDate && v.endDate<v.startDate){ toast("The end date is before the start date"); return; }
+  const clash=covClash(); if(clash){ toast(`“${clash.title}” already starts that day in this placement`); return; }
+  if(!old && !ONLINE) v.created=new Date().toISOString();
+  $("covSave").disabled=true;
+  try{
+    if(covEdit.file){
+      const blob=await shrinkImage(covEdit.file);
+      if(ONLINE){
+        toast("Uploading artwork…");
+        const path=`covers/${v.id}/${Date.now()}.${extOf(blob.type)}`;
+        const {error}=await sb.storage.from(BUCKET).upload(path,blob,{contentType:blob.type||"image/jpeg"});
+        if(error){ toast("Image upload failed: "+error.message); return; }
+        v.image=path;
+      }else{ await idbPut("cover:"+v.id,blob); dropLocalUrl("cover:"+v.id); v.image="local"; }
+    }else if(covEdit.remove){ v.image=null; if(!ONLINE){ idbDel("cover:"+v.id); dropLocalUrl("cover:"+v.id); } }
+    if(!(await persistCover(v))) return;
+    $("coverDialog").close(); renderCovers(); toast(old?"Cover updated":"Cover saved");
+  }finally{ $("covSave").disabled=false; }
+}
+
 /* ============ editor ============ */
 let ck={};
 function editorFlow(){
@@ -1696,6 +2105,8 @@ function renderAll(){
   else if(currentView==="calendar") renderCalendar("main");
   else if(currentView==="agency") renderAgency();
   else if(currentView==="tiktok") renderTikTok();
+  else if(currentView==="covers") renderCovers();
+  renderCoverBadge();
 }
 function resetFilters(){
   filters={q:"",brand:"",platform:"",status:"",media:""};
@@ -2250,6 +2661,29 @@ $("agPrev").onclick=()=>moveMonth(-1); $("agNext").onclick=()=>moveMonth(1);
 $("todayBtn").onclick=$("agToday").onclick=()=>{calendarCursor=new Date();calendarCursor.setDate(1);renderAll()};
 $("agencySwitch").querySelectorAll("[data-agency-mode]").forEach(b=>b.onclick=()=>{ agencyMode=b.dataset.agencyMode; renderAgency(); });
 $("ttNewBtn").onclick=()=>openEditor(null,null,{platform:"TikTok"});
+/* page covers */
+$("covNewBtn").onclick=()=>openCoverEditor(null);
+const moveCovMonth=n=>{ coverCursor=new Date(coverCursor.getFullYear(),coverCursor.getMonth()+n,1); renderCovers(); };
+$("covPrev").onclick=()=>moveCovMonth(-1); $("covNext").onclick=()=>moveCovMonth(1);
+$("covToday").onclick=()=>{ coverCursor=new Date(); coverCursor.setDate(1); renderCovers(); };
+$("covClose").onclick=$("covCancel").onclick=()=>$("coverDialog").close();
+$("covHistClose").onclick=()=>$("coverHistDialog").close();
+$("coverForm").addEventListener("submit",e=>{ e.preventDefault(); saveCoverForm(); });
+$("covPlatform").onchange=()=>{ const prevDefaults=Object.values(COVER_PLACEMENTS).flat().map(x=>x.toLowerCase()); covPlacementList(); if(!$("covPlacement").value.trim()||prevDefaults.includes($("covPlacement").value.trim().toLowerCase())) $("covPlacement").value=(COVER_PLACEMENTS[$("covPlatform").value]||[])[0]||""; covHint(); };
+["covChannel","covPlacement","covStart","covEnd"].forEach(id=>$(id).addEventListener("input",covHint));
+$("covDrop").onclick=$("covPick").onclick=()=>{ const i=$("covFileInput"); i.value=""; i.click(); };
+$("covDrop").addEventListener("keydown",e=>{ if(e.key==="Enter"||e.key===" "){ e.preventDefault(); $("covFileInput").click(); } });
+$("covFileInput").onchange=e=>{ const f=e.target.files?.[0]; if(f) setCovFile(f); };
+$("covDrop").addEventListener("dragover",e=>{ e.preventDefault(); $("covDrop").classList.add("drop-active"); });
+$("covDrop").addEventListener("dragleave",()=>$("covDrop").classList.remove("drop-active"));
+$("covDrop").addEventListener("drop",e=>{ e.preventDefault(); $("covDrop").classList.remove("drop-active"); const f=[...e.dataTransfer.files].find(x=>x.type.startsWith("image/")); if(f) setCovFile(f); });
+$("covRemoveImg").onclick=()=>{ covEdit.file=null; covEdit.remove=true; renderCovDrop(); };
+$("coverDialog").addEventListener("paste",e=>{ const it=[...(e.clipboardData?.items||[])].find(x=>x.type.startsWith("image/")); if(!it) return; const f=it.getAsFile(); if(f){ e.preventDefault(); setCovFile(f); } });
+$("covDelete").onclick=async()=>{
+  const id=$("covId").value; if(!id) return;
+  if(Date.now()-covDelArm>4000){ covDelArm=Date.now(); $("covDelete").textContent="Click again to delete"; setTimeout(()=>{ if(Date.now()-covDelArm>=4000) $("covDelete").textContent="Delete"; },4100); return; }
+  covDelArm=0; if(await archiveCover(id)){ $("coverDialog").close(); renderCovers(); toast("Cover deleted"); }
+};
 $("resetBtn").onclick=resetFilters;
 $("closeDrawer").onclick=closeDrawer;
 $("overlay").onclick=()=>{ closeDrawer(); closeHistory(); };
@@ -2310,12 +2744,13 @@ async function startSession(session){
   $("userMail").textContent=me.email; $("userMail").title=me.email;
   $("userAvatar").textContent=(me.email||"?").slice(0,2).toUpperCase();
   try{ await loadRemote(); }catch(err){ console.error(err); setSync("err","Couldn't load data"); toast("Couldn't load data: "+(err.message||err)); }
+  try{ await loadCovers(); }catch(err){ console.error(err); coversMissing=true; }
   renderAll();
   listenRemote();
 }
 
 /* refresh time-based alerts every 5 minutes */
-setInterval(()=>{ if(!document.querySelector("dialog[open]")){ renderToday(); renderStats(); } },5*60e3);
+setInterval(()=>{ if(!document.querySelector("dialog[open]")){ renderToday(); renderStats(); renderCoverBadge(); if(currentView==="covers") renderCovers(); } },5*60e3);
 
 /* ============ boot ============ */
 populateSelects();
@@ -2324,6 +2759,7 @@ applySettings();
 readUrl();
 if(!ONLINE){
   contents=loadLocal();
+  loadCovers();
   setSync("demo","Demo mode · saved in this browser only");
   renderAll(); setView(currentView);
 }else{
