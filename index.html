@@ -1469,13 +1469,14 @@ function renderStats(){
   const notDone=S.total.items.filter(c=>c.status!==DONE).length, overdue=S.total.items.filter(c=>c.status!==DONE&&c.publishDate<TODAY).length;
   const budget=S.ads.items.reduce((s,c)=>s+(Number(c.budget)||0),0);
   const waitingId=S.ads.items.filter(c=>flowOf(c)==="agency"&&!c.postRef&&c.status!==DONE&&c.publishDate>=TODAY).length;
+  const mStart=ym+"-01", carried=filtered().filter(c=>isAd(c)&&runStartOf(c)<mStart&&runEndOf(c)>=mStart).length;
   const ICONS={"total": "<svg width=\"22\" height=\"22\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linejoin=\"round\"><rect x=\"4\" y=\"4\" width=\"7\" height=\"7\" rx=\"2\"/><rect x=\"13\" y=\"4\" width=\"7\" height=\"7\" rx=\"2\"/><rect x=\"4\" y=\"13\" width=\"7\" height=\"7\" rx=\"2\"/><rect x=\"13\" y=\"13\" width=\"7\" height=\"7\" rx=\"2\"/></svg>", "week": "<svg width=\"22\" height=\"22\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\"><rect x=\"3.5\" y=\"5\" width=\"17\" height=\"15.5\" rx=\"3\"/><path d=\"M3.5 10h17M8 3v4M16 3v4\"/></svg>", "wip": "<svg width=\"22\" height=\"22\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\"><path d=\"M4 20h4L19 9l-4-4L4 16z\"/><path d=\"M13.5 6.5l4 4\"/></svg>", "ads": "<svg width=\"22\" height=\"22\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M13 3L5 13.5h6L10 21l8-10.5h-6z\"/></svg>"};
   const tile=(key,label,value,sub)=>`<button class="stat t-${key}" data-stat="${key}" title="Click to see the list"><span class="stat-ico">${ICONS[key]}</span><div class="stat-label">${label} <span class="stat-go">View ›</span></div><div class="stat-value">${value}</div><div class="stat-sub">${sub}</div></button>`;
   $("stats").innerHTML =
     tile("total","Total content", S.total.items.length, (filters.brand||filters.platform||filters.status||filters.media||filters.q ? "matching filters · " : "")+`in ${monthName(ym).split(" ")[0]}`) +
     tile("week","Published", S.week.items.length, !S.total.items.length?"—":notDone ? `${notDone} not yet published${overdue?` · <span style="color:#b23434;font-weight:700">${overdue} past due</span>`:""}` : "all published 🎉") +
     tile("wip","In progress", S.wip.items.length, "Briefing · Designing · Revision") +
-    tile("ads","Ad budget", baht(budget), `${S.ads.items.length} ad${S.ads.items.length===1?"":"s"}${waitingId?` · <span style="color:#b23434;font-weight:700">${waitingId} waiting Post ID</span>`:""}`);
+    tile("ads","Ad budget", baht(budget), `${S.ads.items.length} ad${S.ads.items.length===1?"":"s"} starting${carried?` · +${carried} still running from last month (counted there)`:""}${waitingId?` · <span style="color:#b23434;font-weight:700">${waitingId} waiting Post ID</span>`:""}`);
   $("stats").querySelectorAll("[data-stat]").forEach(b=>b.onclick=()=>openStatList(b.dataset.stat));
 }
 let statKey=null;
