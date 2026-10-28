@@ -791,12 +791,12 @@
       <div class="field"><label for="refInput">Ref ID <span style="font-weight:600">(optional)</span></label><input type="text" id="refInput" placeholder="e.g. TT-0012" /></div>
 
       <div class="conditional-box" id="tiktokFields">
-        <div class="field full"><label for="ttClipInput">♪ TikTok clip link</label><input type="text" id="ttClipInput" placeholder="https://www.tiktok.com/@account/video/… (after posting)"></div>
+        <div class="field full"><label for="ttClipInput">♪ TikTok clip link <span style="font-weight:600">(optional — add after posting)</span></label><input type="text" id="ttClipInput" placeholder="https://www.tiktok.com/@account/video/…"><span class="help" id="ttClipErr" style="color:var(--danger);font-weight:700;display:none">This box is for the clip's web link (starting with https://). Put the account name in “Account name” below, or leave this empty.</span></div>
         <div class="field"><label for="ttAccTypeInput">Posting account</label><select id="ttAccTypeInput"><option value="brand">Brand account</option><option value="kol">KOL / Creator</option></select></div>
         <div class="field" style="grid-column:span 2"><label for="ttAccNameInput">Account name</label><input type="text" id="ttAccNameInput" placeholder="@brand or KOL name"></div>
-        <div class="field" style="grid-column:span 2"><label for="ttCodeInput">Spark Ads code</label><input type="text" id="ttCodeInput" placeholder="Paste the authorization code" autocomplete="off" spellcheck="false" style="font-family:ui-monospace,Menlo,monospace"></div>
-        <div class="field"><label for="ttExpiryInput">Code expiry <span style="font-weight:600">(optional)</span></label><input type="date" id="ttExpiryInput"></div>
-        <label class="ck-inline full"><input type="checkbox" id="ttCodeSentInput"> Spark code sent to agency</label>
+        <div class="field tt-spark" style="grid-column:span 2"><label for="ttCodeInput">Spark Ads code</label><input type="text" id="ttCodeInput" placeholder="Paste the authorization code" autocomplete="off" spellcheck="false" style="font-family:ui-monospace,Menlo,monospace"></div>
+        <div class="field tt-spark"><label for="ttExpiryInput">Code expiry <span style="font-weight:600">(optional)</span></label><input type="date" id="ttExpiryInput"></div>
+        <label class="ck-inline full tt-spark"><input type="checkbox" id="ttCodeSentInput"> Spark code sent to agency</label>
       </div>
 
       <div class="conditional-box" id="boostFields">
@@ -2521,6 +2521,7 @@ function toggleMediaFields(){
   const media=$("mediaInput").value, tt=$("platformInput").value==="TikTok", ad=media!=="Organic";
   $("boostFields").classList.toggle("show",ad);
   $("tiktokFields").classList.toggle("show",tt);
+  document.querySelectorAll("#tiktokFields .tt-spark").forEach(el=>el.style.display=ad?"":"none");
   $("flowField").style.display=(ad&&!tt&&media==="Boost Post")?"flex":"none";
   $("postRefField").style.display=tt?"none":"flex";
   $("checklistField").style.display=tt?"none":"flex";
@@ -2552,7 +2553,7 @@ function openEditor(id=null, presetDate=null, preset={}){
   $("objectiveInput").value=c?.objective||"";
   $("kpiInput").value=c?.kpi||"";
   $("postRefInput").value=c?.postRef||"";
-  $("ttClipInput").value=c?.clipUrl||"";
+  $("ttClipInput").value=c?.clipUrl||""; $("ttClipErr").style.display="none";
   $("ttAccTypeInput").value=c?.ttAccType||"brand";
   $("ttAccNameInput").value=c?.ttAccName||"";
   $("ttCodeInput").value=c?.sparkCode||"";
@@ -2592,6 +2593,7 @@ $("flowInput").onchange=()=>{
   renderChecklist();
 };
 $("platformInput").onchange=toggleMediaFields;
+$("ttClipInput").addEventListener("input",()=>{ $("ttClipErr").style.display="none"; });
 $("postRefInput").oninput=renderChecklist;
 $("statusInput").onchange=()=>{ $("statusInput").dataset.st=$("statusInput").value; renderChecklist(); };
 $("newContentBtn").onclick=()=>openEditor(null,null,currentView==="tiktok"?{platform:"TikTok"}:currentView==="agency"?{media:"Boost Post"}:{});
@@ -2612,8 +2614,8 @@ $("contentForm").addEventListener("submit",e=>{
   const bad=assets.filter(s=>!safeUrl(s));
   if(bad.length){ toast("Asset links must start with https:// — check: "+bad[0].slice(0,40)); return; }
   const clip=tt?$("ttClipInput").value.trim():"";
-  if(clip && !safeUrl(clip)){ toast("TikTok clip link must start with https://"); return; }
-  const code=tt?$("ttCodeInput").value.trim():"";
+  if(clip && !safeUrl(clip)){ $("ttClipErr").style.display="block"; $("ttClipInput").focus(); $("ttClipInput").scrollIntoView({block:"center",behavior:"smooth"}); toast("TikTok clip link must be a web link (https://…) — or leave it empty"); return; }
+  const code=tt&&ad?$("ttCodeInput").value.trim():"";
   const payload=normalize({
     id:id||newId(), refId, title:$("titleInput").value.trim(), brand:$("brandInput").value, platform,
     publishDate:$("dateInput").value, postTime:$("postTimeInput").value,
