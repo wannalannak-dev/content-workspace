@@ -52,7 +52,7 @@
     .btn.small{padding:6px 10px;font-size:12px;border-radius:8px}
     .btn.block{width:100%;justify-content:center}
 
-    .today{background:var(--panel);border:1px solid var(--border);border-radius:var(--radius);margin-bottom:16px;overflow:hidden}
+    section.today{background:var(--panel);border:1px solid var(--border);border-radius:var(--radius);margin-bottom:16px;overflow:hidden}
     .today-head{display:flex;align-items:center;gap:10px;padding:14px 18px;border-bottom:1px solid var(--border)}
     .today-head h2{margin:0;font-size:16px}
     .today-head .panel-meta{margin-right:auto}
@@ -378,7 +378,7 @@
     .t-wip{--tint:#FFEFE2;--ic:#F2700C} .t-ads{--tint:#FFE8F0;--ic:#E3266A}
     @media (prefers-reduced-motion:reduce){.stat:hover{transform:none}}
     /* panels */
-    .today,.toolbar,.panel{border-color:var(--border);border-radius:var(--radius);box-shadow:0 1px 2px rgba(46,30,120,.04)}
+    section.today,.toolbar,.panel{border-color:var(--border);border-radius:var(--radius);box-shadow:0 1px 2px rgba(46,30,120,.04)}
     .today-col h3{text-transform:none;letter-spacing:0;font-size:13.5px;color:var(--text);font-weight:700}
     .today-col h3 .n{background:var(--primary-soft);color:var(--primary)}
     .t-item{border-radius:12px;border-color:var(--border)}
@@ -451,6 +451,37 @@
     .nl-row{display:flex;flex-direction:column;gap:3px;font-size:11.5px;color:var(--muted);font-weight:600}
     .nl-row input{padding:8px 10px}
     @media(max-width:560px){.nav-label-list{grid-template-columns:1fr}}
+    /* ===== Campaign ===== */
+    .camp-tag{display:inline-block;font-size:10.5px;font-weight:700;color:#8a5a00;background:#fff3cf;border-radius:6px;padding:1px 6px;margin-left:4px;vertical-align:1px}
+    #campFields{border-color:#f5dc9a;background:#fffbef}
+    .res-grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px}
+    .res-grid label{display:flex;flex-direction:column;gap:3px;font-size:11.5px;color:var(--muted);font-weight:700}
+    .res-grid input{padding:8px 9px;min-width:0}
+    @media(max-width:560px){.res-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+    .camp-filters{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:14px}
+    .camp-attn{display:flex;flex-wrap:wrap;gap:8px;align-items:center;border:1px solid #f6c9b6;background:#fff8f3;border-radius:14px;padding:10px 12px;margin-bottom:14px}
+    .camp-attn .t-item{width:auto;max-width:340px}
+    .camp-grid .day{min-height:120px;cursor:pointer}
+    .camp-grid .day.in-camp{background:#f6f2ff}
+    .camp-grid .day.other{opacity:.55}
+    .camp-card{border:1px solid var(--border);border-left:4px solid var(--pc);background:#fff;border-radius:10px;padding:5px 7px;margin-top:5px;cursor:pointer;font-size:12px;min-width:0}
+    .camp-card.paid{background:linear-gradient(135deg,#fff3e6,#ffe8f0);border-color:#f4c2cf;border-left-color:var(--pc)}
+    .camp-card.done{opacity:.75}
+    .camp-card.red{box-shadow:0 0 0 2px #e5484d}.camp-card.orange{box-shadow:0 0 0 2px #f5a524}
+    .camp-card:hover{box-shadow:0 3px 10px rgba(46,30,120,.14)}
+    .cc-top{display:flex;align-items:center;gap:5px;min-width:0}
+    .cc-top .pi{width:16px;height:16px;font-size:7px}
+    .cc-t{font-weight:700;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0}
+    .cc-meta{display:flex;gap:4px;align-items:center;color:var(--muted);font-size:11px;margin-top:2px;overflow:hidden;white-space:nowrap}
+    .ccode{display:inline-block;background:#1E1B2E;color:#fff;border-radius:6px;padding:0 6px;font-size:11px;font-weight:800;letter-spacing:.02em;line-height:18px;flex:0 0 auto}
+    .tk-table td{vertical-align:top;white-space:normal;min-width:110px}
+    .tk-table td:first-child{min-width:60px}
+    .tk-chip{border:1px solid;border-radius:8px;font-size:11.5px;font-weight:700;padding:3px 7px;margin:0 4px 4px 0;cursor:pointer;white-space:nowrap}
+    .tk-add{border:1px dashed #cfc6f3;background:transparent;color:var(--primary);border-radius:8px;width:26px;height:24px;cursor:pointer;font-weight:700;vertical-align:top}
+    .tk-add:hover{background:var(--primary-soft)}
+    .camp-table tbody tr{cursor:pointer}.camp-table tbody tr:hover{background:#f7f5ff}
+    .camp-table td{vertical-align:top}
+    .cd-plats{display:flex;flex-wrap:wrap;gap:8px 16px}
     /* ===== Reports ===== */
     .rep-tools{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
     .rep-tools .icon-btn{width:30px;height:30px}
@@ -595,6 +626,7 @@
       <button data-view="calendar" title="Calendar"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3.5" y="5" width="17" height="15.5" rx="3"/><path d="M3.5 10h17M8 3v4M16 3v4"/></svg> <span class="label">Calendar</span></button>
       <button data-view="agency" title="Agency"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h13l-3-3M20 16H7l3 3"/></svg> <span class="label">Agency</span></button>
       <button data-view="tiktok" title="TikTok Hub"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><rect x="3.5" y="5" width="17" height="14" rx="3.5"/><path d="M10.5 9.3v5.4l4.6-2.7z" fill="currentColor"/></svg> <span class="label">TikTok Hub</span></button>
+      <button data-view="campaign" title="Campaign"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 21V4"/><path d="M5 4h11l-2 4 2 4H5"/></svg> <span class="label">Campaign</span></button>
       <button data-view="covers" title="Page Covers"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4.5" width="18" height="15" rx="3"/><path d="M3 9.5h18"/><circle cx="8" cy="14.5" r="2.2"/><path d="M12.5 14h5M12.5 16.5h3.5"/></svg> <span class="label">Page Covers</span><span class="nav-badge" id="covBadge" hidden></span></button>
       <button data-view="reports" title="Reports"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg> <span class="label">Reports</span></button>
     </div>
@@ -645,6 +677,7 @@
       <div class="search"><span>⌕</span><input id="searchInput" placeholder="Search content, brand, campaign, Post ID..." aria-label="Search" /></div>
       <select id="brandFilter" aria-label="Brand"><option value="">All Brands</option></select>
       <select id="statusFilter" aria-label="Status"><option value="">All Status</option></select>
+      <select id="scopeFilter" aria-label="Which content"></select>
       <select id="mediaFilter" aria-label="Media"><option value="">All Media</option><option>Organic</option><option>Boost Post</option><option>Ads Setup</option></select>
       <button class="btn ghost" id="resetBtn">Reset filters</button>
       <div class="view-switch">
@@ -713,6 +746,33 @@
         <button class="btn primary small" id="ttNewBtn">＋ New TikTok content</button>
       </div>
       <div id="tiktokContainer" class="table-scroll"></div>
+    </section>
+
+    <section id="campaignView" class="panel" style="display:none">
+      <div class="panel-head">
+        <div><div class="panel-title">🚩 <span id="campTitle"></span></div><div class="panel-meta" id="campMeta"></div></div>
+        <div class="cov-head-tools">
+          <select id="campSelect" aria-label="Campaign"></select>
+          <button class="btn small" id="campSettingsBtn">⚙ Campaign settings</button>
+          <button class="btn small" id="campExportBtn">⇩ Excel</button>
+          <button class="btn primary small" id="campNewPostBtn">＋ New post</button>
+        </div>
+      </div>
+      <div class="rep-body">
+        <div class="rep-tiles" id="campTiles"></div>
+        <div class="camp-filters"><div class="cov-plats" id="campPlats" style="padding:0"></div>
+          <div class="view-switch" id="campMediaSwitch" style="margin-left:0"><button data-cmedia="">All</button><button data-cmedia="organic">Organic</button><button data-cmedia="paid">Paid</button></div></div>
+        <div id="campAttn"></div>
+        <div class="rep-card">
+          <div class="rep-card-h"><div class="calendar-nav"><button class="icon-btn" id="campPrev" aria-label="Previous month">‹</button><h3 id="campCalTitle" style="min-width:150px;text-align:center"></h3><button class="icon-btn" id="campNext" aria-label="Next month">›</button></div>
+            <div class="cov-legend"><span><i style="background:#fff;border:1px solid #d9d5e8"></i>Organic</span><span><i style="background:linear-gradient(135deg,#fff3e6,#ffe3ee);border:1px solid #f4b8c9"></i>⚡ Paid</span><span><i style="background:#f6f2ff"></i>Campaign period</span></div>
+            <button class="btn small" id="campToday">Today</button></div>
+          <div style="overflow-x:auto"><div class="calendar-grid camp-grid" id="campGrid"></div></div>
+          <div class="panel-meta" style="margin-top:8px">Click an empty part of a day to add a post · drag a post to move it.</div>
+        </div>
+        <div class="rep-card"><div class="rep-card-h"><h3>Clip tracker</h3><span class="panel-meta">Which clip goes on which platform · ＋ adds a post for that clip</span></div><div id="campTracker"></div></div>
+        <div class="rep-card"><div class="rep-card-h"><h3>All posts</h3><span class="panel-meta" id="campCount"></span></div><div id="campTable"></div></div>
+      </div>
     </section>
 
     <section id="coversView" class="panel" style="display:none">
@@ -790,6 +850,15 @@
       <div class="field"><label for="mediaInput">Media</label><select id="mediaInput"><option>Organic</option><option>Boost Post</option><option>Ads Setup</option></select></div>
       <div class="field"><label for="refInput">Ref ID <span style="font-weight:600">(optional)</span></label><input type="text" id="refInput" placeholder="e.g. TT-0012" /></div>
 
+      <div class="field"><label for="campInput">Campaign</label><select id="campInput"></select></div>
+      <div class="conditional-box" id="campFields">
+        <div class="field"><label for="clipCodeInput">Clip code</label><input type="text" id="clipCodeInput" list="clipCodeList" placeholder="e.g. G1" maxlength="20" autocomplete="off" style="text-transform:uppercase;font-weight:700"><datalist id="clipCodeList"></datalist><span class="help">Your own name for the clip — G1, G2, B2…</span></div>
+        <div class="field camp-nontt"><label for="campAccTypeInput">Posted by</label><select id="campAccTypeInput"><option value="brand">Brand account</option><option value="kol">KOL / Creator</option></select></div>
+        <div class="field camp-nontt"><label for="campAccNameInput">Account / KOL name</label><input type="text" id="campAccNameInput" placeholder="@account"></div>
+        <div class="field full camp-nontt"><label for="postUrlInput">Post link <span style="font-weight:600">(after posting)</span></label><input type="text" id="postUrlInput" placeholder="https://…"></div>
+        <div class="field full"><label>Results <span style="font-weight:600">(optional — fill in after posting)</span></label>
+          <div class="res-grid"><label><span>Views</span><input type="number" min="0" step="1" data-res="views" inputmode="numeric"></label><label><span>Likes</span><input type="number" min="0" step="1" data-res="likes" inputmode="numeric"></label><label><span>Comments</span><input type="number" min="0" step="1" data-res="comments" inputmode="numeric"></label><label><span>Shares</span><input type="number" min="0" step="1" data-res="shares" inputmode="numeric"></label><label><span>Saves</span><input type="number" min="0" step="1" data-res="saves" inputmode="numeric"></label></div></div>
+      </div>
       <div class="conditional-box" id="tiktokFields">
         <div class="field full"><label for="ttClipInput">♪ TikTok clip link <span style="font-weight:600">(optional — add after posting)</span></label><input type="text" id="ttClipInput" placeholder="https://www.tiktok.com/@account/video/…"><span class="help" id="ttClipErr" style="color:var(--danger);font-weight:700;display:none">This box is for the clip's web link (starting with https://). Put the account name in “Account name” below, or leave this empty.</span></div>
         <div class="field"><label for="ttAccTypeInput">Posting account</label><select id="ttAccTypeInput"><option value="brand">Brand account</option><option value="kol">KOL / Creator</option></select></div>
@@ -992,6 +1061,23 @@
   </form>
 </dialog>
 
+<dialog id="campaignDialog" style="width:min(640px,calc(100vw - 32px))">
+  <form id="campaignForm">
+    <div class="modal-head"><strong id="campDlgTitle">Campaign settings</strong><button class="icon-btn" type="button" id="cdClose" aria-label="Close">×</button></div>
+    <div class="modal-body">
+      <div class="field full"><label for="cdName">Campaign name</label><input type="text" id="cdName" required maxlength="40" placeholder="e.g. Butterbear"></div>
+      <div class="field"><label for="cdBrand">Brand <span style="font-weight:600">(default for new posts)</span></label><select id="cdBrand"></select></div>
+      <div class="field"><label for="cdBudget">Planned paid budget (THB) <span style="font-weight:600">(optional)</span></label><input type="number" id="cdBudget" min="0" step="1000"></div>
+      <div class="field"><label for="cdStart">Start <span style="font-weight:600">(optional)</span></label><input type="date" id="cdStart"></div>
+      <div class="field"><label for="cdEnd">End <span style="font-weight:600">(optional)</span></label><input type="date" id="cdEnd"></div>
+      <div class="field full"><label>Platforms</label><div class="cd-plats" id="cdPlats"></div></div>
+      <div class="field full"><label for="cdCodes">Clip codes</label><input type="text" id="cdCodes" placeholder="G1, G2, G3, B2, B3"><span class="help">Separate with commas. These show as rows in the clip tracker and as suggestions when you add a post — you can still type any new code on a post.</span></div>
+      <div class="field full"><label for="cdNote">Objective / note</label><textarea id="cdNote" rows="2" placeholder="e.g. Awareness for the Butterbear collab, KOL + brand clips"></textarea></div>
+    </div>
+    <div class="modal-foot" style="justify-content:flex-end"><button type="button" class="btn" id="cdCancel">Cancel</button><button type="submit" class="btn primary">Save</button></div>
+  </form>
+</dialog>
+
 <dialog id="ecCfgDialog" style="width:min(720px,calc(100vw - 32px))">
   <form id="ecCfgForm">
     <div class="modal-head"><div><strong>E-commerce channels &amp; numbers</strong><div class="panel-meta">Choose the channels and the numbers your e-commerce team reports. Applies to the whole team.</div></div><button class="icon-btn" type="button" id="ecCfgClose" aria-label="Close">×</button></div>
@@ -1079,9 +1165,9 @@ const $ = id => document.getElementById(id);
 const brandColor = b => BRAND_COLORS[b] || "#7b8190";
 const DEFAULT_STATUS_COLORS = Object.assign({Briefing:"#64748b",Designing:"#8b5cf6",Revision:"#f97316",Approved:"#16a34a",Scheduled:"#2563eb",Published:"#0d9488"}, CFG.statusColors||{});
 const FALLBACK_COLORS=["#e11d48","#0891b2","#ca8a04","#7c3aed","#059669","#db2777"];
-const SETTINGS = {appName:(CFG.appName||"Content OS").trim(), statusColors:{}, platformIcons:{}, navLabels:{}, coverConfig:null, ecommConfig:null};
-const NAV_DEFAULT = {list:"Content List",calendar:"Calendar",agency:"Agency",tiktok:"TikTok Hub",covers:"Page Covers",reports:"Reports"};
-const navLabel = v => (SETTINGS.navLabels[v]||"").trim() || NAV_DEFAULT[v] || v;
+const SETTINGS = {appName:(CFG.appName||"Content OS").trim(), statusColors:{}, platformIcons:{}, navLabels:{}, coverConfig:null, ecommConfig:null, campaigns:null};
+const NAV_DEFAULT = {list:"Content List",calendar:"Calendar",agency:"Agency",tiktok:"TikTok Hub",campaign:"Campaigns",covers:"Page Covers",reports:"Reports"};
+const navLabel = v => (SETTINGS.navLabels[v]||"").trim() || (v==="campaign"?(()=>{ try{ return CAMPAIGNS().length===1?CAMPAIGNS()[0].name:""; }catch(e){ return ""; } })():"") || NAV_DEFAULT[v] || v;
 const PLATFORM_META = Object.assign({Facebook:{c:"#1877F2",a:"FB"},Instagram:{c:"#E1306C",a:"IG"},TikTok:{c:"#161823",a:"TT"},YouTube:{c:"#FF0033",a:"YT"},LINE:{c:"#06C755",a:"LN"},X:{c:"#2F3336",a:"X"}}, CFG.platformMeta||{});
 function platMeta(p){ const m=PLATFORM_META[p]; if(m) return m; const pal=["#0EA5E9","#8B5CF6","#F59E0B","#10B981","#EF4444"]; return {c:pal[Math.abs([...String(p||"?")].reduce((a,ch)=>a*31+ch.charCodeAt(0)|0,3))%pal.length],a:String(p||"?").replace(/[^A-Za-z0-9]/g,"").slice(0,2).toUpperCase()||"?"}; }
 function pIcon(p,cls=""){ const m=platMeta(p), img=SETTINGS.platformIcons[p]; return `<span class="pi ${cls}" style="--pc:${m.c}" aria-hidden="true">${img&&/^data:image\//.test(img)?`<img src="${img}" alt="">`:m.a}</span>`; }
@@ -1099,7 +1185,7 @@ function applySettings(){
   const all=[...new Set([...Object.keys(DEFAULT_STATUS_COLORS),...(CFG.statuses||[]),...Object.keys(SETTINGS.statusColors)])];
   $("statusStyles").textContent = all.map(st=>{ const c=statusColor(st); return `[data-st=${cssStr(st)}]{background-color:${c}22!important;color:${shade(c,-.3)}!important;border-color:${c}66!important}`; }).join("\n");
 }
-function loadLocalSettings(){ try{ const v=JSON.parse(localStorage.getItem("cw_settings")||"{}"); if(v.appName) SETTINGS.appName=v.appName; if(v.statusColors) SETTINGS.statusColors=v.statusColors; if(v.platformIcons) SETTINGS.platformIcons=v.platformIcons; if(v.navLabels) SETTINGS.navLabels=v.navLabels; if(v.coverConfig) SETTINGS.coverConfig=v.coverConfig; if(v.ecommConfig) SETTINGS.ecommConfig=v.ecommConfig; }catch(e){} }
+function loadLocalSettings(){ try{ const v=JSON.parse(localStorage.getItem("cw_settings")||"{}"); if(v.appName) SETTINGS.appName=v.appName; if(v.statusColors) SETTINGS.statusColors=v.statusColors; if(v.platformIcons) SETTINGS.platformIcons=v.platformIcons; if(v.navLabels) SETTINGS.navLabels=v.navLabels; if(v.coverConfig) SETTINGS.coverConfig=v.coverConfig; if(v.ecommConfig) SETTINGS.ecommConfig=v.ecommConfig; if(v.campaigns) SETTINGS.campaigns=v.campaigns; }catch(e){} }
 
 /* ============ dates / helpers ============ */
 function iso(d){return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,"0")}-${String(d.getDate()).padStart(2,"0")}`}
@@ -1180,20 +1266,26 @@ function demoData(){
     {id:"C-1009",title:"Skincare – Mask Night",brand:"SKIN",platform:"X",publishDate:d(0),status:"Scheduled",type:"Static",media:"Organic",remark:"Product demo"},
     {id:"C-1010",postTime:"08:00",title:"EOC – Morning Checklist",brand:"EOC",platform:"Facebook",publishDate:d(-2),status:"Published",type:"Static",media:"Boost Post",flow:"self",postRef:"https://facebook.com/demo/posts/1",budget:3000,objective:"Reach",kpi:"CPM",remark:"Routine content"},
     {id:"C-1011",postTime:"17:30",title:"BN – Fan Activity",brand:"BN",platform:"Instagram",publishDate:d(5),status:"Scheduled",type:"Story",media:"Organic",remark:"Engagement"},
+    {id:"C-2001",postTime:"18:00",title:"Butterbear x Scotch – Teaser",brand:"BN",platform:"TikTok",publishDate:d(1),status:"Approved",type:"TikTok",media:"Organic",campaign:"butterbear",clipCode:"G1",ttAccName:"@scotchthailand"},
+    {id:"C-2002",postTime:"18:00",title:"Butterbear x Scotch – Teaser",brand:"BN",platform:"Instagram",publishDate:d(1),status:"Approved",type:"Reels",media:"Organic",campaign:"butterbear",clipCode:"G1",ttAccName:"@scotch_th"},
+    {id:"C-2003",postTime:"19:00",title:"Butterbear dance clip",brand:"BN",platform:"TikTok",publishDate:d(3),status:"Scheduled",type:"TikTok",media:"Boost Post",budget:15000,objective:"Video Views",boostStart:d(3),boostEnd:d(10),campaign:"butterbear",clipCode:"G2",ttAccType:"kol",ttAccName:"@butterbear"},
+    {id:"C-2004",postTime:"12:00",title:"Butterbear gift box reveal",brand:"BN",platform:"Facebook",publishDate:d(4),status:"Designing",type:"Video",media:"Boost Post",flow:"self",budget:8000,objective:"Reach",campaign:"butterbear",clipCode:"B2"},
+    {id:"C-2005",title:"Butterbear gift box reveal",brand:"BN",platform:"X",publishDate:d(4),status:"Briefing",type:"Video",media:"Organic",campaign:"butterbear",clipCode:"B2"},
+    {id:"C-2006",postTime:"20:00",title:"Butterbear behind the scenes",brand:"BN",platform:"YouTube",publishDate:d(-1),status:"Published",type:"Video",media:"Organic",campaign:"butterbear",clipCode:"G3",postUrl:"https://youtube.com/shorts/demo",results:{views:48200,likes:3100,comments:240,shares:180,saves:95}},
     {id:"C-1012",postTime:"11:00",title:"Puree – Katsu Midori",brand:"PUREE",platform:"Facebook",publishDate:d(6),status:"Approved",type:"Static",media:"Boost Post",budget:5000,objective:"Engagement",kpi:"CPE",remark:"Food pairing"}
   ].map(normalize);
 }
 function normalize(c){
   return Object.assign({refId:"",postTime:"",type:"Static",media:"Organic",budget:null,objective:"",kpi:"",remark:"",image:null,assets:"",
     flow:"",sendDate:"",boostStart:"",boostEnd:"",postRef:"",agencySent:false,linkSent:false,boostLive:false,
-    clipUrl:"",ttAccType:"brand",ttAccName:"",sparkCode:"",codeExpiry:"",codeSent:false,by:"",at:""},c);
+    clipUrl:"",ttAccType:"brand",ttAccName:"",sparkCode:"",codeExpiry:"",codeSent:false,campaign:"",clipCode:"",postUrl:"",results:{},by:"",at:""},c);
 }
 
 /* ============ state ============ */
 let contents = [];
 let currentView = "list";
 let calendarCursor = new Date(); calendarCursor.setDate(1);
-let filters = {q:"",brand:"",platform:"",status:"",media:""};
+let filters = {q:"",brand:"",platform:"",status:"",media:"",scope:""};
 let selectedIds = new Set();
 let activePreviewContentId = null, pendingImageTargetId = null, drawerDate = null, me = null;
 
@@ -1202,15 +1294,19 @@ let synced = {}, saveTimer = null, retryTimer = null;
 const sig = c => JSON.stringify([c.refId||"",c.title,c.brand,c.platform,c.publishDate,c.postTime||"",c.status,c.type,c.media,
   c.budget==null?null:Number(c.budget),c.objective||"",c.kpi||"",c.remark||"",c.image||null,c.assets||"",c.flow||"",
   c.sendDate||"",c.boostStart||"",c.boostEnd||"",c.postRef||"",!!c.agencySent,!!c.linkSent,!!c.boostLive,
-  c.clipUrl||"",c.ttAccType||"brand",c.ttAccName||"",c.sparkCode||"",c.codeExpiry||"",!!c.codeSent]);
+  c.clipUrl||"",c.ttAccType||"brand",c.ttAccName||"",c.sparkCode||"",c.codeExpiry||"",!!c.codeSent,
+  c.campaign||"",c.clipCode||"",c.postUrl||"",JSON.stringify(c.results||{})]);
+let HAS_V7=!ONLINE; /* campaign columns exist in the database (set after loading) */
+const hasResults=r=>r&&Object.values(r).some(v=>v!=null&&v!=="");
 const nn = v => v===""||v==null ? null : v;
 function toRow(c){
   return {id:c.id,ref_id:nn((c.refId||"").trim()),title:c.title,brand:c.brand,platform:c.platform,publish_date:c.publishDate,post_time:nn(c.postTime),
     status:c.status,content_type:c.type,media:c.media,budget:c.budget==null?null:Number(c.budget),objective:nn(c.objective),kpi:nn(c.kpi),
     remark:c.remark||"",image_path:c.image||null,asset_links:nn(c.assets),boost_flow:nn(c.flow),agency_send_date:nn(c.sendDate),
     boost_start:nn(c.boostStart),boost_end:nn(c.boostEnd),post_ref:nn(c.postRef),agency_sent:!!c.agencySent,link_sent:!!c.linkSent,
-    boost_live:!!c.boostLive,tt_clip_url:nn(c.clipUrl),tt_account_type:isTT(c)?(c.ttAccType||"brand"):null,tt_account_name:nn(c.ttAccName),
-    tt_spark_code:nn(c.sparkCode),tt_code_expiry:nn(c.codeExpiry),tt_code_sent:!!c.codeSent,updated_by:me?me.email:null};
+    boost_live:!!c.boostLive,tt_clip_url:nn(c.clipUrl),tt_account_type:(isTT(c)||c.campaign)?(c.ttAccType||"brand"):null,tt_account_name:nn(c.ttAccName),
+    tt_spark_code:nn(c.sparkCode),tt_code_expiry:nn(c.codeExpiry),tt_code_sent:!!c.codeSent,updated_by:me?me.email:null,
+    ...(HAS_V7?{campaign:nn(c.campaign),clip_code:nn((c.clipCode||"").trim()),post_url:nn(c.postUrl),results:hasResults(c.results)?c.results:null}:{})};
 }
 function fromRow(r){
   return normalize({id:r.id,refId:r.ref_id||"",title:r.title||"",brand:r.brand,platform:r.platform,publishDate:r.publish_date,
@@ -1219,7 +1315,8 @@ function fromRow(r){
     assets:r.asset_links||"",flow:r.boost_flow||"",sendDate:r.agency_send_date||"",boostStart:r.boost_start||"",boostEnd:r.boost_end||"",
     postRef:r.post_ref||"",agencySent:!!r.agency_sent,linkSent:!!r.link_sent,boostLive:!!r.boost_live,
     clipUrl:r.tt_clip_url||"",ttAccType:r.tt_account_type||"brand",ttAccName:r.tt_account_name||"",sparkCode:r.tt_spark_code||"",
-    codeExpiry:r.tt_code_expiry||"",codeSent:!!r.tt_code_sent,by:r.updated_by||"",at:r.updated_at||""});
+    codeExpiry:r.tt_code_expiry||"",codeSent:!!r.tt_code_sent,campaign:r.campaign||"",clipCode:r.clip_code||"",postUrl:r.post_url||"",
+    results:(r.results&&typeof r.results==="object")?r.results:{},by:r.updated_by||"",at:r.updated_at||""});
 }
 function loadLocal(){
   let list; try{const v=localStorage.getItem(STORAGE_KEY);list=v?JSON.parse(v).map(normalize):demoData()}catch(e){list=demoData()}
@@ -1255,6 +1352,7 @@ async function flush(){
     setSync("ok","All changes saved");
   }catch(err){
     console.error(err);
+    if(/campaign|clip_code|post_url|results/i.test(err.message||"")){ setSync("err","Database needs update v7"); toast("Please run supabase-update-v7.sql in Supabase, then reload."); flushing=false; return; }
     if(/tt_|column .* does not exist|schema cache/i.test(err.message||"")){ setSync("err","Database needs update v4"); toast("Please run supabase-update-v4.sql in Supabase, then reload."); flushing=false; return; }
     const dup = /duplicate key|ref_id/i.test(err.message||"");
     setSync("err", dup ? "Ref ID already used" : "Couldn't save · retrying");
@@ -1267,8 +1365,9 @@ async function loadRemote(){
   const {data,error} = await sb.from("contents").select("*").order("publish_date",{ascending:true});
   if(error) throw error;
   contents = (data||[]).map(fromRow);
+  if(data&&data.length) HAS_V7=("campaign" in data[0]); else { const t=await sb.from("contents").select("campaign").limit(1); HAS_V7=!t.error; }
   synced = {}; contents.forEach(c=>synced[c.id]=sig(c));
-  try{ const st=await sb.from("settings").select("*").in("key",["app_name","status_colors","platform_icons","nav_labels","cover_config","ecomm_config"]); (st.data||[]).forEach(applyRemoteSetting); applySettings(); }catch(e){}
+  try{ const st=await sb.from("settings").select("*").in("key",["app_name","status_colors","platform_icons","nav_labels","cover_config","ecomm_config","campaigns"]); (st.data||[]).forEach(applyRemoteSetting); applySettings(); }catch(e){}
   setSync("ok","All changes saved");
 }
 function listenRemote(){
@@ -1371,9 +1470,14 @@ async function copyImage(from,to){
 /* Images of deleted content are kept in storage so a delete can be restored from History. */
 
 /* ============ filters ============ */
+function scopeOk(c){
+  if(currentView==="agency"||currentView==="tiktok") return true;      // hand-offs & codes: everything
+  const sc=filters.scope||"";
+  return sc==="all" ? true : sc ? c.campaign===sc : !c.campaign;      // default: general content only
+}
 function matches(c, ignorePlatform){
   const q=filters.q.trim().toLowerCase();
-  return (!q || [c.title,c.brand,c.platform,c.remark,c.type,c.objective,c.refId,c.postRef,c.sparkCode,c.ttAccName].join(" ").toLowerCase().includes(q)) &&
+  return scopeOk(c) && (!q || [c.title,c.brand,c.platform,c.remark,c.type,c.objective,c.refId,c.postRef,c.sparkCode,c.ttAccName,c.clipCode,campName(c.campaign)].join(" ").toLowerCase().includes(q)) &&
     (!filters.brand||c.brand===filters.brand) &&
     (ignorePlatform || !filters.platform||c.platform===filters.platform) &&
     (!filters.status||c.status===filters.status) &&
@@ -1385,7 +1489,7 @@ const filtered = () => contents.filter(c=>matches(c,false));
 function readUrl(){
   const p=new URLSearchParams(location.search);
   const pl=p.get("platform"); if(pl){ const m=PLATFORMS.find(x=>x.toLowerCase()===pl.toLowerCase()); if(m) filters.platform=m; }
-  const v=p.get("view"); if(["calendar","agency","tiktok","covers","reports"].includes(v)) currentView=v;
+  const v=p.get("view"); if(["calendar","agency","tiktok","campaign","covers","reports"].includes(v)) currentView=v;
 }
 function writeUrl(){
   const p=new URLSearchParams();
@@ -1517,8 +1621,8 @@ function ensureOption(sel,val){ if(val && ![...sel.options].some(o=>o.value===va
 /* ============ views ============ */
 function setView(view){
   currentView=view;
-  ["list","calendar","agency","tiktok","covers","reports"].forEach(v=>$(v+"View").style.display=v===view?"block":"none");
-  document.body.classList.toggle("in-covers",view==="covers"||view==="reports");
+  ["list","calendar","agency","tiktok","campaign","covers","reports"].forEach(v=>$(v+"View").style.display=v===view?"block":"none");
+  document.body.classList.toggle("in-covers",view==="covers"||view==="reports"||view==="campaign");
   const main = view==="list"||view==="calendar";
   $("today").style.display=main?"block":"none";
   $("stats").style.display=main?"grid":"none";
@@ -1590,7 +1694,7 @@ function renderList(){
         </td>
         <td><div class="content-cell">
           <div class="thumb" style="background:${brandColor(c.brand)}">${esc((c.brand||"").slice(0,5))}</div>
-          <div style="min-width:0">${c.refId?`<div class="ref">${esc(c.refId)}</div>`:""}<div class="content-title">${esc(c.title)}</div><div class="content-sub">${esc(c.type)} · ${esc(c.remark||"No remark")}</div>${assetChips(c)}</div>
+          <div style="min-width:0">${refLine(c)}<div class="content-title">${esc(c.title)}</div><div class="content-sub">${esc(c.type)} · ${esc(c.remark||"No remark")}</div>${assetChips(c)}</div>
         </div></td>
         <td>${brandBadge(c.brand)}</td>
         <td>${pChip(c.platform)}</td>
@@ -1668,7 +1772,7 @@ function updateBulkBar(){
 async function copyContents(ids){
   const originals=contents.filter(c=>ids.includes(c.id));
   if(!originals.length)return;
-  const copies=originals.map(c=>normalize({...c,id:newId(),refId:ONLINE?"":autoRef(c.platform),title:`${c.title} (Copy)`,status:STATUSES[0],image:null,postRef:"",agencySent:false,linkSent:false,boostLive:false,clipUrl:"",sparkCode:"",codeExpiry:"",codeSent:false,by:"",at:""}));
+  const copies=originals.map(c=>normalize({...c,id:newId(),refId:ONLINE?"":autoRef(c.platform),title:`${c.title} (Copy)`,status:STATUSES[0],image:null,postRef:"",agencySent:false,linkSent:false,boostLive:false,clipUrl:"",sparkCode:"",codeExpiry:"",codeSent:false,postUrl:"",results:{},by:"",at:""}));
   for(let i=0;i<originals.length;i++) await copyImage(originals[i],copies[i]);
   contents.push(...copies);
   save(); selectedIds.clear(); renderAll();
@@ -1879,7 +1983,7 @@ function renderTikTok(){
   root.innerHTML=`<table class="tt-table"><thead><tr><th class="preview-cell">Preview</th><th>Content</th><th>Publish</th><th>Status</th><th>Clip</th><th>Spark Ads code</th><th>Sent</th><th>Ad run</th><th>Downloads</th><th></th></tr></thead><tbody>${
     data.map(c=>{ const id=esc(c.id); const al=alertsFor(c); const clip=safeUrl(c.clipUrl); return `<tr>
       <td class="preview-cell"><div class="preview-box" data-preview-box="${id}" title="Click to add/preview image"><div class="preview-placeholder">Paste<br>image</div></div></td>
-      <td><div style="min-width:180px">${c.refId?`<div class="ref">${esc(c.refId)}</div>`:""}<div class="content-title">${esc(c.title)}</div>
+      <td><div style="min-width:180px">${refLine(c)}<div class="content-title">${esc(c.title)}</div>
         <div class="content-sub">${c.ttAccType==="kol"?"KOL":"Brand"}${c.ttAccName?" · "+esc(c.ttAccName):""} · ${esc(c.brand)}</div>
         ${al.map(a=>`<span class="flag ${a.level}">${esc(a.text)}</span>`).join(" ")}</div></td>
       <td style="white-space:nowrap">${shortDate(c.publishDate)}${c.postTime?`<div class="media-detail">${esc(c.postTime)}</div>`:""}</td>
@@ -2499,6 +2603,165 @@ $("repNext").onclick=()=>{ repYM=ymAdd(repYM,1); renderReports(); };
 $("repBrand").onchange=e=>{ repBrandF=e.target.value; renderReports(); };
 document.querySelectorAll("[data-rep-tab]").forEach(b=>b.onclick=()=>{ repTab=b.dataset.repTab; try{ localStorage.setItem("cw_rep_tab",repTab); }catch(e){} renderReports(); });
 
+/* ============ Campaigns (e.g. Butterbear) — content with a campaign lives on its own page ============ */
+const CAMP_DEFAULT=[{id:"butterbear",name:"Butterbear",brand:"",start:"",end:"",budget:null,platforms:["TikTok","Instagram","Facebook","X","YouTube"],codes:["G1","G2","G3","B2","B3"],note:""}];
+const CAMPAIGNS=()=>(SETTINGS.campaigns&&SETTINGS.campaigns.length)?SETTINGS.campaigns:CAMP_DEFAULT;
+const campById=id=>CAMPAIGNS().find(c=>c.id===id);
+const campByName=n=>{ const k=String(n||"").trim().toLowerCase(); return CAMPAIGNS().find(c=>c.name.toLowerCase()===k||c.id.toLowerCase()===k); };
+const campName=id=>id?((campById(id)||{}).name||id):"";
+let campSel=""; try{ campSel=localStorage.getItem("cw_camp")||""; }catch(e){}
+const curCampId=()=>campById(campSel)?campSel:CAMPAIGNS()[0].id;
+let campCursor=null, campPlat="", campMediaF="";
+const natSort=(a,b)=>String(a).localeCompare(String(b),undefined,{numeric:true,sensitivity:"base"});
+const isPaid=c=>isAd(c);
+const engOf=c=>["likes","comments","shares","saves"].reduce((s,k)=>s+(Number((c.results||{})[k])||0),0);
+function fillClipCodes(){
+  const cid=$("campInput").value, cp=campById(cid);
+  const codes=[...new Set([...(cp?cp.codes:[]),...contents.filter(c=>c.campaign===cid&&c.clipCode).map(c=>c.clipCode)])].sort(natSort);
+  $("clipCodeList").innerHTML=codes.map(x=>`<option value="${esc(x)}">`).join("");
+}
+function fillScopeFilter(){
+  const sel=$("scopeFilter"), want=[["","General content"],["all","All incl. campaigns"],...CAMPAIGNS().map(c=>[c.id,"Campaign: "+c.name])];
+  const sig=JSON.stringify(want); if(sel.dataset.sig!==sig){ sel.innerHTML=want.map(([v,l])=>`<option value="${esc(v)}">${esc(l)}</option>`).join(""); sel.dataset.sig=sig; }
+  if(filters.scope && !want.some(w=>w[0]===filters.scope)) filters.scope="";
+  sel.value=filters.scope||"";
+}
+function refLine(c){
+  const tag=c.campaign?`<span class="camp-tag" title="Campaign">${esc(campName(c.campaign))}${c.clipCode?` · ${esc(c.clipCode)}`:""}</span>`:"";
+  return c.refId||tag?`<div class="ref">${esc(c.refId||"")} ${tag}</div>`:"";
+}
+
+/* --- page --- */
+function campItems(cid){ return contents.filter(c=>c.campaign===cid); }
+function renderCampaign(){
+  const cid=curCampId(), cp=campById(cid);
+  $("campSelect").innerHTML=CAMPAIGNS().map(c=>`<option value="${esc(c.id)}" ${c.id===cid?"selected":""}>${esc(c.name)}</option>`).join("")+`<option value="__new">＋ New campaign…</option>`;
+  $("campTitle").textContent=cp.name;
+  const all=campItems(cid);
+  if(!campCursor){ const ref=(cp.start&&cp.start.slice(0,7)>TODAY.slice(0,7))?cp.start:(all.length&&!all.some(c=>c.publishDate.slice(0,7)===TODAY.slice(0,7))?all.map(c=>c.publishDate).sort().pop():TODAY); campCursor=new Date(ref+"T12:00:00"); campCursor.setDate(1); }
+  $("campMeta").textContent=[cp.brand?`Brand ${cp.brand}`:"",cp.start||cp.end?`${cp.start?niceDate(cp.start):"…"} – ${cp.end?niceDate(cp.end):"…"}`:"",`${cp.platforms.length} platforms`,cp.note].filter(Boolean).join(" · ");
+  const plats=[...cp.platforms,...[...new Set(all.map(c=>c.platform))].filter(p=>!cp.platforms.includes(p))];
+  if(campPlat && !plats.includes(campPlat)) campPlat="";
+  $("campPlats").innerHTML=[["","All"],...plats.map(p=>[p,p])].map(([v,l])=>`<button class="ptab ${v?"":"all"} ${campPlat===v?"active":""}" data-cplat="${esc(v)}" ${v?`style="--pc:${platMeta(v).c}"`:""}>${v?pIcon(v):""}${esc(l)} <span class="n">${all.filter(c=>!v||c.platform===v).length}</span></button>`).join("");
+  $("campPlats").querySelectorAll("[data-cplat]").forEach(b=>b.onclick=()=>{ campPlat=b.dataset.cplat; renderCampaign(); });
+  const pool=all.filter(c=>!campPlat||c.platform===campPlat);
+  $("campMediaSwitch").querySelectorAll("[data-cmedia]").forEach(b=>{ const v=b.dataset.cmedia; b.classList.toggle("active",v===campMediaF); b.textContent=(v===""?"All":v==="organic"?"Organic":"Paid")+" · "+pool.filter(c=>!v||(v==="paid")===isPaid(c)).length; });
+  const items=pool.filter(c=>!campMediaF||(campMediaF==="paid")===isPaid(c)).sort((a,b)=>a.publishDate.localeCompare(b.publishDate)||(a.postTime||"99").localeCompare(b.postTime||"99")||natSort(a.clipCode||"~",b.clipCode||"~"));
+  // tiles
+  const paid=items.filter(isPaid), pub=items.filter(c=>c.status===DONE).length, overdue=items.filter(c=>c.status!==DONE&&c.publishDate<TODAY).length;
+  const budget=paid.reduce((s,c)=>s+(Number(c.budget)||0),0), withRes=items.filter(c=>hasResults(c.results));
+  const views=withRes.reduce((s,c)=>s+(Number(c.results.views)||0),0), eng=withRes.reduce((s,c)=>s+engOf(c),0);
+  $("campTiles").innerHTML=`
+    <div class="rep-tile"><span>Posts</span><b>${items.length}</b><small>${items.length-paid.length} organic · ${paid.length} paid</small></div>
+    <div class="rep-tile"><span>Published</span><b>${pub}</b><small>${items.length-pub?`${items.length-pub} to go${overdue?` · <span class="down">${overdue} past due</span>`:""}`:items.length?"all published 🎉":"—"}</small></div>
+    <div class="rep-tile"><span>Paid budget</span><b>${baht(budget)}</b><small>${cp.budget?`of ${baht(cp.budget)} planned (${Math.round(budget/cp.budget*100)}%)`:`${paid.length} paid post${paid.length===1?"":"s"}`}</small></div>
+    <div class="rep-tile"><span>Views</span><b>${views?num(views):"—"}</b><small>${withRes.length?`from ${withRes.length} post${withRes.length===1?"":"s"} with results`:"add results in each post"}</small></div>
+    <div class="rep-tile"><span>Engagement</span><b>${eng?num(eng):"—"}</b><small>${views&&eng?`ER ${(eng/views*100).toFixed(2)}% of views`:"likes + comments + shares + saves"}</small></div>`;
+  // attention
+  const attn=items.map(c=>({c,a:alertsFor(c)})).filter(x=>x.a.length);
+  $("campAttn").innerHTML=attn.length?`<div class="camp-attn"><b>⚠️ Needs attention</b>${attn.slice(0,8).map(x=>`<button class="t-item ${worstLevel(x.a)}" data-open="${esc(x.c.id)}"><span class="d" style="background:${platMeta(x.c.platform).c}"></span><span class="tb"><span class="tt">${x.c.clipCode?`<b>${esc(x.c.clipCode)}</b> · `:""}${esc(x.c.title)}</span><span class="ts"><span>${esc(x.c.platform)} · ${shortDate(x.c.publishDate)} · ${esc(x.a[0].text)}</span></span></span></button>`).join("")}${attn.length>8?`<span class="panel-meta">+${attn.length-8} more</span>`:""}</div>`:"";
+  renderCampCalendar(items,cid);
+  renderCampTracker(items,cid,cp,plats);
+  renderCampTable(items);
+  document.querySelectorAll("#campaignView [data-open]").forEach(b=>b.onclick=()=>openEditor(b.dataset.open));
+  bindCopyCode($("campaignView"));
+}
+function campCard(c){
+  const paid=isPaid(c), al=alertsFor(c), lv=worstLevel(al);
+  return `<div class="camp-card ${paid?"paid":""} ${c.status===DONE?"done":""} ${lv}" draggable="true" data-id="${esc(c.id)}" style="--pc:${platMeta(c.platform).c}" title="${esc(c.title)} · ${esc(c.platform)} · ${esc(c.status)}${al.length?" · "+esc(al[0].text):""}">
+    <div class="cc-top">${c.clipCode?`<b class="ccode">${esc(c.clipCode)}</b>`:""}${pIcon(c.platform)}<span class="cc-t">${esc(c.title)}</span></div>
+    <div class="cc-meta"><span class="st-dot" style="background:${statusColor(c.status)}"></span><span>${paid?"⚡ Paid":"Organic"}</span>${c.postTime?`<span>· ${esc(c.postTime)}</span>`:""}${c.ttAccName?`<span>· ${esc(c.ttAccName)}</span>`:""}</div></div>`;
+}
+function renderCampCalendar(items,cid){
+  const y=campCursor.getFullYear(), m=campCursor.getMonth();
+  $("campCalTitle").textContent=new Intl.DateTimeFormat("en",{month:"long",year:"numeric"}).format(campCursor);
+  const byDate={}; items.forEach(c=>(byDate[c.publishDate]=byDate[c.publishDate]||[]).push(c));
+  const cp=campById(cid), start=startOfCalendar(y,m);
+  let h=["Sun","Mon","Tue","Wed","Thu","Fri","Sat"].map(x=>`<div class="dow">${x}</div>`).join("");
+  for(let i=0;i<42;i++){
+    const d=new Date(start); d.setDate(start.getDate()+i); const date=iso(d), list=byDate[date]||[];
+    const inRange=(!cp.start||date>=cp.start)&&(!cp.end||date<=cp.end)&&(cp.start||cp.end);
+    h+=`<div class="day ${d.getMonth()!==m?"other":""} ${date===TODAY?"today":""} ${inRange?"in-camp":""}" data-cday="${date}" title="Click empty space to add a post on ${niceDate(date)}"><div class="day-head"><span class="day-num">${d.getDate()}</span>${list.length?`<span class="day-count">${list.length}</span>`:""}</div>${list.map(campCard).join("")}</div>`;
+  }
+  const grid=$("campGrid"); grid.innerHTML=h;
+  grid.querySelectorAll(".camp-card").forEach(card=>{
+    card.addEventListener("dragstart",e=>{ e.dataTransfer.setData("text/plain",card.dataset.id); e.dataTransfer.effectAllowed="move"; });
+    card.addEventListener("click",e=>{ e.stopPropagation(); openEditor(card.dataset.id); });
+  });
+  grid.querySelectorAll("[data-cday]").forEach(day=>{
+    day.addEventListener("dragover",e=>{ e.preventDefault(); day.classList.add("drag-over"); });
+    day.addEventListener("dragleave",()=>day.classList.remove("drag-over"));
+    day.addEventListener("drop",e=>{ e.preventDefault(); day.classList.remove("drag-over"); const c=byId(e.dataTransfer.getData("text/plain")); if(!c||c.publishDate===day.dataset.cday) return; c.publishDate=day.dataset.cday; save(); renderAll(); toast(`Moved to ${niceDate(c.publishDate)}`); });
+    day.addEventListener("click",()=>openEditor(null,day.dataset.cday,{campaign:cid,platform:campPlat||undefined}));
+  });
+}
+function renderCampTracker(items,cid,cp,plats){
+  const codes=[...new Set([...cp.codes,...items.map(c=>c.clipCode).filter(Boolean)])].sort(natSort);
+  const noCode=items.filter(c=>!c.clipCode);
+  const cols=campPlat?[campPlat]:plats;
+  if(!codes.length&&!noCode.length){ $("campTracker").innerHTML=`<div class="rep-empty">Add clip codes in ⚙ Campaign settings (e.g. G1, G2, B2) to track which clip goes on which platform.</div>`; return; }
+  const cell=(code,p)=>{ const list=items.filter(c=>(code===null?!c.clipCode:c.clipCode===code)&&c.platform===p);
+    return `<td>${list.map(c=>`<button class="tk-chip" data-open="${esc(c.id)}" data-st="${esc(c.status)}" title="${esc(c.title)} · ${esc(c.status)}${isPaid(c)?" · paid":""}">${shortDate(c.publishDate)}${isPaid(c)?" ⚡":""}${c.status===DONE?" ✓":""}</button>`).join("")}${code!==null?`<button class="tk-add" data-tk-add="${esc(code)}" data-tk-plat="${esc(p)}" title="Add ${esc(code)} on ${esc(p)}">＋</button>`:""}</td>`; };
+  $("campTracker").innerHTML=`<div class="table-scroll"><table class="rep-table tk-table"><thead><tr><th>Clip</th>${cols.map(p=>`<th>${pIcon(p)} ${esc(p)}</th>`).join("")}<th class="r">Posts</th></tr></thead><tbody>
+    ${codes.map(code=>`<tr><td><b class="ccode">${esc(code)}</b></td>${cols.map(p=>cell(code,p)).join("")}<td class="r">${items.filter(c=>c.clipCode===code).length}</td></tr>`).join("")}
+    ${noCode.length?`<tr><td class="muted">No code</td>${cols.map(p=>cell(null,p)).join("")}<td class="r">${noCode.length}</td></tr>`:""}
+  </tbody></table></div>`;
+  $("campTracker").querySelectorAll("[data-tk-add]").forEach(b=>b.onclick=()=>openEditor(null,null,{campaign:cid,clipCode:b.dataset.tkAdd,platform:b.dataset.tkPlat}));
+}
+function renderCampTable(items){
+  $("campCount").textContent=`${items.length} post${items.length===1?"":"s"} · click a row to edit`;
+  if(!items.length){ $("campTable").innerHTML=`<div class="rep-empty">No posts yet — click “＋ New post”, a day on the calendar, or ＋ in the clip tracker.</div>`; return; }
+  $("campTable").innerHTML=`<div class="table-scroll"><table class="rep-table camp-table"><thead><tr><th>Date</th><th>Clip</th><th>Platform</th><th>Content</th><th>Posted by</th><th>Media</th><th>TikTok code</th><th>Status</th><th>Link</th><th class="r">Views</th><th class="r">Eng.</th></tr></thead><tbody>${items.map(c=>{
+    const link=safeUrl(isTT(c)?c.clipUrl:c.postUrl), r=c.results||{}, paid=isPaid(c), al=alertsFor(c);
+    return `<tr data-open="${esc(c.id)}"><td>${shortDate(c.publishDate)}${c.postTime?` <span class="muted">${esc(c.postTime)}</span>`:""}</td>
+      <td>${c.clipCode?`<b class="ccode">${esc(c.clipCode)}</b>`:'<span class="muted">—</span>'}</td><td>${pChip(c.platform)}</td>
+      <td style="white-space:normal;min-width:200px"><b>${esc(c.title)}</b>${al.length?`<div>${al.slice(0,2).map(a=>`<span class="flag ${a.level}">${esc(a.text)}</span>`).join(" ")}</div>`:""}</td>
+      <td>${c.ttAccName?`${c.ttAccType==="kol"?"KOL · ":""}${esc(c.ttAccName)}`:'<span class="muted">—</span>'}</td>
+      <td>${paid?`<b>⚡ ${esc(c.media)}</b>${c.budget?`<div class="media-detail">${baht(c.budget)}</div>`:""}<div class="media-detail">${shortDate(runStartOf(c))}–${shortDate(runEndOf(c))}</div>`:"Organic"}</td>
+      <td>${isTT(c)&&paid?(c.sparkCode?`<div class="code-cell"><code class="code" title="${esc(c.sparkCode)}">${esc(c.sparkCode)}</code><button class="mini-btn" data-copy-code="${esc(c.id)}">Copy</button></div>${c.codeSent?'<div class="media-detail" style="color:var(--ok)">sent ✓</div>':""}`:'<span class="flag red">No code</span>'):'<span class="muted">—</span>'}</td>
+      <td><span class="status" data-st="${esc(c.status)}">${esc(c.status)}</span></td>
+      <td>${link?`<a class="asset" href="${esc(link)}" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()">↗ Open</a>`:'<span class="muted">—</span>'}</td>
+      <td class="r">${r.views!=null?num(r.views):'<span class="muted">—</span>'}</td><td class="r">${hasResults(r)&&engOf(c)?num(engOf(c)):'<span class="muted">—</span>'}</td></tr>`; }).join("")}</tbody></table></div>`;
+}
+
+/* --- campaign settings --- */
+let campEditId=null;
+function openCampaignSettings(id){
+  const cp=id?campById(id):null; campEditId=cp?cp.id:null;
+  $("campDlgTitle").textContent=cp?`Campaign settings · ${cp.name}`:"New campaign";
+  $("cdName").value=cp?cp.name:""; $("cdBrand").innerHTML=`<option value="">— Any brand —</option>`+BRANDS.map(b=>`<option>${esc(b)}</option>`).join(""); $("cdBrand").value=cp?.brand||"";
+  $("cdStart").value=cp?.start||""; $("cdEnd").value=cp?.end||""; $("cdBudget").value=cp?.budget??"";
+  const pl=cp?cp.platforms:["TikTok","Instagram","Facebook","X","YouTube"];
+  $("cdPlats").innerHTML=[...new Set([...PLATFORMS,...pl])].map(p=>`<label class="ck-inline"><input type="checkbox" value="${esc(p)}" ${pl.includes(p)?"checked":""}> ${pIcon(p)} ${esc(p)}</label>`).join("");
+  $("cdCodes").value=(cp?cp.codes:["G1","G2","G3","B2","B3"]).join(", ");
+  $("cdNote").value=cp?.note||"";
+  $("campaignDialog").showModal(); setTimeout(()=>$("cdName").focus(),30);
+}
+$("campaignForm").addEventListener("submit",async e=>{
+  e.preventDefault();
+  const name=$("cdName").value.trim(); if(!name){ toast("Please give the campaign a name"); return; }
+  const list=CAMPAIGNS().map(c=>({...c}));
+  if(list.some(c=>c.id!==campEditId&&c.name.toLowerCase()===name.toLowerCase())){ toast("Another campaign already has this name"); return; }
+  const start=$("cdStart").value, end=$("cdEnd").value; if(start&&end&&end<start){ toast("End date is before the start date"); return; }
+  const data={name,brand:$("cdBrand").value,start,end,budget:$("cdBudget").value===""?null:Number($("cdBudget").value),
+    platforms:[...$("cdPlats").querySelectorAll("input:checked")].map(i=>i.value),
+    codes:[...new Set($("cdCodes").value.split(/[\s,;]+/).map(x=>x.trim().toUpperCase()).filter(Boolean))].sort(natSort),note:$("cdNote").value.trim()};
+  if(!data.platforms.length){ toast("Choose at least one platform"); return; }
+  if(campEditId){ Object.assign(list.find(c=>c.id===campEditId),data); }
+  else{ let id=name.toLowerCase().replace(/[^a-z0-9ก-๙]+/g,"-").replace(/^-|-$/g,"")||"campaign"; let k=id,n=2; while(list.some(c=>c.id===k)) k=id+"-"+(n++); list.push({id:k,...data}); campSel=k; try{ localStorage.setItem("cw_camp",k); }catch(err){} campCursor=null; }
+  SETTINGS.campaigns=list; $("campaignDialog").close(); applySettings(); renderAll();
+  if(await saveSettings([{key:"campaigns",value:list}])) toast(campEditId?"Campaign saved":"Campaign created");
+});
+$("cdClose").onclick=$("cdCancel").onclick=()=>$("campaignDialog").close();
+$("campSelect").onchange=e=>{ const v=e.target.value; if(v==="__new"){ e.target.value=curCampId(); openCampaignSettings(null); return; } campSel=v; campCursor=null; campPlat=""; try{ localStorage.setItem("cw_camp",v); }catch(err){} renderCampaign(); };
+$("campSettingsBtn").onclick=()=>openCampaignSettings(curCampId());
+$("campNewPostBtn").onclick=()=>openEditor(null,null,{campaign:curCampId(),platform:campPlat||undefined});
+$("campPrev").onclick=()=>{ campCursor=new Date(campCursor.getFullYear(),campCursor.getMonth()-1,1); renderCampaign(); };
+$("campNext").onclick=()=>{ campCursor=new Date(campCursor.getFullYear(),campCursor.getMonth()+1,1); renderCampaign(); };
+$("campToday").onclick=()=>{ campCursor=new Date(); campCursor.setDate(1); renderCampaign(); };
+$("campMediaSwitch").querySelectorAll("[data-cmedia]").forEach(b=>b.onclick=()=>{ campMediaF=b.dataset.cmedia; renderCampaign(); });
+$("campExportBtn").onclick=()=>{ const cp=campById(curCampId()); exportList(campItems(cp.id),"Campaign_"+cp.name.replace(/[^A-Za-z0-9ก-๙_-]+/g,"_")); };
+
 /* ============ editor ============ */
 let ck={};
 function editorFlow(){
@@ -2521,6 +2784,8 @@ function toggleMediaFields(){
   const media=$("mediaInput").value, tt=$("platformInput").value==="TikTok", ad=media!=="Organic";
   $("boostFields").classList.toggle("show",ad);
   $("tiktokFields").classList.toggle("show",tt);
+  const inCamp=!!$("campInput").value; $("campFields").classList.toggle("show",inCamp);
+  document.querySelectorAll("#campFields .camp-nontt").forEach(el=>el.style.display=tt?"none":"");
   document.querySelectorAll("#tiktokFields .tt-spark").forEach(el=>el.style.display=ad?"":"none");
   $("flowField").style.display=(ad&&!tt&&media==="Boost Post")?"flex":"none";
   $("postRefField").style.display=tt?"none":"flex";
@@ -2559,6 +2824,13 @@ function openEditor(id=null, presetDate=null, preset={}){
   $("ttCodeInput").value=c?.sparkCode||"";
   $("ttExpiryInput").value=c?.codeExpiry||"";
   $("ttCodeSentInput").checked=!!c?.codeSent;
+  $("campInput").innerHTML=`<option value="">— None (general content) —</option>`+CAMPAIGNS().map(cp=>`<option value="${esc(cp.id)}">${esc(cp.name)}</option>`).join("");
+  const campV=c?.campaign||preset.campaign||(!c&&currentView==="campaign"?curCampId():"")||"";
+  ensureOption($("campInput"),campV); $("campInput").value=campV;
+  if(!c&&campV){ const cp=campById(campV); if(cp&&cp.brand) $("brandInput").value=cp.brand; }
+  $("clipCodeInput").value=c?.clipCode||preset.clipCode||""; fillClipCodes();
+  $("campAccTypeInput").value=c?.ttAccType||"brand"; $("campAccNameInput").value=c?.ttAccName||""; $("postUrlInput").value=c?.postUrl||"";
+  document.querySelectorAll("#campFields [data-res]").forEach(i=>{ const v=c?.results?.[i.dataset.res]; i.value=v==null?"":v; });
   $("assetsInput").value=c?.assets||"";
   $("remarkInput").value=c?.remark||"";
   ck={agencySent:!!c?.agencySent,linkSent:!!c?.linkSent,boostLive:!!c?.boostLive};
@@ -2572,19 +2844,21 @@ function openEditor(id=null, presetDate=null, preset={}){
 }
 function closeEditor(){ $("contentDialog").close(); }
 function renderAll(){
+  fillScopeFilter();
   renderPlatformTabs();
   if(currentView==="list"||currentView==="calendar"){ renderToday(); renderStats(); }
   if(currentView==="list") renderList();
   else if(currentView==="calendar") renderCalendar("main");
   else if(currentView==="agency") renderAgency();
   else if(currentView==="tiktok") renderTikTok();
+  else if(currentView==="campaign") renderCampaign();
   else if(currentView==="covers") renderCovers();
   else if(currentView==="reports") renderReports();
   renderCoverBadge();
 }
 function resetFilters(){
-  filters={q:"",brand:"",platform:"",status:"",media:""};
-  $("searchInput").value=""; ["brandFilter","statusFilter","mediaFilter"].forEach(id=>$(id).value="");
+  filters={q:"",brand:"",platform:"",status:"",media:"",scope:""};
+  $("searchInput").value=""; ["brandFilter","statusFilter","mediaFilter","scopeFilter"].forEach(id=>$(id).value="");
   writeUrl(); renderAll();
 }
 
@@ -2593,10 +2867,11 @@ $("flowInput").onchange=()=>{
   renderChecklist();
 };
 $("platformInput").onchange=toggleMediaFields;
+$("campInput").onchange=()=>{ const cp=campById($("campInput").value); if(cp&&cp.brand&&!$("contentId").value) $("brandInput").value=cp.brand; fillClipCodes(); toggleMediaFields(); };
 $("ttClipInput").addEventListener("input",()=>{ $("ttClipErr").style.display="none"; });
 $("postRefInput").oninput=renderChecklist;
 $("statusInput").onchange=()=>{ $("statusInput").dataset.st=$("statusInput").value; renderChecklist(); };
-$("newContentBtn").onclick=()=>openEditor(null,null,currentView==="tiktok"?{platform:"TikTok"}:currentView==="agency"?{media:"Boost Post"}:{});
+$("newContentBtn").onclick=()=>openEditor(null,null,currentView==="tiktok"?{platform:"TikTok"}:currentView==="agency"?{media:"Boost Post"}:filters.scope&&filters.scope!=="all"?{campaign:filters.scope}:{});
 $("closeDialog").onclick=closeEditor;
 $("cancelBtn").onclick=closeEditor;
 $("contentForm").addEventListener("submit",e=>{
@@ -2616,6 +2891,9 @@ $("contentForm").addEventListener("submit",e=>{
   const clip=tt?$("ttClipInput").value.trim():"";
   if(clip && !safeUrl(clip)){ $("ttClipErr").style.display="block"; $("ttClipInput").focus(); $("ttClipInput").scrollIntoView({block:"center",behavior:"smooth"}); toast("TikTok clip link must be a web link (https://…) — or leave it empty"); return; }
   const code=tt&&ad?$("ttCodeInput").value.trim():"";
+  const campaign=$("campInput").value, postUrl=campaign&&!tt?$("postUrlInput").value.trim():"";
+  if(postUrl && !safeUrl(postUrl)){ toast("Post link must start with https://"); $("postUrlInput").focus(); return; }
+  const results={}; if(campaign) document.querySelectorAll("#campFields [data-res]").forEach(i=>{ if(i.value!=="") results[i.dataset.res]=Math.max(0,Number(i.value)||0); });
   const payload=normalize({
     id:id||newId(), refId, title:$("titleInput").value.trim(), brand:$("brandInput").value, platform,
     publishDate:$("dateInput").value, postTime:$("postTimeInput").value,
@@ -2623,7 +2901,8 @@ $("contentForm").addEventListener("submit",e=>{
     budget:ad&&$("budgetInput").value!==""?Number($("budgetInput").value):null, objective:ad?$("objectiveInput").value:"", kpi:ad?$("kpiInput").value:"",
     flow, sendDate:flow==="agency"?$("sendDateInput").value:"", boostStart, boostEnd, postRef:ad&&!tt?$("postRefInput").value.trim():"",
     agencySent:flow==="agency"&&!!ck.agencySent, linkSent:flow==="self"&&!!ck.linkSent, boostLive:flow==="self"&&!!ck.boostLive,
-    clipUrl:clip, ttAccType:tt?$("ttAccTypeInput").value:"brand", ttAccName:tt?$("ttAccNameInput").value.trim():"",
+    clipUrl:clip, ttAccType:tt?$("ttAccTypeInput").value:campaign?$("campAccTypeInput").value:"brand", ttAccName:tt?$("ttAccNameInput").value.trim():campaign?$("campAccNameInput").value.trim():"",
+    campaign, clipCode:campaign?$("clipCodeInput").value.trim().toUpperCase():"", postUrl, results,
     sparkCode:code, codeExpiry:tt&&code?$("ttExpiryInput").value:"", codeSent:tt&&!!code&&$("ttCodeSentInput").checked,
     assets:assets.join("\n"), remark:$("remarkInput").value.trim(), image:existing?existing.image||null:null, by:existing?existing.by:"", at:existing?existing.at:""
   });
@@ -2734,6 +3013,7 @@ function applyRemoteSetting(row){
   if(row.key==="nav_labels" && row.value && typeof row.value==="object") SETTINGS.navLabels=row.value;
   if(row.key==="cover_config" && row.value && Array.isArray(row.value.platforms)) SETTINGS.coverConfig=row.value;
   if(row.key==="ecomm_config" && row.value && Array.isArray(row.value.metrics)) SETTINGS.ecommConfig=row.value;
+  if(row.key==="campaigns" && Array.isArray(row.value) && row.value.length) SETTINGS.campaigns=row.value;
 }
 /* save one or more settings for the whole team (or this browser in demo mode) */
 async function saveSettings(pairs){
@@ -2838,19 +3118,24 @@ const XCOLS=[
  {h:"Spark Ads Code",k:"sparkCode",w:24,g:"tt"},
  {h:"Code Expiry",k:"codeExpiry",w:12,g:"tt",t:"date",note:"Optional"},
  {h:"Code Sent to Agency",k:"codeSent",w:12,g:"tt",t:"yn",list:"Y/N"},
+ {h:"Campaign",k:"campaign",w:14,g:"camp",list:"Campaign",note:"Blank = general content. Campaign content only shows on its campaign page."},
+ {h:"Clip Code",k:"clipCode",w:10,g:"camp",note:"Campaign only — your clip name, e.g. G1, B2"},
+ {h:"Post Link",k:"postUrl",w:30,g:"camp",note:"Campaign only — link of the post (non-TikTok). Must start with https://"},
+ {h:"Views",k:"r_views",w:10,g:"ro",ro:1,note:"Read-only — update results on the website"},
+ {h:"Likes",k:"r_likes",w:9,g:"ro",ro:1},{h:"Comments",k:"r_comments",w:10,g:"ro",ro:1},{h:"Shares",k:"r_shares",w:9,g:"ro",ro:1},{h:"Saves",k:"r_saves",w:9,g:"ro",ro:1},
  {h:"Download Links (VDO / AW)",k:"assets",w:36,g:"core",t:"wrap",note:"One link per line (Alt+Enter). Must start with https://"},
  {h:"Remark / Campaign",k:"remark",w:30,g:"core"},
  {h:"Has Image",k:"_img",w:9,g:"ro",ro:1,note:"Read-only — ignored on import"},
  {h:"Last Edited By",k:"_by",w:20,g:"ro",ro:1,note:"Read-only — ignored on import"}
 ];
 const LISTS=()=>({"Brand":BRANDS,"Platform":PLATFORMS,"Status":STATUSES,"Content Type":TYPES,"Media":MEDIA,"Boost Workflow":FLOW_LABELS,
-  "Objective":OBJECTIVES,"KPI":KPIS,"TikTok Account":["Brand","KOL / Creator"],"Y/N":["Y","N"]});
+  "Objective":OBJECTIVES,"KPI":KPIS,"TikTok Account":["Brand","KOL / Creator"],"Y/N":["Y","N"],"Campaign":CAMPAIGNS().map(c=>c.name)});
 const LEGACY={"ref":"refId","ref no":"refId","content id":"refId","id":"refId","content title":"title","content":"title","content name":"title","ชื่อคอนเทนต์":"title","ชื่อ":"title",
   "แบรนด์":"brand","channel":"platform","แพลตฟอร์ม":"platform","publish":"publishDate","date":"publishDate","post date":"publishDate","วันที่ลง":"publishDate","วันที่":"publishDate",
   "time":"postTime","เวลา":"postTime","สถานะ":"status","type":"type","format":"type","boost workflow":"flow","workflow":"flow","send to agency":"sendDate","agency date":"sendDate",
   "boost start date":"boostStart","boost start":"boostStart","boost end date":"boostEnd","boost end":"boostEnd","budget":"budget","media objective":"objective","primary kpi":"kpi",
   "post id":"postRef","post link":"postRef","post id link":"postRef","asset link":"assets","asset links":"assets","assets":"assets","link":"assets","download link":"assets","download links":"assets",
-  "remark":"remark","campaign":"remark","note":"remark","หมายเหตุ":"remark","clip link":"clipUrl","tiktok link":"clipUrl","account name":"ttAccName","spark code":"sparkCode","code sent":"codeSent"};
+  "remark":"remark","campaign":"remark","note":"remark","หมายเหตุ":"remark","clip link":"clipUrl","tiktok link":"clipUrl","account name":"ttAccName","spark code":"sparkCode","code sent":"codeSent","clip name":"clipCode","code":"clipCode","ชื่อคลิป":"clipCode","แคมเปญ":"campaign"};
 function normHeader(h){ return String(h??"").toLowerCase().replace(/\*/g,"").replace(/\(.*?\)/g," ").replace(/[^a-z0-9฀-๿]+/g," ").trim(); }
 const HEADER_MAP=(()=>{ const m=Object.assign({},LEGACY); XCOLS.forEach(c=>{ m[normHeader(c.h)]=c.ro?"_ignore":c.k; }); return m; })();
 function cellDate(v){
@@ -2878,7 +3163,7 @@ function loadScript(src){ return new Promise((res,rej)=>{ const s=document.creat
 
 /* ---------- import ---------- */
 const UPDATABLE=XCOLS.filter(c=>!c.ro).map(c=>c.k).filter(k=>k!=="refId");
-const KEEP_IF_BLANK=new Set(["title","brand","platform","publishDate","status","type","media","ttAccType"]);
+const KEEP_IF_BLANK=new Set(["title","brand","platform","publishDate","status","type","media","ttAccType","campaign"]);
 const effFlow=x=>(!x.media||x.media==="Organic"||x.platform==="TikTok")?"":x.media==="Ads Setup"?"agency":(x.flow||"");
 const valStr=(k,v)=>k==="budget"?(v==null||v===""?"":String(Number(v))):typeof v==="boolean"?(v?"Y":"N"):String(v??"");
 let importRows=[];
@@ -2930,11 +3215,16 @@ async function handleImportFile(file){
       if(links.some(l=>!safeUrl(l))) errs.push("Download link must start with https://");
       o.assets=links.filter(safeUrl).join("\n");
       o.remark=str(raw.remark);
+      if(!blank("campaign")){ const cp=campByName(str(raw.campaign)); if(!cp) errs.push(`Unknown campaign “${str(raw.campaign)}” — create it on the campaign page first`); else o.campaign=cp.id; }
+      o.clipCode=str(raw.clipCode).toUpperCase(); o.postUrl=str(raw.postUrl); if(o.postUrl && !safeUrl(o.postUrl)) errs.push("Post link must start with https://");
+      const inCamp=o.campaign||(existing&&blank("campaign")&&existing.campaign);
+      if(!inCamp){ o.clipCode=""; o.postUrl=""; }
       // tidy by media / platform (same rules as the editor)
       const ad=med!=="Organic", tt=plat==="TikTok";
       if(!ad){ ["flow","sendDate","boostStart","boostEnd","postRef","objective","kpi"].forEach(k=>o[k]=""); o.budget=null; o.agencySent=o.linkSent=o.boostLive=false; }
       if(tt){ o.flow=""; o.postRef=""; o.sendDate=""; o.agencySent=o.linkSent=o.boostLive=false; }
-      else { o.clipUrl=""; o.ttAccName=""; o.sparkCode=""; o.codeExpiry=""; o.codeSent=false; o.ttAccType="brand"; }
+      else { o.clipUrl=""; o.sparkCode=""; o.codeExpiry=""; o.codeSent=false; if(!inCamp){ o.ttAccName=""; o.ttAccType="brand"; } }
+      if(tt) o.postUrl="";
       if(ad && !tt && med==="Ads Setup") o.flow="agency";
       if(o.flow==="agency" && !o.sendDate && o.publishDate && !existing) o.sendDate=addDays(o.publishDate,-LEAD_DAYS);
       if(o.flow!=="agency") o.sendDate="";
@@ -2998,6 +3288,8 @@ function xTime(t){ if(!t) return null; const [h,m]=t.split(":").map(Number); ret
 function cellOut(c,col){
   const k=col.k;
   if(k==="_img") return c.image?"Y":"N";
+  if(k.startsWith("r_")){ const v=(c.results||{})[k.slice(2)]; return v==null||v===""?null:Number(v); }
+  if(k==="campaign") return campName(c.campaign);
   if(k==="_by") return c.by||"";
   if(col.t==="date") return xDate(c[k]);
   if(col.t==="time") return xTime(c[k]);
@@ -3007,7 +3299,7 @@ function cellOut(c,col){
   if(k==="ttAccType") return isTT(c)?(c.ttAccType==="kol"?"KOL / Creator":"Brand"):"";
   return c[k]==null?"":c[k];
 }
-const GROUP_FILL={req:"FF5B5BD6",core:"FFE9EAF7",ad:"FFFFF1E7",tt:"FFFDE7F3",ro:"FFEEEEEE"};
+const GROUP_FILL={req:"FF5B5BD6",core:"FFE9EAF7",ad:"FFFFF1E7",tt:"FFFDE7F3",camp:"FFFFF6D6",ro:"FFEEEEEE"};
 async function buildWorkbook(items,{template=false,from="",to="",summary=true}={}){
   if(!window.ExcelJS) await loadScript("https://cdnjs.cloudflare.com/ajax/libs/exceljs/4.4.0/exceljs.min.js");
   const wb=new ExcelJS.Workbook(); wb.creator=SETTINGS.appName; wb.created=new Date();
@@ -3156,6 +3448,7 @@ $("searchInput").oninput=e=>{filters.q=e.target.value;renderAll()};
 $("brandFilter").onchange=e=>{filters.brand=e.target.value;renderAll()};
 $("statusFilter").onchange=e=>{filters.status=e.target.value;renderAll()};
 $("mediaFilter").onchange=e=>{filters.media=e.target.value;renderAll()};
+$("scopeFilter").onchange=e=>{filters.scope=e.target.value;renderAll()};
 const moveMonth=n=>{ calendarCursor=new Date(calendarCursor.getFullYear(),calendarCursor.getMonth()+n,1); renderAll(); };
 $("prevMonth").onclick=()=>moveMonth(-1); $("nextMonth").onclick=()=>moveMonth(1);
 $("agPrev").onclick=()=>moveMonth(-1); $("agNext").onclick=()=>moveMonth(1);
