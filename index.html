@@ -482,6 +482,13 @@
     .camp-table tbody tr{cursor:pointer}.camp-table tbody tr:hover{background:#f7f5ff}
     .camp-table td{vertical-align:top}
     .cd-plats{display:flex;flex-wrap:wrap;gap:8px 16px}
+    .sec-toggle{border:0;background:none;padding:0;font:inherit;font-weight:700;font-size:14.5px;color:var(--text);cursor:pointer}
+    .sec-toggle:hover{color:var(--primary)}
+    .sec-tools{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+    .sec-tools input{padding:7px 11px;width:220px;max-width:100%}
+    .mini-pager{display:flex;gap:10px;align-items:center;justify-content:flex-end;margin-top:10px;flex-wrap:wrap}
+    .day-more{display:block;width:100%;margin-top:5px;border:1px dashed #cfc6f3;background:#fff;color:var(--primary);border-radius:8px;font-size:11.5px;font-weight:700;padding:3px 0;cursor:pointer}
+    .cp-prev{width:52px;height:52px}
     /* ===== Reports ===== */
     .rep-tools{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
     .rep-tools .icon-btn{width:30px;height:30px}
@@ -770,8 +777,8 @@
           <div style="overflow-x:auto"><div class="calendar-grid camp-grid" id="campGrid"></div></div>
           <div class="panel-meta" style="margin-top:8px">Click an empty part of a day to add a post · drag a post to move it.</div>
         </div>
-        <div class="rep-card"><div class="rep-card-h"><h3>Clip tracker</h3><span class="panel-meta">Which clip goes on which platform · ＋ adds a post for that clip</span></div><div id="campTracker"></div></div>
-        <div class="rep-card"><div class="rep-card-h"><h3>All posts</h3><span class="panel-meta" id="campCount"></span></div><div id="campTable"></div></div>
+        <div class="rep-card"><div class="rep-card-h"><h3><button type="button" class="sec-toggle" id="tkToggle">▾ Clip tracker</button></h3><div class="sec-tools"><input type="search" id="tkSearch" placeholder="Search clip, e.g. G1" aria-label="Search clip"><span class="panel-meta" id="tkMeta"></span></div></div><div id="campTracker"></div></div>
+        <div class="rep-card"><div class="rep-card-h"><h3><button type="button" class="sec-toggle" id="ptToggle">▾ All posts</button></h3><div class="sec-tools"><input type="search" id="ptSearch" placeholder="Search clip, title, account…" aria-label="Search posts"><span class="panel-meta" id="campCount"></span></div></div><div id="campTable"></div></div>
       </div>
     </section>
 
@@ -838,6 +845,17 @@
     <div class="modal-body">
       <input type="hidden" id="contentId" />
       <div class="field full">
+        <label>Preview image</label>
+        <div class="img-field">
+          <div class="img-drop" id="editorImgBox" tabindex="0" title="Click, drop or paste an image">Click, drop<br>or paste<br>image</div>
+          <div style="display:flex;flex-direction:column;gap:6px">
+            <button class="btn small" type="button" id="editorImgUpload">Upload image</button>
+            <button class="link-btn" type="button" id="editorImgRemove" style="color:var(--danger);display:none;align-self:flex-start">Remove image</button>
+            <span class="help">PNG / JPG / WebP / GIF. Tip: copy an image and press Ctrl+V here.</span>
+          </div>
+        </div>
+      </div>
+      <div class="field full">
         <label for="titleInput">Content title</label>
         <input type="text" id="titleInput" required placeholder="e.g. Nonkul – Busy Day" />
       </div>
@@ -856,8 +874,6 @@
         <div class="field camp-nontt"><label for="campAccTypeInput">Posted by</label><select id="campAccTypeInput"><option value="brand">Brand account</option><option value="kol">KOL / Creator</option></select></div>
         <div class="field camp-nontt"><label for="campAccNameInput">Account / KOL name</label><input type="text" id="campAccNameInput" placeholder="@account"></div>
         <div class="field full camp-nontt"><label for="postUrlInput">Post link <span style="font-weight:600">(after posting)</span></label><input type="text" id="postUrlInput" placeholder="https://…"></div>
-        <div class="field full"><label>Results <span style="font-weight:600">(optional — fill in after posting)</span></label>
-          <div class="res-grid"><label><span>Views</span><input type="number" min="0" step="1" data-res="views" inputmode="numeric"></label><label><span>Likes</span><input type="number" min="0" step="1" data-res="likes" inputmode="numeric"></label><label><span>Comments</span><input type="number" min="0" step="1" data-res="comments" inputmode="numeric"></label><label><span>Shares</span><input type="number" min="0" step="1" data-res="shares" inputmode="numeric"></label><label><span>Saves</span><input type="number" min="0" step="1" data-res="saves" inputmode="numeric"></label></div></div>
       </div>
       <div class="conditional-box" id="tiktokFields">
         <div class="field full"><label for="ttClipInput">♪ TikTok clip link <span style="font-weight:600">(optional — add after posting)</span></label><input type="text" id="ttClipInput" placeholder="https://www.tiktok.com/@account/video/…"><span class="help" id="ttClipErr" style="color:var(--danger);font-weight:700;display:none">This box is for the clip's web link (starting with https://). Put the account name in “Account name” below, or leave this empty.</span></div>
@@ -890,17 +906,6 @@
         <div class="field full" id="checklistField"><label>Checklist</label><div class="checklist" id="checklist"></div></div>
       </div>
 
-      <div class="field full">
-        <label>Preview image</label>
-        <div class="img-field">
-          <div class="img-drop" id="editorImgBox" tabindex="0" title="Click, drop or paste an image">Click, drop<br>or paste<br>image</div>
-          <div style="display:flex;flex-direction:column;gap:6px">
-            <button class="btn small" type="button" id="editorImgUpload">Upload image</button>
-            <button class="link-btn" type="button" id="editorImgRemove" style="color:var(--danger);display:none;align-self:flex-start">Remove image</button>
-            <span class="help">PNG / JPG / WebP / GIF. Tip: copy an image and press Ctrl+V here.</span>
-          </div>
-        </div>
-      </div>
       <div class="field full">
         <label for="assetsInput">Download links (VDO / AW)</label>
         <textarea id="assetsInput" rows="2" placeholder="One link per line — Google Drive, Dropbox, WeTransfer..."></textarea>
@@ -1452,7 +1457,7 @@ async function saveImageToContent(id,file){
     const old=c.image; c.image=path; save();
     if(old) sb.storage.from(BUCKET).remove([old]);
   }else{ await idbPut(id,blob); dropLocalUrl(id); }
-  renderList(); toast("Preview image saved");
+  renderAll(); toast("Preview image saved");
 }
 async function removeImage(id){
   const c=byId(id);
@@ -1738,9 +1743,9 @@ function renderList(){
 async function hydratePreviewImages(data){
   if(ONLINE){ try{ await signUrls(data.map(c=>c.image).filter(Boolean)); }catch(e){} }
   for(const c of data){
-    const box=document.querySelector(`[data-preview-box="${CSS.escape(c.id)}"]`);
-    if(!box) continue;
-    try{ const url=await imageUrlFor(c); if(url) box.innerHTML=`<img src="${esc(url)}" alt="${esc(c.title)}" loading="lazy">`; }catch(e){}
+    const boxes=document.querySelectorAll(`[data-preview-box="${CSS.escape(c.id)}"]`);
+    if(!boxes.length) continue;
+    try{ const url=await imageUrlFor(c); if(url) boxes.forEach(box=>box.innerHTML=`<img src="${esc(url)}" alt="${esc(c.title)}" loading="lazy">`); }catch(e){}
   }
 }
 function beginImageUpload(id){ pendingImageTargetId=id; const input=$("imageFileInput"); input.value=""; input.click(); }
@@ -2604,14 +2609,23 @@ $("repBrand").onchange=e=>{ repBrandF=e.target.value; renderReports(); };
 document.querySelectorAll("[data-rep-tab]").forEach(b=>b.onclick=()=>{ repTab=b.dataset.repTab; try{ localStorage.setItem("cw_rep_tab",repTab); }catch(e){} renderReports(); });
 
 /* ============ Campaigns (e.g. Butterbear) — content with a campaign lives on its own page ============ */
-const CAMP_DEFAULT=[{id:"butterbear",name:"Butterbear",brand:"",start:"",end:"",budget:null,platforms:["TikTok","Instagram","Facebook","X","YouTube"],codes:["G1","G2","G3","B2","B3"],note:""}];
-const CAMPAIGNS=()=>(SETTINGS.campaigns&&SETTINGS.campaigns.length)?SETTINGS.campaigns:CAMP_DEFAULT;
+const CAMP_DEFAULT=[{id:"butterbear",name:"Butterbear",brand:"EOC",start:"",end:"",budget:null,platforms:["TikTok","Instagram","Facebook","X","YouTube"],codes:["G1","G2","G3","B2","B3"],note:""}];
+const CAMPAIGNS=()=>((SETTINGS.campaigns&&SETTINGS.campaigns.length)?SETTINGS.campaigns:CAMP_DEFAULT).map(c=>c.id==="butterbear"&&!c.brand?{...c,brand:"EOC"}:c);
 const campById=id=>CAMPAIGNS().find(c=>c.id===id);
 const campByName=n=>{ const k=String(n||"").trim().toLowerCase(); return CAMPAIGNS().find(c=>c.name.toLowerCase()===k||c.id.toLowerCase()===k); };
 const campName=id=>id?((campById(id)||{}).name||id):"";
 let campSel=""; try{ campSel=localStorage.getItem("cw_camp")||""; }catch(e){}
 const curCampId=()=>campById(campSel)?campSel:CAMPAIGNS()[0].id;
-let campCursor=null, campPlat="", campMediaF="";
+let campCursor=null, campPlat="", campMediaF="", campOpenDays=new Set();
+let tkQ="", tkPage=1, ptQ="", ptPage=1, campCtx=null;
+const secHidden=k=>{ try{ return localStorage.getItem("cw_hide_"+k)==="1"; }catch(e){ return false; } };
+const setSecHidden=(k,v)=>{ try{ localStorage.setItem("cw_hide_"+k,v?"1":"0"); }catch(e){} };
+const DAY_MAX=5, TK_ROWS=10, PT_ROWS=15;
+function miniPager(page,total,rows){ const n=Math.max(1,Math.ceil(total/rows)); if(n<=1) return ""; return `<div class="mini-pager"><button class="btn small" data-mp="${page-1}" ${page<=1?"disabled":""}>‹ Prev</button><span class="panel-meta">Page ${page} of ${n} · ${total} rows</span><button class="btn small" data-mp="${page+1}" ${page>=n?"disabled":""}>Next ›</button></div>`; }
+const CLIP_COLORS={G:"#16a34a",P:"#db2777",F:"#ea580c",B:"#2563eb",K:"#7c3aed",S:"#0891b2",T:"#1E1B2E",V:"#ca8a04",R:"#dc2626",C:"#0d9488"};
+const CLIP_FALLBACK=["#4f46e5","#be185d","#0f766e","#b45309","#6d28d9","#15803d","#c2410c","#0369a1"];
+function clipColor(code){ const ch=String(code||"").trim().charAt(0).toUpperCase(); return CLIP_COLORS[ch]||CLIP_FALLBACK[ch?ch.charCodeAt(0)%CLIP_FALLBACK.length:0]; }
+const clipBadge=code=>`<b class="ccode" style="background:${clipColor(code)}">${esc(code)}</b>`;
 const natSort=(a,b)=>String(a).localeCompare(String(b),undefined,{numeric:true,sensitivity:"base"});
 const isPaid=c=>isAd(c);
 const engOf=c=>["likes","comments","shares","saves"].reduce((s,k)=>s+(Number((c.results||{})[k])||0),0);
@@ -2649,27 +2663,26 @@ function renderCampaign(){
   const items=pool.filter(c=>!campMediaF||(campMediaF==="paid")===isPaid(c)).sort((a,b)=>a.publishDate.localeCompare(b.publishDate)||(a.postTime||"99").localeCompare(b.postTime||"99")||natSort(a.clipCode||"~",b.clipCode||"~"));
   // tiles
   const paid=items.filter(isPaid), pub=items.filter(c=>c.status===DONE).length, overdue=items.filter(c=>c.status!==DONE&&c.publishDate<TODAY).length;
-  const budget=paid.reduce((s,c)=>s+(Number(c.budget)||0),0), withRes=items.filter(c=>hasResults(c.results));
-  const views=withRes.reduce((s,c)=>s+(Number(c.results.views)||0),0), eng=withRes.reduce((s,c)=>s+engOf(c),0);
+  const budget=paid.reduce((s,c)=>s+(Number(c.budget)||0),0);
+  const usedCodes=[...new Set(items.map(c=>c.clipCode).filter(Boolean))], ttPaid=items.filter(c=>isTT(c)&&isPaid(c)), ttCode=ttPaid.filter(c=>c.sparkCode).length;
   $("campTiles").innerHTML=`
     <div class="rep-tile"><span>Posts</span><b>${items.length}</b><small>${items.length-paid.length} organic · ${paid.length} paid</small></div>
     <div class="rep-tile"><span>Published</span><b>${pub}</b><small>${items.length-pub?`${items.length-pub} to go${overdue?` · <span class="down">${overdue} past due</span>`:""}`:items.length?"all published 🎉":"—"}</small></div>
     <div class="rep-tile"><span>Paid budget</span><b>${baht(budget)}</b><small>${cp.budget?`of ${baht(cp.budget)} planned (${Math.round(budget/cp.budget*100)}%)`:`${paid.length} paid post${paid.length===1?"":"s"}`}</small></div>
-    <div class="rep-tile"><span>Views</span><b>${views?num(views):"—"}</b><small>${withRes.length?`from ${withRes.length} post${withRes.length===1?"":"s"} with results`:"add results in each post"}</small></div>
-    <div class="rep-tile"><span>Engagement</span><b>${eng?num(eng):"—"}</b><small>${views&&eng?`ER ${(eng/views*100).toFixed(2)}% of views`:"likes + comments + shares + saves"}</small></div>`;
+    <div class="rep-tile"><span>Clips</span><b>${usedCodes.length}</b><small>${cp.codes.length?`${cp.codes.filter(x=>usedCodes.includes(x)).length} of ${cp.codes.length} planned codes used`:"distinct clip codes"}</small></div>
+    <div class="rep-tile"><span>TikTok codes</span><b>${ttPaid.length?`${ttCode} / ${ttPaid.length}`:"—"}</b><small>${ttPaid.length?(ttPaid.length-ttCode?`<span class="down">${ttPaid.length-ttCode} paid TikTok still need a code</span>`:"all paid TikTok have a code ✓"):"no paid TikTok posts"}</small></div>`;
   // attention
   const attn=items.map(c=>({c,a:alertsFor(c)})).filter(x=>x.a.length);
-  $("campAttn").innerHTML=attn.length?`<div class="camp-attn"><b>⚠️ Needs attention</b>${attn.slice(0,8).map(x=>`<button class="t-item ${worstLevel(x.a)}" data-open="${esc(x.c.id)}"><span class="d" style="background:${platMeta(x.c.platform).c}"></span><span class="tb"><span class="tt">${x.c.clipCode?`<b>${esc(x.c.clipCode)}</b> · `:""}${esc(x.c.title)}</span><span class="ts"><span>${esc(x.c.platform)} · ${shortDate(x.c.publishDate)} · ${esc(x.a[0].text)}</span></span></span></button>`).join("")}${attn.length>8?`<span class="panel-meta">+${attn.length-8} more</span>`:""}</div>`:"";
+  $("campAttn").innerHTML=attn.length?`<div class="camp-attn"><b>⚠️ Needs attention</b>${attn.slice(0,8).map(x=>`<button class="t-item ${worstLevel(x.a)}" data-open="${esc(x.c.id)}"><span class="d" style="background:${platMeta(x.c.platform).c}"></span><span class="tb"><span class="tt">${x.c.clipCode?`${clipBadge(x.c.clipCode)} `:""}${esc(x.c.title)}</span><span class="ts"><span>${esc(x.c.platform)} · ${shortDate(x.c.publishDate)} · ${esc(x.a[0].text)}</span></span></span></button>`).join("")}${attn.length>8?`<span class="panel-meta">+${attn.length-8} more</span>`:""}</div>`:"";
   renderCampCalendar(items,cid);
-  renderCampTracker(items,cid,cp,plats);
-  renderCampTable(items);
-  document.querySelectorAll("#campaignView [data-open]").forEach(b=>b.onclick=()=>openEditor(b.dataset.open));
-  bindCopyCode($("campaignView"));
+  campCtx={items,cid,cp,plats};
+  renderCampTracker(); renderCampTable();
+  $("campAttn").querySelectorAll("[data-open]").forEach(b=>b.onclick=()=>openEditor(b.dataset.open));
 }
 function campCard(c){
   const paid=isPaid(c), al=alertsFor(c), lv=worstLevel(al);
   return `<div class="camp-card ${paid?"paid":""} ${c.status===DONE?"done":""} ${lv}" draggable="true" data-id="${esc(c.id)}" style="--pc:${platMeta(c.platform).c}" title="${esc(c.title)} · ${esc(c.platform)} · ${esc(c.status)}${al.length?" · "+esc(al[0].text):""}">
-    <div class="cc-top">${c.clipCode?`<b class="ccode">${esc(c.clipCode)}</b>`:""}${pIcon(c.platform)}<span class="cc-t">${esc(c.title)}</span></div>
+    <div class="cc-top">${c.clipCode?clipBadge(c.clipCode):""}${pIcon(c.platform)}<span class="cc-t">${esc(c.title)}</span></div>
     <div class="cc-meta"><span class="st-dot" style="background:${statusColor(c.status)}"></span><span>${paid?"⚡ Paid":"Organic"}</span>${c.postTime?`<span>· ${esc(c.postTime)}</span>`:""}${c.ttAccName?`<span>· ${esc(c.ttAccName)}</span>`:""}</div></div>`;
 }
 function renderCampCalendar(items,cid){
@@ -2681,9 +2694,11 @@ function renderCampCalendar(items,cid){
   for(let i=0;i<42;i++){
     const d=new Date(start); d.setDate(start.getDate()+i); const date=iso(d), list=byDate[date]||[];
     const inRange=(!cp.start||date>=cp.start)&&(!cp.end||date<=cp.end)&&(cp.start||cp.end);
-    h+=`<div class="day ${d.getMonth()!==m?"other":""} ${date===TODAY?"today":""} ${inRange?"in-camp":""}" data-cday="${date}" title="Click empty space to add a post on ${niceDate(date)}"><div class="day-head"><span class="day-num">${d.getDate()}</span>${list.length?`<span class="day-count">${list.length}</span>`:""}</div>${list.map(campCard).join("")}</div>`;
+    const open=campOpenDays.has(date), shown=open?list:list.slice(0,DAY_MAX);
+    h+=`<div class="day ${d.getMonth()!==m?"other":""} ${date===TODAY?"today":""} ${inRange?"in-camp":""}" data-cday="${date}" title="Click empty space to add a post on ${niceDate(date)}"><div class="day-head"><span class="day-num">${d.getDate()}</span>${list.length?`<span class="day-count">${list.length}</span>`:""}</div>${shown.map(campCard).join("")}${list.length>DAY_MAX?`<button class="day-more" data-more="${date}">${open?"Show less":`+${list.length-DAY_MAX} more`}</button>`:""}</div>`;
   }
   const grid=$("campGrid"); grid.innerHTML=h;
+  grid.querySelectorAll("[data-more]").forEach(b=>b.onclick=e=>{ e.stopPropagation(); const d=b.dataset.more; campOpenDays.has(d)?campOpenDays.delete(d):campOpenDays.add(d); renderCampCalendar(items,cid); });
   grid.querySelectorAll(".camp-card").forEach(card=>{
     card.addEventListener("dragstart",e=>{ e.dataTransfer.setData("text/plain",card.dataset.id); e.dataTransfer.effectAllowed="move"; });
     card.addEventListener("click",e=>{ e.stopPropagation(); openEditor(card.dataset.id); });
@@ -2695,33 +2710,60 @@ function renderCampCalendar(items,cid){
     day.addEventListener("click",()=>openEditor(null,day.dataset.cday,{campaign:cid,platform:campPlat||undefined}));
   });
 }
-function renderCampTracker(items,cid,cp,plats){
-  const codes=[...new Set([...cp.codes,...items.map(c=>c.clipCode).filter(Boolean)])].sort(natSort);
-  const noCode=items.filter(c=>!c.clipCode);
+function renderCampTracker(){
+  const {items,cid,cp,plats}=campCtx, hid=secHidden("tk");
+  $("tkToggle").textContent=(hid?"▸ ":"▾ ")+"Clip tracker"; $("tkToggle").setAttribute("aria-expanded",String(!hid));
+  $("tkSearch").style.display=hid?"none":""; $("campTracker").style.display=hid?"none":"";
+  const q=tkQ.trim().toUpperCase();
+  const allCodes=[...new Set([...cp.codes,...items.map(c=>c.clipCode).filter(Boolean)])].sort(natSort);
+  let rowsAll=allCodes.filter(c=>!q||c.toUpperCase().includes(q));
+  const noCode=q?[]:items.filter(c=>!c.clipCode);
+  $("tkMeta").textContent=q?`${rowsAll.length} of ${allCodes.length} clips`:`${allCodes.length} clips`;
+  if(hid){ $("campTracker").innerHTML=""; return; }
+  const pages=Math.max(1,Math.ceil(rowsAll.length/TK_ROWS)); if(tkPage>pages) tkPage=pages;
+  const codes=rowsAll.slice((tkPage-1)*TK_ROWS,tkPage*TK_ROWS);
+  if(q&&!codes.length){ $("campTracker").innerHTML=`<div class="rep-empty">No clip matches “${esc(tkQ)}”.</div>`; return; }
   const cols=campPlat?[campPlat]:plats;
   if(!codes.length&&!noCode.length){ $("campTracker").innerHTML=`<div class="rep-empty">Add clip codes in ⚙ Campaign settings (e.g. G1, G2, B2) to track which clip goes on which platform.</div>`; return; }
   const cell=(code,p)=>{ const list=items.filter(c=>(code===null?!c.clipCode:c.clipCode===code)&&c.platform===p);
     return `<td>${list.map(c=>`<button class="tk-chip" data-open="${esc(c.id)}" data-st="${esc(c.status)}" title="${esc(c.title)} · ${esc(c.status)}${isPaid(c)?" · paid":""}">${shortDate(c.publishDate)}${isPaid(c)?" ⚡":""}${c.status===DONE?" ✓":""}</button>`).join("")}${code!==null?`<button class="tk-add" data-tk-add="${esc(code)}" data-tk-plat="${esc(p)}" title="Add ${esc(code)} on ${esc(p)}">＋</button>`:""}</td>`; };
   $("campTracker").innerHTML=`<div class="table-scroll"><table class="rep-table tk-table"><thead><tr><th>Clip</th>${cols.map(p=>`<th>${pIcon(p)} ${esc(p)}</th>`).join("")}<th class="r">Posts</th></tr></thead><tbody>
-    ${codes.map(code=>`<tr><td><b class="ccode">${esc(code)}</b></td>${cols.map(p=>cell(code,p)).join("")}<td class="r">${items.filter(c=>c.clipCode===code).length}</td></tr>`).join("")}
-    ${noCode.length?`<tr><td class="muted">No code</td>${cols.map(p=>cell(null,p)).join("")}<td class="r">${noCode.length}</td></tr>`:""}
-  </tbody></table></div>`;
+    ${codes.map(code=>`<tr><td>${clipBadge(code)}</td>${cols.map(p=>cell(code,p)).join("")}<td class="r">${items.filter(c=>c.clipCode===code).length}</td></tr>`).join("")}
+    ${noCode.length&&tkPage===pages?`<tr><td class="muted">No code</td>${cols.map(p=>cell(null,p)).join("")}<td class="r">${noCode.length}</td></tr>`:""}
+  </tbody></table></div>${miniPager(tkPage,rowsAll.length,TK_ROWS)}`;
   $("campTracker").querySelectorAll("[data-tk-add]").forEach(b=>b.onclick=()=>openEditor(null,null,{campaign:cid,clipCode:b.dataset.tkAdd,platform:b.dataset.tkPlat}));
+  $("campTracker").querySelectorAll("[data-mp]").forEach(b=>b.onclick=()=>{ tkPage=+b.dataset.mp; renderCampTracker(); });
+  $("campTracker").querySelectorAll("[data-open]").forEach(b=>b.onclick=()=>openEditor(b.dataset.open));
 }
-function renderCampTable(items){
-  $("campCount").textContent=`${items.length} post${items.length===1?"":"s"} · click a row to edit`;
+function renderCampTable(){
+  const hid=secHidden("pt"), all=campCtx.items;
+  $("ptToggle").textContent=(hid?"▸ ":"▾ ")+"All posts"; $("ptToggle").setAttribute("aria-expanded",String(!hid));
+  $("ptSearch").style.display=hid?"none":""; $("campTable").style.display=hid?"none":"";
+  const q=ptQ.trim().toLowerCase();
+  const found=all.filter(c=>!q||[c.clipCode,c.title,c.platform,c.ttAccName,c.status,c.media,c.refId].join(" ").toLowerCase().includes(q))
+    .sort((a,b)=>a.publishDate.localeCompare(b.publishDate)||(a.postTime||"99").localeCompare(b.postTime||"99")||natSort(a.clipCode||"~",b.clipCode||"~"));
+  $("campCount").textContent=q?`${found.length} of ${all.length} posts`:`${all.length} post${all.length===1?"":"s"} · by post date`;
+  if(hid){ $("campTable").innerHTML=""; return; }
+  const pages=Math.max(1,Math.ceil(found.length/PT_ROWS)); if(ptPage>pages) ptPage=pages;
+  const items=found.slice((ptPage-1)*PT_ROWS,ptPage*PT_ROWS);
+  if(q&&!items.length){ $("campTable").innerHTML=`<div class="rep-empty">No post matches “${esc(ptQ)}”.</div>`; return; }
   if(!items.length){ $("campTable").innerHTML=`<div class="rep-empty">No posts yet — click “＋ New post”, a day on the calendar, or ＋ in the clip tracker.</div>`; return; }
-  $("campTable").innerHTML=`<div class="table-scroll"><table class="rep-table camp-table"><thead><tr><th>Date</th><th>Clip</th><th>Platform</th><th>Content</th><th>Posted by</th><th>Media</th><th>TikTok code</th><th>Status</th><th>Link</th><th class="r">Views</th><th class="r">Eng.</th></tr></thead><tbody>${items.map(c=>{
+  $("campTable").innerHTML=`<div class="table-scroll"><table class="rep-table camp-table"><thead><tr><th>Preview</th><th>Date</th><th>Clip</th><th>Platform</th><th>Content</th><th>Posted by</th><th>Media</th><th>TikTok code</th><th>Status</th><th>Link</th></tr></thead><tbody>${items.map(c=>{
     const link=safeUrl(isTT(c)?c.clipUrl:c.postUrl), r=c.results||{}, paid=isPaid(c), al=alertsFor(c);
-    return `<tr data-open="${esc(c.id)}"><td>${shortDate(c.publishDate)}${c.postTime?` <span class="muted">${esc(c.postTime)}</span>`:""}</td>
-      <td>${c.clipCode?`<b class="ccode">${esc(c.clipCode)}</b>`:'<span class="muted">—</span>'}</td><td>${pChip(c.platform)}</td>
+    return `<tr data-open="${esc(c.id)}"><td><div class="preview-box cp-prev" data-preview-box="${esc(c.id)}" title="Click to see or add the image"><div class="preview-placeholder">＋<br>image</div></div></td><td>${shortDate(c.publishDate)}${c.postTime?` <span class="muted">${esc(c.postTime)}</span>`:""}</td>
+      <td>${c.clipCode?clipBadge(c.clipCode):'<span class="muted">—</span>'}</td><td>${pChip(c.platform)}</td>
       <td style="white-space:normal;min-width:200px"><b>${esc(c.title)}</b>${al.length?`<div>${al.slice(0,2).map(a=>`<span class="flag ${a.level}">${esc(a.text)}</span>`).join(" ")}</div>`:""}</td>
       <td>${c.ttAccName?`${c.ttAccType==="kol"?"KOL · ":""}${esc(c.ttAccName)}`:'<span class="muted">—</span>'}</td>
       <td>${paid?`<b>⚡ ${esc(c.media)}</b>${c.budget?`<div class="media-detail">${baht(c.budget)}</div>`:""}<div class="media-detail">${shortDate(runStartOf(c))}–${shortDate(runEndOf(c))}</div>`:"Organic"}</td>
       <td>${isTT(c)&&paid?(c.sparkCode?`<div class="code-cell"><code class="code" title="${esc(c.sparkCode)}">${esc(c.sparkCode)}</code><button class="mini-btn" data-copy-code="${esc(c.id)}">Copy</button></div>${c.codeSent?'<div class="media-detail" style="color:var(--ok)">sent ✓</div>':""}`:'<span class="flag red">No code</span>'):'<span class="muted">—</span>'}</td>
       <td><span class="status" data-st="${esc(c.status)}">${esc(c.status)}</span></td>
-      <td>${link?`<a class="asset" href="${esc(link)}" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()">↗ Open</a>`:'<span class="muted">—</span>'}</td>
-      <td class="r">${r.views!=null?num(r.views):'<span class="muted">—</span>'}</td><td class="r">${hasResults(r)&&engOf(c)?num(engOf(c)):'<span class="muted">—</span>'}</td></tr>`; }).join("")}</tbody></table></div>`;
+      <td>${link?`<a class="asset" href="${esc(link)}" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()">↗ Open</a>`:'<span class="muted">—</span>'}</td></tr>`; }).join("")}</tbody></table></div>${miniPager(ptPage,found.length,PT_ROWS)}`;
+  const root=$("campTable");
+  root.querySelectorAll("tr[data-open]").forEach(tr=>tr.onclick=()=>openEditor(tr.dataset.open));
+  root.querySelectorAll("[data-preview-box]").forEach(box=>box.onclick=async e=>{ e.stopPropagation(); const id=box.dataset.previewBox; const url=await imageUrlFor(byId(id)); if(url) openImagePreview(id); else beginImageUpload(id); });
+  root.querySelectorAll("[data-mp]").forEach(b=>b.onclick=()=>{ ptPage=+b.dataset.mp; renderCampTable(); });
+  bindCopyCode(root);
+  hydratePreviewImages(items);
 }
 
 /* --- campaign settings --- */
@@ -2755,6 +2797,10 @@ $("campaignForm").addEventListener("submit",async e=>{
 $("cdClose").onclick=$("cdCancel").onclick=()=>$("campaignDialog").close();
 $("campSelect").onchange=e=>{ const v=e.target.value; if(v==="__new"){ e.target.value=curCampId(); openCampaignSettings(null); return; } campSel=v; campCursor=null; campPlat=""; try{ localStorage.setItem("cw_camp",v); }catch(err){} renderCampaign(); };
 $("campSettingsBtn").onclick=()=>openCampaignSettings(curCampId());
+$("tkToggle").onclick=()=>{ setSecHidden("tk",!secHidden("tk")); renderCampTracker(); };
+$("ptToggle").onclick=()=>{ setSecHidden("pt",!secHidden("pt")); renderCampTable(); };
+$("tkSearch").oninput=e=>{ tkQ=e.target.value; tkPage=1; renderCampTracker(); };
+$("ptSearch").oninput=e=>{ ptQ=e.target.value; ptPage=1; renderCampTable(); };
 $("campNewPostBtn").onclick=()=>openEditor(null,null,{campaign:curCampId(),platform:campPlat||undefined});
 $("campPrev").onclick=()=>{ campCursor=new Date(campCursor.getFullYear(),campCursor.getMonth()-1,1); renderCampaign(); };
 $("campNext").onclick=()=>{ campCursor=new Date(campCursor.getFullYear(),campCursor.getMonth()+1,1); renderCampaign(); };
@@ -2830,7 +2876,6 @@ function openEditor(id=null, presetDate=null, preset={}){
   if(!c&&campV){ const cp=campById(campV); if(cp&&cp.brand) $("brandInput").value=cp.brand; }
   $("clipCodeInput").value=c?.clipCode||preset.clipCode||""; fillClipCodes();
   $("campAccTypeInput").value=c?.ttAccType||"brand"; $("campAccNameInput").value=c?.ttAccName||""; $("postUrlInput").value=c?.postUrl||"";
-  document.querySelectorAll("#campFields [data-res]").forEach(i=>{ const v=c?.results?.[i.dataset.res]; i.value=v==null?"":v; });
   $("assetsInput").value=c?.assets||"";
   $("remarkInput").value=c?.remark||"";
   ck={agencySent:!!c?.agencySent,linkSent:!!c?.linkSent,boostLive:!!c?.boostLive};
@@ -2893,7 +2938,7 @@ $("contentForm").addEventListener("submit",e=>{
   const code=tt&&ad?$("ttCodeInput").value.trim():"";
   const campaign=$("campInput").value, postUrl=campaign&&!tt?$("postUrlInput").value.trim():"";
   if(postUrl && !safeUrl(postUrl)){ toast("Post link must start with https://"); $("postUrlInput").focus(); return; }
-  const results={}; if(campaign) document.querySelectorAll("#campFields [data-res]").forEach(i=>{ if(i.value!=="") results[i.dataset.res]=Math.max(0,Number(i.value)||0); });
+  const results=existing&&existing.results?existing.results:{};
   const payload=normalize({
     id:id||newId(), refId, title:$("titleInput").value.trim(), brand:$("brandInput").value, platform,
     publishDate:$("dateInput").value, postTime:$("postTimeInput").value,
